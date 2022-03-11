@@ -29,7 +29,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2022/03/11/vtHX12rqaIWn9cD.png">
 <meta property="article:published_time" content="2022-03-09T06:24:14.569Z">
-<meta property="article:modified_time" content="2022-03-11T13:36:12.186Z">
+<meta property="article:modified_time" content="2022-03-11T13:55:13.732Z">
 <meta property="article:author" content="Li tuo">
 <meta property="article:tag" content="攻击">
 <meta name="twitter:card" content="summary">
@@ -193,7 +193,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-03-11 21:36:12" itemprop="dateModified" datetime="2022-03-11T21:36:12+08:00">2022-03-11</time>
+                <time title="修改时间：2022-03-11 21:55:13" itemprop="dateModified" datetime="2022-03-11T21:55:13+08:00">2022-03-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -218,7 +218,6 @@
       
         <h2 id="Towards-transferable-targeted-attack（2020CVPR）"><a href="#Towards-transferable-targeted-attack（2020CVPR）" class="headerlink" title="Towards transferable targeted attack（2020CVPR）"></a>Towards transferable targeted attack（2020CVPR）</h2><p>代码链接：<a target="_blank" rel="noopener" href="https://github.com/TiJoy/Towards-Transferable-Targeted-Attack">https://github.com/TiJoy/Towards-Transferable-Targeted-Attack</a></p>
 <span id="more"></span> 
-
 <h2 id="On-Generating-Transferable-Targeted-Perturbations（ICCV2021）"><a href="#On-Generating-Transferable-Targeted-Perturbations（ICCV2021）" class="headerlink" title="On Generating Transferable Targeted Perturbations（ICCV2021）"></a>On Generating Transferable Targeted Perturbations（ICCV2021）</h2><p>代码链接：<a target="_blank" rel="noopener" href="https://github.com/Muzammal-Naseer/TTP">https://github.com/Muzammal-Naseer/TTP</a></p>
 <p>本文提出一种基于生成方法的高迁移目标扰动（transferable targeted perturbations，TTP)，现有的方法依赖于从一个模型到另一个模型的类别边界信息，不利于扰动的迁移。本文的方法匹配扰动图像的”分布”和目标类别，最后提出一种新的目标函数不仅对齐原始图像和目标图像的全局分布，也匹配两种域的局部邻域结构。基于所提出的目标，我们训练一个生成器，可以自适应地合成特定于给定输入的扰动。我们的生成方法与源或目标域标签无关，同时对广泛的攻击设定，始终比最先进的方法表现更好。</p>
 <p>主要方法概括：提出一种新的生成训练框架，通过最大化源分布和目标分布在一个预训练的判别器隐空间共同一致性，将源分布映射为目标分布。</p>
@@ -256,14 +255,31 @@
 <li><a target="_blank" rel="noopener" href="https://github.com/Muzammal-Naseer/TTP#Citation">TTP</a>提出基于全局分布匹配目标函数，在一个预训练模型的潜在空间匹配源域和目标域。它不依赖于数据注释（标签）或分类边界信息（ICCV 2021）。</li>
 </ul>
 <h2 id="基于生成的目标攻击"><a href="#基于生成的目标攻击" class="headerlink" title="基于生成的目标攻击"></a>基于生成的目标攻击</h2><h3 id="生成模型"><a href="#生成模型" class="headerlink" title="生成模型"></a>生成模型</h3><p>目标类别$t$，$P$和$Q$分别表示源域和目标域对抗样本，$x_s$ ~ $P$，$x_t$ ~ $P$，扰动的源域数据$P^{‘}$，$x^{‘}$ ~ $P^{‘}$，$x^{‘}=x_s+\delta$，$\mathcal{D}_\psi(x_s)$，$\mathcal{D}_\psi(x^{‘}_s)$，$\mathcal{D}_\psi(x_t)$分别代表潜在分布。</p>
-<p>实验框架如下图，$\mathcal{G}<em>\theta$是生成器，$\mathcal{D}<em>\theta$是判别器，$\mathcal{G}</em>{\theta}$学习源域到目标域的映射，使源域图像获得最小改动，对抗扰动$\delta$限制在范数距离$l</em>{\infty} \leq \epsilon$，这通过一个可微的裁剪操作将无界的生成器$\mathcal{G}_\theta$生成的对抗扰动投影到距$x_s$固定范数距离内实现。<br>$$<br>x^{‘}_s=clip(min(x_s+\epsilon,max(\mathcal{W}*\mathcal{G}<em>\theta,x_s-\epsilon))),\tag 1<br>$$<br>$\mathcal{W}$是固定权重的平滑操作，在不破坏$l</em>{\infty}$范数限制下减少高频信息，使生成器收敛到一个有意义的结果。</p>
-<img src="https://s2.loli.net/2022/03/11/vtHX12rqaIWn9cD.png" style="zoom:80%;" />
-
+<p>实验框架如下图，$\mathcal{G}_\theta$是生成器，$\mathcal{D}_\theta$是判别器，$\mathcal{G}_{\theta}$学习源域到目标域的映射，使源域图像获得最小改动，对抗扰动$\delta$限制在范数距离$l_{\infty} \leq \epsilon$，这通过一个可微的裁剪操作将无界的生成器$\mathcal{G}_\theta$生成的对抗扰动投影到距$x_s$固定范数距离内实现。</p>
+<script type="math/tex; mode=display">
+x^{'}_s=clip(min(x_s+\epsilon,max(\mathcal{W}*\mathcal{G}_\theta,x_s-\epsilon))),\tag 1</script><p>$\mathcal{W}$是固定权重的平滑操作，在不破坏$l_{\infty}$范数限制下减少高频信息，使生成器收敛到一个有意义的结果。</p>
+<p><img src="https://s2.loli.net/2022/03/11/vtHX12rqaIWn9cD.png" style="zoom:80%;" /></p>
 <p>原有的基于生成的方法依赖于判别器的分类边界，攻击者必须可以获得一个大量标签数据训练的判别器，进一步生成器依赖于输入的特定实例特征，缺少对全局目标分布特征的把握，造成低迁移性。</p>
-<p>为解决上述问题，本文对目标分布$Q$建模并使在隐层空间$\mathcal{D}<em>{\psi}$中扰动的源域分布$P^{‘}$更接近于$Q$<br>$$<br>\left| \delta \right|</em>{\infty} \le \epsilon,     s.t., \quad \mathcal{D}_\psi(x^{‘}_s)\approx \mathcal{D}_\psi(x_t)  \tag 2<br>$$<br>这个全局的目标函数有两个优势，1）减少扰动和目标分布的不匹配程度，为生成器提供一种引导，2）不需要目标类别信息，判别器可以是一种无监督的方式训练得到</p>
-<h3 id="分布匹配"><a href="#分布匹配" class="headerlink" title="分布匹配"></a>分布匹配</h3><p>用KL散度表示$p^{‘}$和$Q$之间的共同一致性，判别特征$\mathcal{D}<em>\psi(x^{‘}<em>s)$和$\mathcal{D}<em>\psi(x_t)$的KL散度定义如下<br>$$<br>D</em>{K L}\left(P^{\prime} | Q\right)=\frac{1}{N} \sum</em>{i=1}^{N} \sum</em>{j=1}^{n} \sigma\left(\mathcal{D}<em>{\psi}\left(\boldsymbol{x}</em>{s}^{\prime, i}\right)\right)<em>{j} \log \frac{\sigma\left(\mathcal{D}</em>{\psi}\left(\boldsymbol{x}<em>{s}^{\prime, i}\right)\right)</em>{j}}{\sigma\left(\mathcal{D}<em>{\psi}\left(\boldsymbol{x}</em>{t}^{i}\right)\right)<em>{j}}<br>$$<br>N代表样本数量，n是判别器输出的特征维数，$\sigma$表示sigmoid操作，由于KL散度非对称$D</em>{K L}\left( P^{\prime} | Q\right)\neq D_{K L}\left(Q | P^{\prime}\right)$，不是一种距离的度量，损失函数定义<br>$$<br>\mathcal{L}=D_{K L}\left(P^{\prime} | Q\right)+D_{K L}\left(Q | P^{\prime}\right)\tag{3}<br>$$<br>作为一种常规性度量，引入在分布对齐时添加源域样本的增广版本，这能使生成器更关注于特定目标类类别信息，对输入变换更鲁棒。本文中随机使用旋转，裁剪，水平翻转，颜色抖动或者灰度处理变换，从源域$x_s$得到增广样本$\widetilde{x}_s$  。$\widetilde{x}<em>s$ ~ $\widetilde{P}$送入生成器$\mathcal{G}</em>{\theta}$ ，扰动的增广样本$\widetilde{x}_s ^{‘}$ ~ $\widetilde{P}^{‘}$ 用公式（1）投影到增广样本附近，目标域样本没有任何增广操作，$\widetilde{x}_s ^{‘}$ 送入判别器计算$ \mathcal{D}_\psi(\widetilde{x}^{\prime}<em>s)$和$ \mathcal{D}<em>\psi(x_t)$之间的共同一致性，公式如下<br>$$<br>\mathcal{L}^{a u g}=D</em>{K L}\left(\tilde{P}^{\prime} | Q\right)+D</em>{K L}\left(Q | \tilde{P}^{\prime}\right) \tag 4<br>$$</p>
-<h3 id="邻域相似度匹配"><a href="#邻域相似度匹配" class="headerlink" title="邻域相似度匹配"></a>邻域相似度匹配</h3><p>上述损失函数没有考虑局部结构，例如一个样本和它增广版本之间的关系，为了扰动的源域和目标类别样本的可靠对齐，提出匹配两种域之间的邻域相似度分布。考虑一批目标域样本$\left{x_{t}^{i}\right}<em>{i=1}^{N}$和一批扰动的源域样本$\left{x</em>{s}^{‘i}\right}<em>{i=1}^{N}$ ，对于一个训练批次$x_s ^{‘}$，计算相似度矩阵$\mathcal{S}^s$，它的元素编码了原始样本和它的增广版本$\widetilde{x}<em>s ^ {‘}$之间的余弦相似度。<br>$$<br>\mathcal{S}</em>{i, j}^{s}=\frac{\mathcal{D}</em>{\psi}\left(\boldsymbol{x}<em>{s}^{\prime, i}\right) \cdot \mathcal{D}</em>{\psi}\left(\tilde{x}<em>{s}^{\prime, j}\right)}{\left|\mathcal{D}</em>{\psi}\left(x_{s}^{\prime, i}\right)\right|\left|\mathcal{D}<em>{\psi}\left(\tilde{x}</em>{s}^{\prime, j}\right)\right|} \tag 5<br>$$<br>作为对比，对于目标类别样本$x_t$ ，计算样本之间的余弦相似度矩阵$\mathcal{S}^t$<br>$$<br>\mathcal{S}<em>{i, j}^{t}=\frac{\mathcal{D}</em>{\psi}\left(x_{t}^{i}\right) \cdot \mathcal{D}<em>{\psi}\left(x</em>{t}^{j}\right)}{\left|\mathcal{D}<em>{\psi}\left(x</em>{t}^{i}\right)\right|\left|\mathcal{D}<em>{\psi}\left(x</em>{t}^{j}\right)\right|} \tag6<br>$$<br>对上面两个相似度矩阵沿着每一行做softmax操作得到概率估计<br>$$<br>\overline{\mathcal{S}}<em>{i, j}=\frac{\exp \left(\mathcal{S}</em>{i, j}\right)}{\sum_{k} \exp \left(\mathcal{S}<em>{i, k}\right)}, where, \mathcal{S} \in\left{\mathcal{S}^{s}, \mathcal{S}^{t}\right} \tag 7<br>$$<br>为了匹配源域和目标域局部邻域模式，计算$\overline{\mathcal{S}}^s$和$\overline{\mathcal{S}}^t$KL散度作为损失项<br>$$<br>\mathcal{L}^{s i m}=\sum</em>{i, j} \overline{\mathcal{S}}<em>{i, j}^{t} \log \frac{\overline{\mathcal{S}}</em>{i, j}^{t}}{\overline{\mathcal{S}}<em>{i, j}^{s}}+\sum</em>{i, j} \overline{\mathcal{S}}<em>{i, j}^{s} \log \frac{\overline{\mathcal{S}}</em>{i, j}^{s}}{\overline{\mathcal{S}}_{i, j}^{t}} \tag 8<br>$$</p>
-<h3 id="整体损失函数"><a href="#整体损失函数" class="headerlink" title="整体损失函数"></a>整体损失函数</h3><p>生成器参数通过最小化下面损失更新<br>$$<br>\mathcal{L}_{\mathcal{G}}=\mathcal{L}+\mathcal{L}^{a u g}+\mathcal{L}^{sim } \tag 9<br>$$<br>上述损失激励生成器在扰动源域样本时不仅匹配目标分布的全局特征（$\mathcal{L}+\mathcal{L}^{a u g}$），而且基于邻域连通匹配局部信息（$\mathcal{L}^{sim }$）</p>
+<p>为解决上述问题，本文对目标分布$Q$建模并使在隐层空间$\mathcal{D}_{\psi}$中扰动的源域分布$P^{‘}$更接近于$Q$</p>
+<script type="math/tex; mode=display">
+\left\| \delta \right\|_{\infty} \le \epsilon,     s.t., \quad \mathcal{D}_\psi(x^{'}_s)\approx \mathcal{D}_\psi(x_t)  \tag 2</script><p>这个全局的目标函数有两个优势，1）减少扰动和目标分布的不匹配程度，为生成器提供一种引导，2）不需要目标类别信息，判别器可以是一种无监督的方式训练得到</p>
+<h3 id="分布匹配"><a href="#分布匹配" class="headerlink" title="分布匹配"></a>分布匹配</h3><p>用KL散度表示$p^{‘}$和$Q$之间的共同一致性，判别特征$\mathcal{D}_\psi(x^{‘}_s)$和$\mathcal{D}_\psi(x_t)$的KL散度定义如下</p>
+<script type="math/tex; mode=display">
+D_{K L}\left(P^{\prime} \| Q\right)=\frac{1}{N} \sum_{i=1}^{N} \sum_{j=1}^{n} \sigma\left(\mathcal{D}_{\psi}\left(\boldsymbol{x}_{s}^{\prime, i}\right)\right)_{j} \log \frac{\sigma\left(\mathcal{D}_{\psi}\left(\boldsymbol{x}_{s}^{\prime, i}\right)\right)_{j}}{\sigma\left(\mathcal{D}_{\psi}\left(\boldsymbol{x}_{t}^{i}\right)\right)_{j}}</script><p>N代表样本数量，n是判别器输出的特征维数，$\sigma$表示sigmoid操作，由于KL散度非对称$D_{K L}\left( P^{\prime} | Q\right)\neq D_{K L}\left(Q | P^{\prime}\right)$，不是一种距离的度量，损失函数定义</p>
+<script type="math/tex; mode=display">
+\mathcal{L}=D_{K L}\left(P^{\prime} \| Q\right)+D_{K L}\left(Q \| P^{\prime}\right)\tag{3}</script><p>作为一种常规性度量，引入在分布对齐时添加源域样本的增广版本，这能使生成器更关注于特定目标类类别信息，对输入变换更鲁棒。本文中随机使用旋转，裁剪，水平翻转，颜色抖动或者灰度处理变换，从源域$x_s$得到增广样本$\widetilde{x}_s$  。$\widetilde{x}_s$ ~ $\widetilde{P}$送入生成器$\mathcal{G}_{\theta}$ ，扰动的增广样本$\widetilde{x}_s ^{‘}$ ~ $\widetilde{P}^{‘}$ 用公式（1）投影到增广样本附近，目标域样本没有任何增广操作，$\widetilde{x}_s ^{‘}$ 送入判别器计算$ \mathcal{D}_\psi(\widetilde{x}^{\prime}_s)$和$ \mathcal{D}_\psi(x_t)$之间的共同一致性，公式如下</p>
+<script type="math/tex; mode=display">
+\mathcal{L}^{a u g}=D_{K L}\left(\tilde{P}^{\prime} \| Q\right)+D_{K L}\left(Q \| \tilde{P}^{\prime}\right) \tag 4</script><h3 id="邻域相似度匹配"><a href="#邻域相似度匹配" class="headerlink" title="邻域相似度匹配"></a>邻域相似度匹配</h3><p>上述损失函数没有考虑局部结构，例如一个样本和它增广版本之间的关系，为了扰动的源域和目标类别样本的可靠对齐，提出匹配两种域之间的邻域相似度分布。考虑一批目标域样本$\left\{x_{t}^{i}\right\}_{i=1}^{N}$和一批扰动的源域样本$\left\{x_{s}^{‘i}\right\}_{i=1}^{N}$ ，对于一个训练批次$x_s ^{‘}$，计算相似度矩阵$\mathcal{S}^s$，它的元素编码了原始样本和它的增广版本$\widetilde{x}_s ^ {‘}$之间的余弦相似度。</p>
+<script type="math/tex; mode=display">
+\mathcal{S}_{i, j}^{s}=\frac{\mathcal{D}_{\psi}\left(\boldsymbol{x}_{s}^{\prime, i}\right) \cdot \mathcal{D}_{\psi}\left(\tilde{x}_{s}^{\prime, j}\right)}{\left\|\mathcal{D}_{\psi}\left(x_{s}^{\prime, i}\right)\right\|\left\|\mathcal{D}_{\psi}\left(\tilde{x}_{s}^{\prime, j}\right)\right\|} \tag 5</script><p>作为对比，对于目标类别样本$x_t$ ，计算样本之间的余弦相似度矩阵$\mathcal{S}^t$</p>
+<script type="math/tex; mode=display">
+\mathcal{S}_{i, j}^{t}=\frac{\mathcal{D}_{\psi}\left(x_{t}^{i}\right) \cdot \mathcal{D}_{\psi}\left(x_{t}^{j}\right)}{\left\|\mathcal{D}_{\psi}\left(x_{t}^{i}\right)\right\|\left\|\mathcal{D}_{\psi}\left(x_{t}^{j}\right)\right\|} \tag6</script><p>对上面两个相似度矩阵沿着每一行做softmax操作得到概率估计</p>
+<script type="math/tex; mode=display">
+\overline{\mathcal{S}}_{i, j}=\frac{\exp \left(\mathcal{S}_{i, j}\right)}{\sum_{k} \exp \left(\mathcal{S}_{i, k}\right)}, where, \mathcal{S} \in\left\{\mathcal{S}^{s}, \mathcal{S}^{t}\right\} \tag 7</script><p>为了匹配源域和目标域局部邻域模式，计算$\overline{\mathcal{S}}^s$和$\overline{\mathcal{S}}^t$KL散度作为损失项</p>
+<script type="math/tex; mode=display">
+\mathcal{L}^{s i m}=\sum_{i, j} \overline{\mathcal{S}}_{i, j}^{t} \log \frac{\overline{\mathcal{S}}_{i, j}^{t}}{\overline{\mathcal{S}}_{i, j}^{s}}+\sum_{i, j} \overline{\mathcal{S}}_{i, j}^{s} \log \frac{\overline{\mathcal{S}}_{i, j}^{s}}{\overline{\mathcal{S}}_{i, j}^{t}} \tag 8</script><h3 id="整体损失函数"><a href="#整体损失函数" class="headerlink" title="整体损失函数"></a>整体损失函数</h3><p>生成器参数通过最小化下面损失更新</p>
+<script type="math/tex; mode=display">
+\mathcal{L}_{\mathcal{G}}=\mathcal{L}+\mathcal{L}^{a u g}+\mathcal{L}^{sim } \tag 9</script><p>上述损失激励生成器在扰动源域样本时不仅匹配目标分布的全局特征（$\mathcal{L}+\mathcal{L}^{a u g}$），而且基于邻域连通匹配局部信息（$\mathcal{L}^{sim }$）</p>
 <h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><p>实验细节自己看吧，对比了很多基于迭代和基于生成的模型</p>
 
     </div>
