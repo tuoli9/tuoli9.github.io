@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>sz今天依然没自开</title>
+    <url>/2022/03/09/sz/</url>
+    <content><![CDATA[<h2 id="望sz看到后立马联系我自开"><a href="#望sz看到后立马联系我自开" class="headerlink" title="望sz看到后立马联系我自开"></a>望sz看到后立马联系我自开</h2><span id="more"></span> 
+]]></content>
+  </entry>
+  <entry>
     <title>迁移目标攻击文献阅读</title>
     <url>/2022/03/09/%E8%BF%81%E7%A7%BB%E7%9B%AE%E6%A0%87%E6%94%BB%E5%87%BB%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB/</url>
     <content><![CDATA[<h2 id="Towards-transferable-targeted-attack（2020CVPR）"><a href="#Towards-transferable-targeted-attack（2020CVPR）" class="headerlink" title="Towards transferable targeted attack（2020CVPR）"></a>Towards transferable targeted attack（2020CVPR）</h2><p>代码链接：<a href="https://github.com/TiJoy/Towards-Transferable-Targeted-Attack">https://github.com/TiJoy/Towards-Transferable-Targeted-Attack</a></p>
@@ -105,11 +111,5 @@ D_{K L}\left(P^{\prime} \| Q\right)=\frac{1}{N} \sum_{i=1}^{N} \sum_{j=1}^{n} \s
       <tags>
         <tag>对抗攻击</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>sz今天依然没自开</title>
-    <url>/2022/03/09/sz/</url>
-    <content><![CDATA[<h2 id="望sz看到后立马联系我自开"><a href="#望sz看到后立马联系我自开" class="headerlink" title="望sz看到后立马联系我自开"></a>望sz看到后立马联系我自开</h2><span id="more"></span> 
-]]></content>
   </entry>
 </search>
