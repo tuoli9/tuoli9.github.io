@@ -46,6 +46,9 @@ D\left(l\left(x^{a d v}\right), y_{\text {tar }}\right)=1-\frac{\left|l\left(x^{
 \mathcal{L}_{\text {all }}=\mathcal{L}_{P o}\left(l(x), y_{\text {tar }}\right)+\lambda \cdot \mathcal{L}_{\text {trip }}\left(y_{\text {tar }}, l\left(x_{i}\right), y_{\text {true }}\right)</script><p>基于MI-FGSM，本文也使用输入多样性的方法，整体算法流程如下图：</p>
 <p><img src="https://s2.loli.net/2022/03/12/1vNZ4OjV2GLAXkl.png" alt="image-20220312140356435"></p>
 <h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><p>实验细节自己看</p>
+<p>参考</p>
+<p><a href="https://blog.csdn.net/sydukee/article/details/110822003">https://blog.csdn.net/sydukee/article/details/110822003</a></p>
+<p><a href="https://www.jianshu.com/p/afaf551d145e">https://www.jianshu.com/p/afaf551d145e</a></p>
 <h2 id="On-Generating-Transferable-Targeted-Perturbations（ICCV2021）"><a href="#On-Generating-Transferable-Targeted-Perturbations（ICCV2021）" class="headerlink" title="On Generating Transferable Targeted Perturbations（ICCV2021）"></a>On Generating Transferable Targeted Perturbations（ICCV2021）</h2><p>代码链接：<a href="https://github.com/Muzammal-Naseer/TTP">https://github.com/Muzammal-Naseer/TTP</a></p>
 <p>本文提出一种基于生成方法的高迁移目标扰动（transferable targeted perturbations，TTP)，现有的方法依赖于从一个模型到另一个模型的类别边界信息，不利于扰动的迁移。本文的方法匹配扰动图像的”分布”和目标类别，最后提出一种新的目标函数不仅对齐原始图像和目标图像的全局分布，也匹配两种域的局部邻域结构。基于所提出的目标，我们训练一个生成器，可以自适应地合成特定于给定输入的扰动。我们的生成方法与源或目标域标签无关，同时对广泛的攻击设定，始终比最先进的方法表现更好。</p>
 <p>主要方法概括：提出一种新的生成训练框架，通过最大化源分布和目标分布在一个预训练的判别器隐空间共同一致性，将源分布映射为目标分布。</p>
