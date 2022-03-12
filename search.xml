@@ -20,6 +20,32 @@
     <url>/2022/03/09/%E8%BF%81%E7%A7%BB%E7%9B%AE%E6%A0%87%E6%94%BB%E5%87%BB%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB/</url>
     <content><![CDATA[<h2 id="Towards-transferable-targeted-attack（2020CVPR）"><a href="#Towards-transferable-targeted-attack（2020CVPR）" class="headerlink" title="Towards transferable targeted attack（2020CVPR）"></a>Towards transferable targeted attack（2020CVPR）</h2><p>代码链接：<a href="https://github.com/TiJoy/Towards-Transferable-Targeted-Attack">https://github.com/TiJoy/Towards-Transferable-Targeted-Attack</a></p>
 <span id="more"></span> 
+<h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p>目标攻击比非目标攻击更难迁移，在本文中分析了两点造成这种困难的原因，1）在迭代攻击中存在梯度消失的现象，在累计动量时，相邻两次成功的噪声过分一致，造成噪声固化；2）目标对抗样本只与目标类别接近还不够，还要远离原始的类别。为解决上述问题引入庞加莱距离（Poincaré  distance），作为相似性度量，使得在迭代攻击中梯度大小自适应以缓解噪声固化。进一步，在用度量学习（metric learning）对目标攻击过程正则化处理，使对抗样本远离真实标签并且获得高迁移目标对抗样本。lmageNet上的实验证实了我们的方法的优越性，在黑盒针对性攻击中，与其他最新技术相比,其攻击成功率平均提高了8%</p>
+<h3 id="庞加莱距离度量（Poincar´e-Distance-Metric）"><a href="#庞加莱距离度量（Poincar´e-Distance-Metric）" class="headerlink" title="庞加莱距离度量（Poincar´e Distance Metric）"></a>庞加莱距离度量（Poincar´e Distance Metric）</h3><p>大多数黑盒攻击使用softmax作为损失函数，</p>
+<script type="math/tex; mode=display">
+\frac{\partial L}{\partial o_{i}}=p_{i}-y_{i}</script><p>$p_i$是预测概率，$y_i$是标签one-hot编码，对于目标攻击，损失函数对softmax输出的向量<strong>$o$</strong>，在迭代攻击中$p_i$逐渐靠近$y_i$，梯度消失，造成噪声固化，用Poincaré  distance替代交叉熵损失可以解决这个问题。</p>
+<p>关于Poincaré  distance：</p>
+<p>Poincaré  ball上所有点都在一个单位n维$l_2$球上，两点间的距离定义如下：</p>
+<script type="math/tex; mode=display">
+d(u, v)=\operatorname{arccosh}(1+\delta(u, v))</script><p>其中$u$和$v$是n维欧几里得空间$l_2$范数小于1的两点，$\delta(u,v)$是等距不变量定义如下</p>
+<script type="math/tex; mode=display">
+\delta(u, v)=2 \frac{\|u-v\|^{2}}{\left(1-\|u\|^{2}\right)\left(1-\|v\|^{2}\right)}</script><p><img src="https://s2.loli.net/2022/03/12/pD5oxiK27eFhbGa.png" alt="image-20220312114031622" style="zoom:80%;" /></p>
+<p>图b中任一点到边缘的距离都是$\infty$，图c中，当接近球的表面时，Poincaré distance增长非常快。这意味着当向表面移动时，梯度大小将会增长。</p>
+<p>由以上定义，对于one-hot编码的标签$y$，有$\sum_{i}y_i=1$，这表示标签在一个单位$l_1$球上。当$y$是一个未经平滑处理的one-hot标签，有$|y|_2=1$，所以点$y$在Poincaré ball的边缘，这意味着任一点到$y$的距离都是$+\infty$ 。在目标攻击中，我们的目标是减少模型输出的logits和目标标签之间的距离。</p>
+<p>但使用Poincaré distance存在另外一个问题，融合的logits不满足$|l(x)|_2&lt;1$，所以本文中logits用$l_1$距离归一化。对于目标标签，任一点到它的距离是+$\infty$ ，这难以优化。将y减去一个非常小的常数$\xi=0.0001$ ，Poincaré distance 度量损失</p>
+<script type="math/tex; mode=display">
+\mathcal{L}_{P o}(x, y)=d(u, v)=\operatorname{arccosh}(1+\delta(u, v))</script><p>其中$u=l_k(x)/|l_k(x)|_1$，$v=\max \{y-\xi, 0\}$，$l(x)$是融合的logits。在本文中，$l(x)$是融合了多个模型的logits。</p>
+<script type="math/tex; mode=display">
+l(x)=\sum_{k=1}^{K} w_{k} l_{k}(x)</script><p>$K$是集成模型数量，$l_k(x)$表示第$k$个模型输出的logits，$w_k$是每个模型的权重，$w_k&gt;0$($\sum_{k=1}^{K}w_k=1$) ，在本文中每个模型的权重相等。通过引入Poincaré度量，当且仅当数据接近目标标签时梯度才会变大。</p>
+<h3 id="目标攻击三元损失（Triplet-Loss-for-Targeted-Attack）"><a href="#目标攻击三元损失（Triplet-Loss-for-Targeted-Attack）" class="headerlink" title="目标攻击三元损失（Triplet Loss for Targeted Attack）"></a>目标攻击三元损失（Triplet Loss for Targeted Attack）</h3><p>以往的目标攻击生成的对抗样本和原始类别过于接近，这不利于样本的迁移，本文中引入三元损失，三元损失不仅减少对抗样本和目标类别的距离，还增加对抗样本和原始标签的距离，本文使用干净样本的logits $l(x_{clean})$，one-hot编码的目标标签$y_{tar}$和真实标签$y_{true}$构成三元损失：</p>
+<script type="math/tex; mode=display">
+\begin{aligned} & \mathcal{L}_{\text {trip }}\left(y_{\text {tar }}, l\left(x_{i}\right), y_{\text {true }}\right) \\=& {\left[D\left(l\left(x_{i}\right), y_{\text {tar }}\right)-D\left(l\left(x_{i}\right), y_{\text {true }}\right)+\gamma\right]_{+} . }\end{aligned}</script><p>注意到$l(x_{adv})$没有归一化，本文中使用角距离（angular distance）作为距离度量：</p>
+<script type="math/tex; mode=display">
+D\left(l\left(x^{a d v}\right), y_{\text {tar }}\right)=1-\frac{\left|l\left(x^{a d v}\right) \cdot y_{\text {tar }}\right|}{\left\|l\left(x^{a d v}\right)\right\|_{2}\left\|y_{\text {tar }}\right\|_{2}} .</script><p>将三元损失加到损失函数，得到整个的损失函数：</p>
+<script type="math/tex; mode=display">
+\mathcal{L}_{\text {all }}=\mathcal{L}_{P o}\left(l(x), y_{\text {tar }}\right)+\lambda \cdot \mathcal{L}_{\text {trip }}\left(y_{\text {tar }}, l\left(x_{i}\right), y_{\text {true }}\right)</script><p>基于MI-FGSM，本文也使用输入多样性的方法，整体算法流程如下图：</p>
+<p><img src="https://s2.loli.net/2022/03/12/1vNZ4OjV2GLAXkl.png" alt="image-20220312140356435"></p>
+<h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><p>实验细节自己看</p>
 <h2 id="On-Generating-Transferable-Targeted-Perturbations（ICCV2021）"><a href="#On-Generating-Transferable-Targeted-Perturbations（ICCV2021）" class="headerlink" title="On Generating Transferable Targeted Perturbations（ICCV2021）"></a>On Generating Transferable Targeted Perturbations（ICCV2021）</h2><p>代码链接：<a href="https://github.com/Muzammal-Naseer/TTP">https://github.com/Muzammal-Naseer/TTP</a></p>
 <p>本文提出一种基于生成方法的高迁移目标扰动（transferable targeted perturbations，TTP)，现有的方法依赖于从一个模型到另一个模型的类别边界信息，不利于扰动的迁移。本文的方法匹配扰动图像的”分布”和目标类别，最后提出一种新的目标函数不仅对齐原始图像和目标图像的全局分布，也匹配两种域的局部邻域结构。基于所提出的目标，我们训练一个生成器，可以自适应地合成特定于给定输入的扰动。我们的生成方法与源或目标域标签无关，同时对广泛的攻击设定，始终比最先进的方法表现更好。</p>
 <p>主要方法概括：提出一种新的生成训练框架，通过最大化源分布和目标分布在一个预训练的判别器隐空间共同一致性，将源分布映射为目标分布。</p>
@@ -82,7 +108,7 @@ D_{K L}\left(P^{\prime} \| Q\right)=\frac{1}{N} \sum_{i=1}^{N} \sum_{j=1}^{n} \s
 \mathcal{L}^{s i m}=\sum_{i, j} \overline{\mathcal{S}}_{i, j}^{t} \log \frac{\overline{\mathcal{S}}_{i, j}^{t}}{\overline{\mathcal{S}}_{i, j}^{s}}+\sum_{i, j} \overline{\mathcal{S}}_{i, j}^{s} \log \frac{\overline{\mathcal{S}}_{i, j}^{s}}{\overline{\mathcal{S}}_{i, j}^{t}} \tag 8</script><h3 id="整体损失函数"><a href="#整体损失函数" class="headerlink" title="整体损失函数"></a>整体损失函数</h3><p>生成器参数通过最小化下面损失更新</p>
 <script type="math/tex; mode=display">
 \mathcal{L}_{\mathcal{G}}=\mathcal{L}+\mathcal{L}^{a u g}+\mathcal{L}^{sim } \tag 9</script><p>上述损失激励生成器在扰动源域样本时不仅匹配目标分布的全局特征（$\mathcal{L}+\mathcal{L}^{a u g}$），而且基于邻域连通匹配局部信息（$\mathcal{L}^{sim }$）</p>
-<h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><p>实验细节自己看吧，对比了很多基于迭代和基于生成的模型</p>
+<h3 id="实验-1"><a href="#实验-1" class="headerlink" title="实验"></a>实验</h3><p>实验细节自己看吧，对比了很多基于迭代和基于生成的模型</p>
 ]]></content>
       <categories>
         <category>对抗攻击</category>
