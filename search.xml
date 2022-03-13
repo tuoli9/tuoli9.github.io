@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>sz今天依然没自开</title>
-    <url>/2022/03/09/sz/</url>
-    <content><![CDATA[<h2 id="望sz看到后立马联系我自开"><a href="#望sz看到后立马联系我自开" class="headerlink" title="望sz看到后立马联系我自开"></a>望sz看到后立马联系我自开</h2><span id="more"></span> 
-]]></content>
-  </entry>
-  <entry>
     <title>迁移目标攻击文献阅读</title>
     <url>/2022/03/09/%E8%BF%81%E7%A7%BB%E7%9B%AE%E6%A0%87%E6%94%BB%E5%87%BB%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB/</url>
     <content><![CDATA[<h2 id="Towards-transferable-targeted-attack（2020CVPR）"><a href="#Towards-transferable-targeted-attack（2020CVPR）" class="headerlink" title="Towards transferable targeted attack（2020CVPR）"></a>Towards transferable targeted attack（2020CVPR）</h2><p>代码链接：<a href="https://github.com/TiJoy/Towards-Transferable-Targeted-Attack">https://github.com/TiJoy/Towards-Transferable-Targeted-Attack</a></p>
@@ -104,7 +98,32 @@ D_{K L}\left(P^{\prime} \| Q\right)=\frac{1}{N} \sum_{i=1}^{N} \sum_{j=1}^{n} \s
 \mathcal{L}_{\mathcal{G}}=\mathcal{L}+\mathcal{L}^{a u g}+\mathcal{L}^{sim } \tag 9</script><p>上述损失激励生成器在扰动源域样本时不仅匹配目标分布的全局特征（$\mathcal{L}+\mathcal{L}^{a u g}$），而且基于邻域连通匹配局部信息（$\mathcal{L}^{sim }$）</p>
 <h3 id="实验-1"><a href="#实验-1" class="headerlink" title="实验"></a>实验</h3><p>实验细节自己看吧，对比了很多基于迭代和基于生成的模型</p>
 <h2 id="On-Success-and-Simplicity-A-Second-Look-at-Transferable-Targeted-Attacks（NeurIPS-2021）"><a href="#On-Success-and-Simplicity-A-Second-Look-at-Transferable-Targeted-Attacks（NeurIPS-2021）" class="headerlink" title="On Success and Simplicity: A Second Look at Transferable Targeted Attacks（NeurIPS 2021）"></a>On Success and Simplicity: A Second Look at Transferable Targeted Attacks（NeurIPS 2021）</h2><p>代码链接：<a href="https://github.com/ZhengyuZhao/Targeted-Tansfer">https://github.com/ZhengyuZhao/Targeted-Tansfer</a></p>
-<h3 id="摘要-1"><a href="#摘要-1" class="headerlink" title="摘要"></a>摘要</h3>]]></content>
+<p>本文提出一个简单的logit损失，相比于资源密集型的模型取得了更好的目标迁移效果，在三个新的现实场景：</p>
+<ul>
+<li>低模型相似度的集成迁移（ensemble transfer）</li>
+<li>a worse-case scenario with low-ranked target classes</li>
+<li>Google Cloud Vision API 真实世界的攻击</li>
+</ul>
+<p>中验证了所提方法的优越性，并展示了这个损失对data-free方法生成的目标通用扰动的实用性。</p>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>目前目标攻击 resource-intensive transferable attacks可以取得SOTA效果，主要有两种方法：FDA和TTP。FDA的方法[<a href="#[1]">1</a>][<a href="#[2]">2</a>]通过在大规模标签数据上训练target-class-specific辅助分类器，然后再深度特征空间中，用辅助分类器优化对抗扰动。TTP[<a href="#3">3</a>]方法基于匹配全局和局部分布训练target-class-specific 对抗生成网络（GANs）,然后使用训练好的生成器对任意输入图像直接生成扰动。</p>
+<p>本文主要贡献在于发现不需要模型训练和外加数据的简单迁移攻击(MI-FGSM，DI-FGSM，TI-FGSM)也能实现强目标迁移性。我们认为这一观点被忽略了，主要是因为目前的研究只使用了少量的迭代次数不合理地限制了攻击收敛性，另一个主要贡献是阐述非常简单的logit loss的普遍优越性，甚至比 resource-intensive SOTA方法表现更好。</p>
+<h3 id="对简单迁移攻击的新见解"><a href="#对简单迁移攻击的新见解" class="headerlink" title="对简单迁移攻击的新见解"></a>对简单迁移攻击的新见解</h3><p>集成三种迁移攻击（MI, DI, TI）可以获得最好效果，其实只使用DI就已经能获得很好的迁移效果，MI和TI和原本效果不好的目标攻击效果差不多。DI比TI表现更好的原因可能是由于DI在每次迭代时随机图像增广而不是TI的固定增广。在这种方式下，对目标攻击的梯度更具有一般性，所以能避免对白盒源模型的过拟合。（？？？不理解）MI和DI，TI有本质区别，它只能固定更新方向，而不能用于向一个特定（目标）实现更准确的梯度方向。</p>
+<p><img src="https://s2.loli.net/2022/03/13/6qpJb3ihA5UYsOn.png" alt="image-20220313205918445" style="zoom:80%;" /></p>
+<p>​                                                                                                                    图1. </p>
+<p>通常目标迁移攻击限制攻击将攻击优化限制在少数迭代（通常小于20次）。在图1中目标攻击比非目标攻击达到收敛所需要的迭代次数更多。这意味着在只有少数迭代的情况下评估目标迁移性是有问题的。</p>
+<p>现有简单攻击通常使用交叉熵（CE）损失。但随着迭代次数增加，CE损失会造成梯度消失。为解决这个问题，Po+Trip 损失[<a href="#[4]">4</a>]以一种贪婪的方式随意的逆转梯度的减少，例如在迭代时增大梯度。然而我们发现这种操作导致迭代次数太大，因此造成攻击优化错过最小值。</p>
+<p>在这里，对于损失函数，我们消除了CE损失中使用的最终softmax函数，只是从logit输出中反向传播梯度。</p>
+<script type="math/tex; mode=display">
+L_{Logit }=-l_{t}\left(x^{\prime}\right) \tag 1</script><p>$l_t(·)$表示对目标类别 logit的输出。虽然用logit攻击的想法并不新，但它在目标迁移性方面的优越性能至今还没有被认识。我们还发现，使用著名的基于logit的损失，C&amp;W，得到的结果一直比较糟糕。</p>
+<p>下面公式$\eqref{eq22}$展示logit损失比CE损失有更强的梯度。CE损失对目标logit输入$z_t$的梯度对$p_t$单调递减，因为使用softmax函数，$p_t$很快到达1，因此梯度几乎消失。这种现象使得即使应用更多的迭代，也很难改善攻击。公式$\eqref{eq3}$logit损失是一个常数。</p>
+<script type="math/tex; mode=display">
+\begin{aligned} L_{C E} &=-1 \cdot \log \left(p_{t}\right)=-\log \left(\frac{e^{z_{t}}}{\sum e^{z_{j}}}\right)=-z_{t}+\log \left(\sum e^{z_{j}}\right) \\ \frac{\partial L_{C E}}{\partial z_{t}} &=-1+\frac{\partial \log \left(\sum e^{z_{j}}\right)}{\partial e^{z_{t}}} \cdot \frac{\partial e^{z_{t}}}{\partial z_{t}}=-1+\frac{e^{z_{t}}}{\sum e^{z_{j}}}=-1+p_{t} \end{aligned} \tag 2\label {eq22}</script><script type="math/tex; mode=display">
+L_{\text {Logit }}=-z_{t}, \frac{\partial L_{\text {Logit }}}{\partial z_{t}}=-1 \tag 3 \label{eq3}</script><p>参考文献</p>
+<p><span id="[1]">[1] Nathan Inkawhich, Kevin Liang, Lawrence Carin, and Yiran Chen. Transferable perturbations<br>of deep feature distributions. In ICLR, 2020.</span></p>
+<p><span id="[2]">[2] Nathan Inkawhich, Kevin J Liang, Binghui Wang, Matthew Inkawhich, Lawrence Carin, and<br>Yiran Chen. Perturbing across the feature hierarchy to improve standard and strict blackbox<br>attack transferability. In NeurIPS, 2020.</span></p>
+<p><span id ="[3]">[3] Muzammal Naseer, Salman Khan, Munawar Hayat, Fahad Shahbaz Khan, and Fatih Porikli.<br>On generating transferable targeted perturbations. In ICCV, 2021.</span></p>
+<p><span id ="4">[4] Maosen Li, Cheng Deng, Tengjiao Li, Junchi Yan, Xinbo Gao, and Heng Huang. Towards<br>transferable targeted attack. In CVPR, 2020.</span></p>
+]]></content>
       <categories>
         <category>对抗攻击</category>
         <category>目标攻击</category>
