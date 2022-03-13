@@ -118,7 +118,8 @@ L_{Logit }=-l_{t}\left(x^{\prime}\right) \tag 1</script><p>$l_t(·)$表示对目
 <p>下面公式$\eqref{eq22}$展示logit损失比CE损失有更强的梯度。CE损失对目标logit输入$z_t$的梯度对$p_t$单调递减，因为使用softmax函数，$p_t$很快到达1，因此梯度几乎消失。这种现象使得即使应用更多的迭代，也很难改善攻击。公式$\eqref{eq3}$logit损失是一个常数。</p>
 <script type="math/tex; mode=display">
 \begin{aligned} L_{C E} &=-1 \cdot \log \left(p_{t}\right)=-\log \left(\frac{e^{z_{t}}}{\sum e^{z_{j}}}\right)=-z_{t}+\log \left(\sum e^{z_{j}}\right) \\ \frac{\partial L_{C E}}{\partial z_{t}} &=-1+\frac{\partial \log \left(\sum e^{z_{j}}\right)}{\partial e^{z_{t}}} \cdot \frac{\partial e^{z_{t}}}{\partial z_{t}}=-1+\frac{e^{z_{t}}}{\sum e^{z_{j}}}=-1+p_{t} \end{aligned} \tag 2\label {eq22}</script><script type="math/tex; mode=display">
-L_{\text {Logit }}=-z_{t}, \frac{\partial L_{\text {Logit }}}{\partial z_{t}}=-1 \tag 3 \label{eq3}</script><p>参考文献</p>
+L_{\text {Logit }}=-z_{t}, \frac{\partial L_{\text {Logit }}}{\partial z_{t}}=-1 \tag 3 \label{eq3}</script><h3 id="实验-2"><a href="#实验-2" class="headerlink" title="实验"></a>实验</h3><p>还么看…:cry:</p>
+<p>参考文献</p>
 <p><span id="[1]">[1] Nathan Inkawhich, Kevin Liang, Lawrence Carin, and Yiran Chen. Transferable perturbations<br>of deep feature distributions. In ICLR, 2020.</span></p>
 <p><span id="[2]">[2] Nathan Inkawhich, Kevin J Liang, Binghui Wang, Matthew Inkawhich, Lawrence Carin, and<br>Yiran Chen. Perturbing across the feature hierarchy to improve standard and strict blackbox<br>attack transferability. In NeurIPS, 2020.</span></p>
 <p><span id ="[3]">[3] Muzammal Naseer, Salman Khan, Munawar Hayat, Fahad Shahbaz Khan, and Fatih Porikli.<br>On generating transferable targeted perturbations. In ICCV, 2021.</span></p>
