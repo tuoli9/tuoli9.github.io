@@ -31,8 +31,15 @@
 <meta property="og:image" content="https://s2.loli.net/2022/03/12/1vNZ4OjV2GLAXkl.png">
 <meta property="og:image" content="https://s2.loli.net/2022/03/11/vtHX12rqaIWn9cD.png">
 <meta property="og:image" content="https://s2.loli.net/2022/03/13/6qpJb3ihA5UYsOn.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/14/rNha5KVDomwWuTl.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/14/cSo28ehswL1KmGJ.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/14/ThDrekSzRfL2CH8.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/14/FYOBg7AbXyPhfCs.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/14/c8LOqvKl1mQxdGn.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/14/9ln7kHjW3ioEmFO.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/14/bkJKIFYjnUScLZ8.png">
 <meta property="article:published_time" content="2022-03-09T06:24:14.569Z">
-<meta property="article:modified_time" content="2022-03-13T14:31:40.279Z">
+<meta property="article:modified_time" content="2022-03-14T06:09:08.321Z">
 <meta property="article:author" content="Li tuo">
 <meta property="article:tag" content="对抗攻击">
 <meta name="twitter:card" content="summary">
@@ -196,7 +203,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-03-13 22:31:40" itemprop="dateModified" datetime="2022-03-13T22:31:40+08:00">2022-03-13</time>
+                <time title="修改时间：2022-03-14 14:09:08" itemprop="dateModified" datetime="2022-03-14T14:09:08+08:00">2022-03-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -246,14 +253,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>10k</span>
+              <span>14k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>9 分钟</span>
+              <span>12 分钟</span>
             </span>
 
         </div>
@@ -380,12 +387,39 @@ L_{Logit }=-l_{t}\left(x^{\prime}\right) \tag 1</script><p>$l_t(·)$表示对目
 <p>下面公式$\eqref{eq22}$展示logit损失比CE损失有更强的梯度。CE损失对目标logit输入$z_t$的梯度对$p_t$单调递减，因为使用softmax函数，$p_t$很快到达1，因此梯度几乎消失。这种现象使得即使应用更多的迭代，也很难改善攻击。公式$\eqref{eq3}$logit损失是一个常数。</p>
 <script type="math/tex; mode=display">
 \begin{aligned} L_{C E} &=-1 \cdot \log \left(p_{t}\right)=-\log \left(\frac{e^{z_{t}}}{\sum e^{z_{j}}}\right)=-z_{t}+\log \left(\sum e^{z_{j}}\right) \\ \frac{\partial L_{C E}}{\partial z_{t}} &=-1+\frac{\partial \log \left(\sum e^{z_{j}}\right)}{\partial e^{z_{t}}} \cdot \frac{\partial e^{z_{t}}}{\partial z_{t}}=-1+\frac{e^{z_{t}}}{\sum e^{z_{j}}}=-1+p_{t} \end{aligned} \tag 2\label {eq22}</script><script type="math/tex; mode=display">
-L_{\text {Logit }}=-z_{t}, \frac{\partial L_{\text {Logit }}}{\partial z_{t}}=-1 \tag 3 \label{eq3}</script><h3 id="实验-2"><a href="#实验-2" class="headerlink" title="实验"></a>实验</h3><p>还么看…:cry:</p>
+L_{\text {Logit }}=-z_{t}, \frac{\partial L_{\text {Logit }}}{\partial z_{t}}=-1 \tag 3 \label{eq3}</script><h3 id="实验-2"><a href="#实验-2" class="headerlink" title="实验"></a>实验</h3><p>实验数据集：NIPS 2017对抗攻击和防御<a target="_blank" rel="noopener" href="https://github.com/cleverhans-lab/cleverhans/tree/master/cleverhans_v3.
+1.0/examples/nips17_adversarial_competition/dataset">数据集</a>，在TI中$|W|_1=5$，所有攻击迭代次数300。</p>
+<h4 id="单个模型迁移效果"><a href="#单个模型迁移效果" class="headerlink" title="单个模型迁移效果"></a>单个模型迁移效果</h4><p><img src="https://s2.loli.net/2022/03/14/rNha5KVDomwWuTl.png" alt="image-20220314095757934"></p>
+<p>目标模型是resnet和densenet时目标迁移攻击成功率较高，一种解释是网络中的跳跃连接（skip connection）提高迁移率[<a href="#&quot;[5]&quot;">5</a>,<a href="#&quot;[6]&quot;">6</a>]，目标模型是Inception-v3 迁移成功率较低，一个可能的原因是Inception 结构有多尺度卷积和两个辅助分类器。</p>
+<h4 id="在简单和有挑战性场景下的集成迁移"><a href="#在简单和有挑战性场景下的集成迁移" class="headerlink" title="在简单和有挑战性场景下的集成迁移"></a>在简单和有挑战性场景下的集成迁移</h4><p>（1）在简单情况下Po+Trip 在迭代次数限制在20次时效果比CE好，在足够迭代次数效果变差，下表对应20/100迭代次数。</p>
+<p><img src="https://s2.loli.net/2022/03/14/cSo28ehswL1KmGJ.png" alt="image-20220314101037605"></p>
+<p>（2）在源模型和目标模型没有交叉，logit方法攻击效果比CE和Po+Trip 有显著提升。三种方法比单个模型情况都有本质提升。Po+Trip方法在一些情况下表现最差因为它随机增加梯度大小，因为模型的多样性，损失面不光滑，造成优化过程错过最小值点。和单个模型的迁移场景一样，这种情况下Inception-v3的迁移也是最困难的。</p>
+<p><img src="https://s2.loli.net/2022/03/14/ThDrekSzRfL2CH8.png" alt="image-20220314103037679"></p>
+<p>（3）目前基于迁移攻击的评估仅限于攻击最佳和平均的情况，为了解决这一局限性，我们考虑了一种更坏的转移情况，通过将目标从最高排序类别逐渐改变为最低排序的类别。在下表中，目标类别排名位置和目标迁移率有不可忽略的关系。具体地说，当目标标签预测概率越低，攻击越困难，排名较高的目标的结果可能不会像排名较低的目标的更现实、更糟糕的情况那样揭示不同攻击的实际强度。特别是，只看排名最高的目标的最佳情况可能会导致一个误导性的结论，即CE是最有效的攻击。这一发现表明，对目标可迁移性的更有意义的评估应进一步增加难度，超越目前的最佳和平均情况。</p>
+<p><img src="https://s2.loli.net/2022/03/14/FYOBg7AbXyPhfCs.png" alt="image-20220314104513584"></p>
+<p>（4）对Google Cloud Vision迁移攻击。API预测了一组语义标签和置信度分数。具体来说，只返回顶部置信度不低于50%的类，最多显示10个类。请注意这里的置信度分数不是概率(总和为1)。我们测试了目标和非目标的可迁移性。由于所有返回的标签都具有较高的可信度($\ge$ 50%)，我们不会将成功率的衡量限制在top-1类别。相反，对于非目标成功率，我们测试真实标签是否出现在返回的列表中，而对于目标成功率，测试目标类是否出现。由于API预测的语义标签集并不完全对应1000个ImageNet类，所以我们将语义相似的类视为同一个类。</p>
+<p><img src="https://s2.loli.net/2022/03/14/c8LOqvKl1mQxdGn.png" alt="image-20220314140640067"></p>
+<p>表4报告了超过100张图像的平均结果，这些图像最初产生的是正确的预测。可以看出，总的来说，实现目标转移的成功要比非目标转移的成功困难得多。特别是，Logit攻击实现了最佳的目标可迁移性，图4中显示了准不可察觉的扰动。我们的研究结果揭示了Google Cloud Vision在简单的基于迁移的攻击中存在的潜在漏洞，这种攻击不需要查询交互。</p>
+<h4 id="Logit方法和Resource-Intensive迁移攻击方法对比"><a href="#Logit方法和Resource-Intensive迁移攻击方法对比" class="headerlink" title="Logit方法和Resource-Intensive迁移攻击方法对比"></a>Logit方法和Resource-Intensive迁移攻击方法对比</h4><p>（1）和TTP对比</p>
+<p>参数：10-Targets（all-source），单个模型情况：ResNet50，集成模型情况ResNet{18,50,101,152}。目标模型：DenseNet121 和 VGG16 bn。</p>
+<p><img src="https://s2.loli.net/2022/03/14/9ln7kHjW3ioEmFO.png" alt="image-20220314110300303"></p>
+<p>在上表中，在一般情况下$\epsilon=16$，logit攻击能获得和TTP差不多的效果，集成模型对logit攻击提升更大，这可能是因为即使使用单模型作为判别器，TTP也可以通过训练很好地学习目标语义的特征和通过大规模数据学习目标类别分布。图5. 通过比较TTP实现的无边界扰动与Logit实现的无界扰动，可以确定TTP学习到的更清晰的目标语义。</p>
+<p>（2）和$\text{FDA}^{N}$+xent方法对比</p>
+<p>CE, Po+Trip, 和 Logit三种方法和$\text{FDA}^{N}$+xent 在生成无边界对抗图像对比，对抗扰动初始化为随机高斯噪声并且要求越大越好。在4000张图像上实验，每一张图像朝着随机目标优化。MI迁移模型在无边界情况下有损表现，去除。表6所有的三种简单迁移攻击都比$\text{FDA}^{N}$+xent的方法要好，在图5中无边界的对抗扰动能够在某种程度上反应目标的语义。这一发现表明，实现目标可迁移性依赖于鲁棒的，语义特征，这些特征被各种模型所学习，也被人类所理解。这样，实现有目标的可迁移性与非有目标的可迁移性有本质区别，非目标攻击攻击非鲁棒特征就足够。同样值得注意的是，在具有较小范数边界的实际场景中，语义对齐扰动不改变人类的判断。</p>
+<p><img src="https://s2.loli.net/2022/03/14/bkJKIFYjnUScLZ8.png" alt="image-20220314131322939"></p>
+<p>（3）简单Logit攻击在Data-Free通用扰动应用</p>
+<p>上述对扰动的观察可以反映出特定的目标语义激励我们应用Logit攻击来实现目标的通用对抗扰动(UAPs)，这可以将多个原始图像分类到特定的目标类。现有的实现目标通用扰动主要依赖于对附加数据的大规模优化。然而，简单logit攻击能容易的扩展到data-free目标通用扰动，上述迁移logit攻击和唯一区别是用平均图像（所有像素值设为0.5而不是[0, 1]）作为原始图像。</p>
+<p>在我们的实验中，对于每个目标类，我们进行300次迭代生成一个单一的目标UAP向量($\epsilon$ = 16)，并将其应用到我们数据集中的所有1000张图像。表7报告了所有1000个ImageNet类的平均结果。可以看出，logit loss可以带来实质性的成功，明显优于CE损失。图6可以确认这一点，图6显示了logit攻击可以产生比CE更多的语义对齐的扰动。这个观察结果也支持来自[<a href="#&quot;[7]&quot;">7</a>]的结论，即通用扰动包含域特征，而图像就扰动而言就像噪音。</p>
+<h3 id="结论和回顾"><a href="#结论和回顾" class="headerlink" title="结论和回顾"></a>结论和回顾</h3><p>在这篇论文中，我们已经证明了实现有针对性的可迁移并不像目前的工作总结的那么困难。具体地说，我们发现，当给定足够的收敛迭代时，简单的可转移攻击实际上可以实现惊人的目标可迁移性。我们已经在广泛的场景中验证了简单可迁移攻击的有效性，包括三个新引入的具有挑战性的场景。这些具有挑战性的场景更好地揭示了不同攻击的实际能力。特别地，我们证明了一个非常简单的Logit攻击在所有迁移场景中都具有优越性，可以获得比最先进的资源密集型（resource-intensive）方法更好的结果。我们还展示了Logit攻击在以无数据方式产生目标通用对抗扰动方面的潜在应用。总的来说，我们希望我们的研究成果能够对未来的研究工作有所启发，对目标可迁移性进行更有意义的评估。我们未来的工作将集中于研究为什么不同的模型架构产生不同的可移植性。特别的我们应该去探索Inception-v3的低成功率。接下来，需要从多个方面对不同攻击的资源消耗进行更全面的讨论，例如训练和推理时间、硬件资源和数据大小。</p>
+<p>较强的可移动性明显有利于对抗性图像在黑盒社交公益上应用。此外，考虑到我们的发现，即使是简单的攻击也可以产生高度可迁移的对抗图像，这也将激励社区设计更强大的防御。我们的方法仍有可能被恶意行为者滥用，以破坏合法的系统。然而，我们坚信，我们的论文能够为研究人员提供的帮助远远大于它可能为一个实际的恶意行动者提供的帮助。</p>
 <p>参考文献</p>
 <p><span id="[1]">[1] Nathan Inkawhich, Kevin Liang, Lawrence Carin, and Yiran Chen. Transferable perturbations<br>of deep feature distributions. In ICLR, 2020.</span></p>
 <p><span id="[2]">[2] Nathan Inkawhich, Kevin J Liang, Binghui Wang, Matthew Inkawhich, Lawrence Carin, and<br>Yiran Chen. Perturbing across the feature hierarchy to improve standard and strict blackbox<br>attack transferability. In NeurIPS, 2020.</span></p>
 <p><span id ="[3]">[3] Muzammal Naseer, Salman Khan, Munawar Hayat, Fahad Shahbaz Khan, and Fatih Porikli.<br>On generating transferable targeted perturbations. In ICCV, 2021.</span></p>
 <p><span id ="4">[4] Maosen Li, Cheng Deng, Tengjiao Li, Junchi Yan, Xinbo Gao, and Heng Huang. Towards<br>transferable targeted attack. In CVPR, 2020.</span></p>
+<p><span id = "5">[5] Nathan Inkawhich, Kevin Liang, Lawrence Carin, and Yiran Chen. Transferable perturbations<br>of deep feature distributions. In ICLR, 2020.</span></p>
+<p><span id = "6">[6] Nathan Inkawhich, Kevin J Liang, Binghui Wang, Matthew Inkawhich, Lawrence Carin, and Yiran Chen. Perturbing across the feature hierarchy to improve standard and strict blackbox attack transferability. In NeurIPS, 2020.</span></p>
+<p><span id ="7">[7] Chaoning Zhang, Philipp Benz, Tooba Imtiaz, and In So Kweon. Understanding adversarial<br>examples from the mutual influence of images and perturbations. In CVPR, 2020.</span></p>
 
     </div>
 
@@ -477,7 +511,7 @@ L_{\text {Logit }}=-z_{t}, \frac{\partial L_{\text {Logit }}}{\partial z_{t}}=-1
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Towards-transferable-targeted-attack%EF%BC%882020CVPR%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">Towards transferable targeted attack（2020CVPR）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%91%98%E8%A6%81"><span class="nav-number">1.1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%9E%E5%8A%A0%E8%8E%B1%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F%EF%BC%88Poincar%C2%B4e-Distance-Metric%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">庞加莱距离度量（Poincar´e Distance Metric）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E6%94%BB%E5%87%BB%E4%B8%89%E5%85%83%E6%8D%9F%E5%A4%B1%EF%BC%88Triplet-Loss-for-Targeted-Attack%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">目标攻击三元损失（Triplet Loss for Targeted Attack）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-number">1.4.</span> <span class="nav-text">实验</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#On-Generating-Transferable-Targeted-Perturbations%EF%BC%88ICCV2021%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">On Generating Transferable Targeted Perturbations（ICCV2021）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.1.</span> <span class="nav-text">相关工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%94%9F%E6%88%90%E7%9A%84%E7%9B%AE%E6%A0%87%E6%94%BB%E5%87%BB"><span class="nav-number">2.2.</span> <span class="nav-text">基于生成的目标攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.2.1.</span> <span class="nav-text">生成模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%8C%B9%E9%85%8D"><span class="nav-number">2.2.2.</span> <span class="nav-text">分布匹配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%82%BB%E5%9F%9F%E7%9B%B8%E4%BC%BC%E5%BA%A6%E5%8C%B9%E9%85%8D"><span class="nav-number">2.2.3.</span> <span class="nav-text">邻域相似度匹配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B4%E4%BD%93%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.4.</span> <span class="nav-text">整体损失函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C-1"><span class="nav-number">2.3.</span> <span class="nav-text">实验</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#On-Success-and-Simplicity-A-Second-Look-at-Transferable-Targeted-Attacks%EF%BC%88NeurIPS-2021%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">On Success and Simplicity: A Second Look at Transferable Targeted Attacks（NeurIPS 2021）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">3.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E7%AE%80%E5%8D%95%E8%BF%81%E7%A7%BB%E6%94%BB%E5%87%BB%E7%9A%84%E6%96%B0%E8%A7%81%E8%A7%A3"><span class="nav-number">3.2.</span> <span class="nav-text">对简单迁移攻击的新见解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C-2"><span class="nav-number">3.3.</span> <span class="nav-text">实验</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Towards-transferable-targeted-attack%EF%BC%882020CVPR%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">Towards transferable targeted attack（2020CVPR）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%91%98%E8%A6%81"><span class="nav-number">1.1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%9E%E5%8A%A0%E8%8E%B1%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8F%EF%BC%88Poincar%C2%B4e-Distance-Metric%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">庞加莱距离度量（Poincar´e Distance Metric）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E6%94%BB%E5%87%BB%E4%B8%89%E5%85%83%E6%8D%9F%E5%A4%B1%EF%BC%88Triplet-Loss-for-Targeted-Attack%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">目标攻击三元损失（Triplet Loss for Targeted Attack）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-number">1.4.</span> <span class="nav-text">实验</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#On-Generating-Transferable-Targeted-Perturbations%EF%BC%88ICCV2021%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">On Generating Transferable Targeted Perturbations（ICCV2021）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.1.</span> <span class="nav-text">相关工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%94%9F%E6%88%90%E7%9A%84%E7%9B%AE%E6%A0%87%E6%94%BB%E5%87%BB"><span class="nav-number">2.2.</span> <span class="nav-text">基于生成的目标攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.2.1.</span> <span class="nav-text">生成模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%8C%B9%E9%85%8D"><span class="nav-number">2.2.2.</span> <span class="nav-text">分布匹配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%82%BB%E5%9F%9F%E7%9B%B8%E4%BC%BC%E5%BA%A6%E5%8C%B9%E9%85%8D"><span class="nav-number">2.2.3.</span> <span class="nav-text">邻域相似度匹配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B4%E4%BD%93%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.4.</span> <span class="nav-text">整体损失函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C-1"><span class="nav-number">2.3.</span> <span class="nav-text">实验</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#On-Success-and-Simplicity-A-Second-Look-at-Transferable-Targeted-Attacks%EF%BC%88NeurIPS-2021%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">On Success and Simplicity: A Second Look at Transferable Targeted Attacks（NeurIPS 2021）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">3.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E7%AE%80%E5%8D%95%E8%BF%81%E7%A7%BB%E6%94%BB%E5%87%BB%E7%9A%84%E6%96%B0%E8%A7%81%E8%A7%A3"><span class="nav-number">3.2.</span> <span class="nav-text">对简单迁移攻击的新见解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C-2"><span class="nav-number">3.3.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E4%B8%AA%E6%A8%A1%E5%9E%8B%E8%BF%81%E7%A7%BB%E6%95%88%E6%9E%9C"><span class="nav-number">3.3.1.</span> <span class="nav-text">单个模型迁移效果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E7%AE%80%E5%8D%95%E5%92%8C%E6%9C%89%E6%8C%91%E6%88%98%E6%80%A7%E5%9C%BA%E6%99%AF%E4%B8%8B%E7%9A%84%E9%9B%86%E6%88%90%E8%BF%81%E7%A7%BB"><span class="nav-number">3.3.2.</span> <span class="nav-text">在简单和有挑战性场景下的集成迁移</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Logit%E6%96%B9%E6%B3%95%E5%92%8CResource-Intensive%E8%BF%81%E7%A7%BB%E6%94%BB%E5%87%BB%E6%96%B9%E6%B3%95%E5%AF%B9%E6%AF%94"><span class="nav-number">3.3.3.</span> <span class="nav-text">Logit方法和Resource-Intensive迁移攻击方法对比</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA%E5%92%8C%E5%9B%9E%E9%A1%BE"><span class="nav-number">3.4.</span> <span class="nav-text">结论和回顾</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -556,13 +590,13 @@ L_{\text {Logit }}=-z_{t}, \frac{\partial L_{\text {Logit }}}{\partial z_{t}}=-1
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">10k</span>
+    <span title="站点总字数">14k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">9 分钟</span>
+    <span title="站点阅读时长">12 分钟</span>
 </div>
 <!--
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
