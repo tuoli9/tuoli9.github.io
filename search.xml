@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>一些conda指令</title>
+    <url>/posts/5d0/</url>
+    <content><![CDATA[<p><a href="https://zhuanlan.zhihu.com/p/349345180">Linux安装anaconda - 知乎 (zhihu.com)</a></p>
+<p>删除环境</p>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">conda remove -n your<span class="built_in">_</span>env<span class="built_in">_</span>name(虚拟环境名称) --all</span><br></pre></td></tr></table></figure>
+<p>创建环境</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">conda create -n pt python=3.7</span><br></pre></td></tr></table></figure>
+<span id="more"></span> 
+<p>清华源</p>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</span><br><span class="line"></span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/</span><br><span class="line"></span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/bioconda/</span><br><span class="line"></span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r/</span><br><span class="line"></span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/pro/</span><br></pre></td></tr></table></figure>
+<p>pip</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip install --upgrade SomePackage</span><br><span class="line">pip uninstall SomePackage</span><br></pre></td></tr></table></figure>
+<ul>
+<li>-e 安装可编辑的包。不同项目，但是一个项目依赖时使用。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip install -e 本地目录</span><br><span class="line">pip install -e git+https://github.com/django/django.git#egg=django</span><br><span class="line">pip install -e git+ssh://git@github.com:django/django.git#egg=django</span><br></pre></td></tr></table></figure>
+<ul>
+<li>-t 安装到指定位置</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip install -t 位置目录</span><br></pre></td></tr></table></figure>
+<p>换源</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim ~/.condarc</span><br><span class="line">channels:</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/</span><br><span class="line">ssl_verify: true</span><br></pre></td></tr></table></figure>
+<p>科大：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">channels:</span><br><span class="line">  - https://mirrors.ustc.edu.cn/anaconda/pkgs/main/</span><br><span class="line">  - https://mirrors.ustc.edu.cn/anaconda/pkgs/free/</span><br><span class="line">  - https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge/</span><br><span class="line">ssl_verify: true</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+  </entry>
+  <entry>
     <title>迁移目标攻击文献阅读</title>
     <url>/posts/bc76/</url>
     <content><![CDATA[<h2 id="Towards-transferable-targeted-attack（2020CVPR）"><a href="#Towards-transferable-targeted-attack（2020CVPR）" class="headerlink" title="Towards transferable targeted attack（2020CVPR）"></a>Towards transferable targeted attack（2020CVPR）</h2><p>代码链接：<a href="https://github.com/TiJoy/Towards-Transferable-Targeted-Attack">https://github.com/TiJoy/Towards-Transferable-Targeted-Attack</a></p>
@@ -159,35 +189,5 @@ L_{\text {Logit }}=-z_{t}, \frac{\partial L_{\text {Logit }}}{\partial z_{t}}=-1
       <tags>
         <tag>对抗攻击</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>一些conda指令</title>
-    <url>/posts/5d0/</url>
-    <content><![CDATA[<p><a href="https://zhuanlan.zhihu.com/p/349345180">Linux安装anaconda - 知乎 (zhihu.com)</a></p>
-<p>删除环境</p>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">conda remove -n your<span class="built_in">_</span>env<span class="built_in">_</span>name(虚拟环境名称) --all</span><br></pre></td></tr></table></figure>
-<p>创建环境</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">conda create -n pt python=3.7</span><br></pre></td></tr></table></figure>
-<span id="more"></span> 
-<p>清华源</p>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</span><br><span class="line"></span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/</span><br><span class="line"></span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/bioconda/</span><br><span class="line"></span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r/</span><br><span class="line"></span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/pro/</span><br></pre></td></tr></table></figure>
-<p>pip</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip install --upgrade SomePackage</span><br><span class="line">pip uninstall SomePackage</span><br></pre></td></tr></table></figure>
-<ul>
-<li>-e 安装可编辑的包。不同项目，但是一个项目依赖时使用。</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip install -e 本地目录</span><br><span class="line">pip install -e git+https://github.com/django/django.git#egg=django</span><br><span class="line">pip install -e git+ssh://git@github.com:django/django.git#egg=django</span><br></pre></td></tr></table></figure>
-<ul>
-<li>-t 安装到指定位置</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip install -t 位置目录</span><br></pre></td></tr></table></figure>
-<p>换源</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim ~/.condarc</span><br><span class="line">channels:</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/</span><br><span class="line">ssl_verify: true</span><br></pre></td></tr></table></figure>
-<p>科大：</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">channels:</span><br><span class="line">  - https://mirrors.ustc.edu.cn/anaconda/pkgs/main/</span><br><span class="line">  - https://mirrors.ustc.edu.cn/anaconda/pkgs/free/</span><br><span class="line">  - https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge/</span><br><span class="line">ssl_verify: true</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
   </entry>
 </search>
