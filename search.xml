@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>一些conda指令</title>
-    <url>/2021/11/13/%E4%B8%80%E4%BA%9Bconda%E6%8C%87%E4%BB%A4/</url>
+    <url>/posts/5d0/</url>
     <content><![CDATA[<p><a href="https://zhuanlan.zhihu.com/p/349345180">Linux安装anaconda - 知乎 (zhihu.com)</a></p>
 <p>删除环境</p>
 <figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">conda remove -n your<span class="built_in">_</span>env<span class="built_in">_</span>name(虚拟环境名称) --all</span><br></pre></td></tr></table></figure>
@@ -32,7 +32,7 @@
   </entry>
   <entry>
     <title>迁移目标攻击文献阅读</title>
-    <url>/2022/03/09/%E8%BF%81%E7%A7%BB%E7%9B%AE%E6%A0%87%E6%94%BB%E5%87%BB%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB/</url>
+    <url>/posts/bc76/</url>
     <content><![CDATA[<h2 id="Towards-transferable-targeted-attack（2020CVPR）"><a href="#Towards-transferable-targeted-attack（2020CVPR）" class="headerlink" title="Towards transferable targeted attack（2020CVPR）"></a>Towards transferable targeted attack（2020CVPR）</h2><p>代码链接：<a href="https://github.com/TiJoy/Towards-Transferable-Targeted-Attack">https://github.com/TiJoy/Towards-Transferable-Targeted-Attack</a></p>
 <span id="more"></span> 
 <h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p>目标攻击比非目标攻击更难迁移，在本文中分析了两点造成这种困难的原因，1）在迭代攻击中存在梯度消失的现象，在累计动量时，相邻两次成功的噪声过分一致，造成噪声固化；2）目标对抗样本只与目标类别接近还不够，还要远离原始的类别。为解决上述问题引入庞加莱距离（Poincaré  distance），作为相似性度量，使得在迭代攻击中梯度大小自适应以缓解噪声固化。进一步，在用度量学习（metric learning）对目标攻击过程正则化处理，使对抗样本远离真实标签并且获得高迁移目标对抗样本。lmageNet上的实验证实了我们的方法的优越性，在黑盒针对性攻击中，与其他最新技术相比,其攻击成功率平均提高了8%</p>
