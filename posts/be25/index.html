@@ -20,28 +20,32 @@
     var CONFIG = {"hostname":"tuoli9.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Li&#39;s Blog">
-<meta property="og:url" content="https://tuoli9.github.io/index.html">
+  <meta name="description" content="pytorch常用函数官方文档：PyTorch documentation — PyTorch 1.11.0 documentation">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pytorch常用函数">
+<meta property="og:url" content="https://tuoli9.github.io/posts/be25/index.html">
 <meta property="og:site_name" content="Li&#39;s Blog">
+<meta property="og:description" content="pytorch常用函数官方文档：PyTorch documentation — PyTorch 1.11.0 documentation">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-09-26T12:07:23.150Z">
+<meta property="article:modified_time" content="2022-03-23T12:27:32.650Z">
 <meta property="article:author" content="Li Tuo">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://tuoli9.github.io/">
+<link rel="canonical" href="https://tuoli9.github.io/posts/be25/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>Li's Blog</title>
+  <title>pytorch常用函数 | Li's Blog</title>
   
 
 
@@ -177,249 +181,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://tuoli9.github.io/posts/bc76/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/%E7%A8%8B%E5%BA%8F%E5%96%B5.png">
-      <meta itemprop="name" content="Li Tuo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Li's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/bc76/" class="post-title-link" itemprop="url">迁移目标攻击文献阅读</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-03-09 14:24:14" itemprop="dateCreated datePublished" datetime="2022-03-09T14:24:14+08:00">2022-03-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-03-18 16:15:57" itemprop="dateModified" datetime="2022-03-18T16:15:57+08:00">2022-03-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB/" itemprop="url" rel="index"><span itemprop="name">对抗攻击</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB/%E7%9B%AE%E6%A0%87%E6%94%BB%E5%87%BB/" itemprop="url" rel="index"><span itemprop="name">目标攻击</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/posts/bc76/" class="post-meta-item leancloud_visitors" data-flag-title="迁移目标攻击文献阅读" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/posts/bc76/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/bc76/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>14k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>12 分钟</span>
-            </span>
-
-        </div>
-      </header>
 
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Towards-transferable-targeted-attack（2020CVPR）"><a href="#Towards-transferable-targeted-attack（2020CVPR）" class="headerlink" title="Towards transferable targeted attack（2020CVPR）"></a>Towards transferable targeted attack（2020CVPR）</h2><p>代码链接：<a target="_blank" rel="noopener" href="https://github.com/TiJoy/Towards-Transferable-Targeted-Attack">https://github.com/TiJoy/Towards-Transferable-Targeted-Attack</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/bc76/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://tuoli9.github.io/posts/5d0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/%E7%A8%8B%E5%BA%8F%E5%96%B5.png">
-      <meta itemprop="name" content="Li Tuo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Li's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/5d0/" class="post-title-link" itemprop="url">一些conda指令</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-11-13 21:19:50" itemprop="dateCreated datePublished" datetime="2021-11-13T21:19:50+08:00">2021-11-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-03-21 14:19:53" itemprop="dateModified" datetime="2022-03-21T14:19:53+08:00">2022-03-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%85%B6%E4%BB%96/" itemprop="url" rel="index"><span itemprop="name">其他</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/posts/5d0/" class="post-meta-item leancloud_visitors" data-flag-title="一些conda指令" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/posts/5d0/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/5d0/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/349345180">Linux安装anaconda - 知乎 (zhihu.com)</a></p>
-<p>删除环境</p>
-<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda remove -n your<span class="built_in">_</span>env<span class="built_in">_</span>name(虚拟环境名称) --all</span><br></pre></td></tr></table></figure>
-<p>创建环境</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n pt python=3.7</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/5d0/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -435,10 +200,9 @@
       <meta itemprop="name" content="Li's Blog">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/be25/" class="post-title-link" itemprop="url">pytorch常用函数</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          pytorch常用函数
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -512,36 +276,94 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="pytorch常用函数"><a href="#pytorch常用函数" class="headerlink" title="pytorch常用函数"></a>pytorch常用函数</h2><p>官方文档：<a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/index.html">PyTorch documentation — PyTorch 1.11.0 documentation</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/be25/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
+        <h2 id="pytorch常用函数"><a href="#pytorch常用函数" class="headerlink" title="pytorch常用函数"></a>pytorch常用函数</h2><p>官方文档：<a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/index.html">PyTorch documentation — PyTorch 1.11.0 documentation</a></p>
+<span id="more"></span> 
+<p>基本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">torch.zeros((5,5))</span><br><span class="line">torch.ones(*sizes, out=None) → Tensor</span><br></pre></td></tr></table></figure>
+<h3 id="随机数"><a href="#随机数" class="headerlink" title="随机数"></a>随机数</h3><p> <strong>均匀分布</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">torch.rand(*sizes, out=<span class="literal">None</span>)  <span class="comment">#从区间[0, 1)的均匀分布中抽取的一组随机数</span></span><br><span class="line">例</span><br><span class="line">torch.rand(<span class="number">2</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>标准正态分布</strong> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.randn(*sizes, out=None) #包含了从标准正态分布（均值为0，方差为1，即高斯白噪声）中抽取的一组随机数</span><br></pre></td></tr></table></figure>
+<p><strong>离散正态分布</strong> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.normal(means, std, out=None) #标准差std是一个张量，包含每个输出元素相关的正态分布标准差。</span><br></pre></td></tr></table></figure>
+<p> <strong>线性间距向量</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.linspace(start, end, steps=<span class="number">100</span>, out=<span class="literal">None</span>) <span class="comment">#包含在区间start和end上均匀间隔的step个点。</span></span><br></pre></td></tr></table></figure>
+<p><strong>设置随机数种子</strong> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.manual_seed(42)</span><br></pre></td></tr></table></figure>
+<h3 id="scatter"><a href="#scatter" class="headerlink" title="scatter"></a>scatter</h3><p>torch.scatter_(input, dim, index, src)</p>
+<p>将src中数据根据index中的索引按照dim的方向填进input中可以通过getattr方法访问，index是<em>LongTensor</em>类型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x = torch.rand(2, 5)</span><br><span class="line">x</span><br><span class="line"></span><br><span class="line"> 0.4319  0.6500  0.4080  0.8760  0.2355</span><br><span class="line"> 0.2609  0.4711  0.8486  0.8573  0.1029</span><br><span class="line">[torch.FloatTensor of size 2x5]</span><br></pre></td></tr></table></figure>
+<p>LongTensor的shape刚好与x的shape对应，也就是LongTensor每个index指定x中一个数据的填充位置。dim=0，表示按行填充，主要理解按行填充。举例LongTensor中的第0行第2列index=2，表示在第2行（从0开始）进行填充填充，对应到zeros(3, 5)中就是位置（2,2）。所以此处要求zeros(3, 5)的列数要与x列数相同，而LongTensor中的index最大值应与zeros(3, 5)行数相一致。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.zeros(<span class="number">3</span>, <span class="number">5</span>).scatter_(<span class="number">0</span>, torch.LongTensor([[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span>], [<span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]]), x)</span><br><span class="line"></span><br><span class="line"> <span class="number">0.4319</span>  <span class="number">0.4711</span>  <span class="number">0.8486</span>  <span class="number">0.8760</span>  <span class="number">0.2355</span></span><br><span class="line"> <span class="number">0.0000</span>  <span class="number">0.6500</span>  <span class="number">0.0000</span>  <span class="number">0.8573</span>  <span class="number">0.0000</span></span><br><span class="line"> <span class="number">0.2609</span>  <span class="number">0.0000</span>  <span class="number">0.4080</span>  <span class="number">0.0000</span>  <span class="number">0.1029</span></span><br><span class="line">[torch.FloatTensor of size 3x5]</span><br></pre></td></tr></table></figure>
+<p>可用于one-hot编码</p>
+<h3 id="gather"><a href="#gather" class="headerlink" title="gather"></a>gather</h3><p>torch.gather( input’, dim, index, out=None, sparse_grad=False)</p>
+<p>在多分类中，torch.gather常用来取出标签所对应的概率，index是<em>LongTensor</em>类型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#按照dim = 0,  取一个2*2tensor的对角线上的数值</span><br><span class="line">import torch</span><br><span class="line">a = torch.Tensor([[1, 2],</span><br><span class="line">                  [3, 4]])</span><br><span class="line"></span><br><span class="line">b = torch.gather(a, dim = 0, index=torch.LongTensor([[0, 1]]))</span><br><span class="line"></span><br><span class="line">a =  tensor([[1., 2.],</span><br><span class="line">             [3., 4.]])</span><br><span class="line"></span><br><span class="line">b =  tensor([[1., 4.]])</span><br></pre></td></tr></table></figure>
+<h3 id="维度变化"><a href="#维度变化" class="headerlink" title="维度变化"></a>维度变化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">torch.unsqueeze() <span class="comment">#共享内存</span></span><br><span class="line">torch.squeeze()   <span class="comment">#共享内存</span></span><br><span class="line">torch.expand()    <span class="comment">#返回新视图</span></span><br><span class="line">torch.cat(seq, dim=<span class="number">0</span>) <span class="comment">#在指定的维度dim上对序列seq进行连接操作</span></span><br><span class="line">torch.stack(tensors, dim=<span class="number">0</span>, *, out=<span class="literal">None</span>) <span class="comment">#扩张再拼接</span></span><br><span class="line">torch.repeat(*sizes))</span><br></pre></td></tr></table></figure>
+<p><code>self.add_module</code>(<em>name</em>, <em>module</em>)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nn.ModuleList</span><br></pre></td></tr></table></figure>
+<p>梯度</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.autograd.grad(loss,adv,retain_graph = <span class="literal">False</span>,create_graph = <span class="literal">False</span>)[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="hook机制"><a href="#hook机制" class="headerlink" title="hook机制"></a>hook机制</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/foneone/article/details/107099060">(45条消息) Pytorch_hook机制的理解及利用register_forward_hook(hook)中间层输出_越努力 越幸运-CSDN博客_register_forward_hook</a></p>
+<p>ILA（中间层攻击）源码有应用</p>
+<h3 id="调参技巧"><a href="#调参技巧" class="headerlink" title="调参技巧"></a>调参技巧</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/374465251">写给新手炼丹师：2021版调参上分手册 - 知乎 (zhihu.com)</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">device = torch.device(&quot;cuda&quot; if torch.cuda.is_available() else &quot;cpu&quot;)</span><br></pre></td></tr></table></figure>
+<h3 id="学习率调整"><a href="#学习率调整" class="headerlink" title="学习率调整"></a>学习率调整</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/69411064">PyTorch 学习笔记（八）：PyTorch的六个学习率调整方法 - 知乎 (zhihu.com)</a></p>
+<h3 id="pytorch访问模型每一层名字"><a href="#pytorch访问模型每一层名字" class="headerlink" title="pytorch访问模型每一层名字"></a>pytorch访问模型每一层名字</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 这两种等效，返回包含子模块的迭代器</span></span><br><span class="line"><span class="built_in">print</span>([item[<span class="number">0</span>] <span class="keyword">for</span> item <span class="keyword">in</span> model._modules.items()])</span><br><span class="line"><span class="keyword">for</span> name, module <span class="keyword">in</span> model.named_children():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;children module:&#x27;</span>, name)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> name <span class="keyword">in</span> model.children():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;module:&#x27;</span>, name)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="keyword">for</span> name, module <span class="keyword">in</span> model.named_modules():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;modules:&#x27;</span>, name)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">for</span> name <span class="keyword">in</span> model.modules():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;modules:&#x27;</span>, name)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 多用于保存参数</span></span><br><span class="line"><span class="keyword">for</span> name <span class="keyword">in</span> model.state_dict():</span><br><span class="line">    <span class="built_in">print</span>(name)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">for</span> name,param <span class="keyword">in</span> model.named_parameters():</span><br><span class="line">    <span class="built_in">print</span>(name)</span><br><span class="line">    </span><br><span class="line">model.parameters()   <span class="comment"># 常用于优化器</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> key, value <span class="keyword">in</span> model._modules:</span><br><span class="line">	<span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<p>参数访问</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> param <span class="keyword">in</span> model.parameters():</span><br><span class="line">    param.requires_grad = <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
     </div>
 
     
     
     
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Li Tuo
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://tuoli9.github.io/posts/be25/" title="pytorch常用函数">https://tuoli9.github.io/posts/be25/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/posts/5d0/" rel="next" title="一些conda指令">
+      一些conda指令 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
+    
   </article>
   
   
   
 
 
-  
-
-
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -588,6 +410,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#pytorch%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">pytorch常用函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">随机数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scatter"><span class="nav-number">1.2.</span> <span class="nav-text">scatter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gather"><span class="nav-number">1.3.</span> <span class="nav-text">gather</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%B4%E5%BA%A6%E5%8F%98%E5%8C%96"><span class="nav-number">1.4.</span> <span class="nav-text">维度变化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hook%E6%9C%BA%E5%88%B6"><span class="nav-number">1.5.</span> <span class="nav-text">hook机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E5%8F%82%E6%8A%80%E5%B7%A7"><span class="nav-number">1.6.</span> <span class="nav-text">调参技巧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0%E7%8E%87%E8%B0%83%E6%95%B4"><span class="nav-number">1.7.</span> <span class="nav-text">学习率调整</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pytorch%E8%AE%BF%E9%97%AE%E6%A8%A1%E5%9E%8B%E6%AF%8F%E4%B8%80%E5%B1%82%E5%90%8D%E5%AD%97"><span class="nav-number">1.8.</span> <span class="nav-text">pytorch访问模型每一层名字</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
