@@ -131,14 +131,14 @@
   </url>
   
   <url>
-    <loc>https://tuoli9.github.io/categories/%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB/%E7%9B%AE%E6%A0%87%E6%94%BB%E5%87%BB/</loc>
+    <loc>https://tuoli9.github.io/categories/pytorch/</loc>
     <lastmod>2022-03-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://tuoli9.github.io/categories/pytorch/</loc>
+    <loc>https://tuoli9.github.io/categories/%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB/%E7%9B%AE%E6%A0%87%E6%94%BB%E5%87%BB/</loc>
     <lastmod>2022-03-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
