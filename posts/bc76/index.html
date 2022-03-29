@@ -368,7 +368,7 @@ D\left(l\left(x^{a d v}\right), y_{\text {tar }}\right)=1-\frac{\left|l\left(x^{
 <p>实验框架如下图，$\mathcal{G}_\theta$是生成器，$\mathcal{D}_\theta$是判别器，$\mathcal{G}_{\theta}$学习源域到目标域的映射，使源域图像获得最小改动，对抗扰动$\delta$限制在范数距离$l_{\infty} \leq \epsilon$，这通过一个可微的裁剪操作将无界的生成器$\mathcal{G}_\theta$生成的对抗扰动投影到距$x_s$固定范数距离内实现。</p>
 <script type="math/tex; mode=display">
 x^{'}_s=clip(min(x_s+\epsilon,max(\mathcal{W}*\mathcal{G}_\theta,x_s-\epsilon))),\tag 1</script><p>$\mathcal{W}$是固定权重的平滑操作，在不破坏$l_{\infty}$范数限制下减少高频信息，使生成器收敛到一个有意义的结果。</p>
-<p><img src="https://gitee.com/chawucir/pic/raw/master/img/image-20220329225202825.png" alt="image-20220329225202825" style="zoom:80%;" /></p>
+<p><img src="https://gitee.com/chawucir/pic/raw/master/img/image-20220329225202825.png" alt="image-20220329225202825" style="zoom:80%;"></p>
 <p>原有的基于生成的方法依赖于判别器的分类边界，攻击者必须可以获得一个大量标签数据训练的判别器，进一步生成器依赖于输入的特定实例特征，缺少对全局目标分布特征的把握，造成低迁移性。</p>
 <p>为解决上述问题，本文对目标分布$Q$建模并使在隐层空间$\mathcal{D}_{\psi}$中扰动的源域分布$P^{‘}$更接近于$Q$</p>
 <script type="math/tex; mode=display">
@@ -391,7 +391,7 @@ D_{K L}\left(P^{\prime} \| Q\right)=\frac{1}{N} \sum_{i=1}^{N} \sum_{j=1}^{n} \s
 <script type="math/tex; mode=display">
 \mathcal{L}_{\mathcal{G}}=\mathcal{L}+\mathcal{L}^{a u g}+\mathcal{L}^{sim } \tag 9</script><p>上述损失激励生成器在扰动源域样本时不仅匹配目标分布的全局特征（$\mathcal{L}+\mathcal{L}^{a u g}$），而且基于邻域连通匹配局部信息（$\mathcal{L}^{sim }$）</p>
 <p>整体算法流程</p>
-<p><img src="https://gitee.com/chawucir/pic/raw/master/img/image-20220329225416383.png" alt="image-20220329225416383" style="zoom:80%;" /></p>
+<p><img src="https://gitee.com/chawucir/pic/raw/master/img/image-20220329225416383.png" alt="image-20220329225416383" style="zoom:80%;"></p>
 <h3 id="实验-1"><a href="#实验-1" class="headerlink" title="实验"></a>实验</h3><p>实验细节自己看吧，对比了很多基于迭代和基于生成的模型</p>
 <h2 id="On-Success-and-Simplicity-A-Second-Look-at-Transferable-Targeted-Attacks（NeurIPS-2021）"><a href="#On-Success-and-Simplicity-A-Second-Look-at-Transferable-Targeted-Attacks（NeurIPS-2021）" class="headerlink" title="On Success and Simplicity: A Second Look at Transferable Targeted Attacks（NeurIPS 2021）"></a>On Success and Simplicity: A Second Look at Transferable Targeted Attacks（NeurIPS 2021）</h2><p>代码链接：<a target="_blank" rel="noopener" href="https://github.com/ZhengyuZhao/Targeted-Tansfer">https://github.com/ZhengyuZhao/Targeted-Tansfer</a></p>
 <p>本文提出一个简单的logit损失，相比于资源密集型的模型取得了更好的目标迁移效果，在三个新的现实场景：</p>
@@ -442,11 +442,11 @@ L_{\text {Logit }}=-z_{t}, \frac{\partial L_{\text {Logit }}}{\partial z_{t}}=-1
 <p>参考文献</p>
 <p><span id="[1]">[1] Nathan Inkawhich, Kevin Liang, Lawrence Carin, and Yiran Chen. Transferable perturbations<br>of deep feature distributions. In ICLR, 2020.</span></p>
 <p><span id="[2]">[2] Nathan Inkawhich, Kevin J Liang, Binghui Wang, Matthew Inkawhich, Lawrence Carin, and<br>Yiran Chen. Perturbing across the feature hierarchy to improve standard and strict blackbox<br>attack transferability. In NeurIPS, 2020.</span></p>
-<p><span id ="[3]">[3] Muzammal Naseer, Salman Khan, Munawar Hayat, Fahad Shahbaz Khan, and Fatih Porikli.<br>On generating transferable targeted perturbations. In ICCV, 2021.</span></p>
-<p><span id ="4">[4] Maosen Li, Cheng Deng, Tengjiao Li, Junchi Yan, Xinbo Gao, and Heng Huang. Towards<br>transferable targeted attack. In CVPR, 2020.</span></p>
-<p><span id = "5">[5] Nathan Inkawhich, Kevin Liang, Lawrence Carin, and Yiran Chen. Transferable perturbations<br>of deep feature distributions. In ICLR, 2020.</span></p>
-<p><span id = "6">[6] Nathan Inkawhich, Kevin J Liang, Binghui Wang, Matthew Inkawhich, Lawrence Carin, and Yiran Chen. Perturbing across the feature hierarchy to improve standard and strict blackbox attack transferability. In NeurIPS, 2020.</span></p>
-<p><span id ="7">[7] Chaoning Zhang, Philipp Benz, Tooba Imtiaz, and In So Kweon. Understanding adversarial<br>examples from the mutual influence of images and perturbations. In CVPR, 2020.</span></p>
+<p><span id="[3]">[3] Muzammal Naseer, Salman Khan, Munawar Hayat, Fahad Shahbaz Khan, and Fatih Porikli.<br>On generating transferable targeted perturbations. In ICCV, 2021.</span></p>
+<p><span id="4">[4] Maosen Li, Cheng Deng, Tengjiao Li, Junchi Yan, Xinbo Gao, and Heng Huang. Towards<br>transferable targeted attack. In CVPR, 2020.</span></p>
+<p><span id="5">[5] Nathan Inkawhich, Kevin Liang, Lawrence Carin, and Yiran Chen. Transferable perturbations<br>of deep feature distributions. In ICLR, 2020.</span></p>
+<p><span id="6">[6] Nathan Inkawhich, Kevin J Liang, Binghui Wang, Matthew Inkawhich, Lawrence Carin, and Yiran Chen. Perturbing across the feature hierarchy to improve standard and strict blackbox attack transferability. In NeurIPS, 2020.</span></p>
+<p><span id="7">[7] Chaoning Zhang, Philipp Benz, Tooba Imtiaz, and In So Kweon. Understanding adversarial<br>examples from the mutual influence of images and perturbations. In CVPR, 2020.</span></p>
 
     </div>
 
