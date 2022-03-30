@@ -30,16 +30,15 @@
 <meta property="og:site_name" content="Li&#39;s Blog">
 <meta property="og:description" content="Improving the Transferability of Targeted Adversarial Examples through Object-Based Diverse Input (CVPR2022) 代码：https:&#x2F;&#x2F;github.com&#x2F;dreamflake&#x2F;ODI 解决的问题本文要解决目标攻击迁移效果差的文体。数据增广是缓解迁移攻击对抗样本对源模型过拟合的一种方法，之前的">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s2.loli.net/2022/03/30/gKJcE8YfLVTMIN6.png">
-<meta property="og:image" content="https://gitee.com/chawucir/pic/raw/master/img/image-20220329221016779.png">
-<meta property="og:image" content="https://gitee.com/chawucir/pic/raw/master/img/image-20220329223739949.png">
-<meta property="og:image" content="https://gitee.com/chawucir/pic/raw/master/img/image-20220329223855100.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/30/A741TU2bNDatK8h.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/30/S8kgGFKRH62CYna.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/30/Bw5J2cUyfDXFZSI.png">
 <meta property="article:published_time" content="2022-03-29T13:50:05.539Z">
-<meta property="article:modified_time" content="2022-03-30T01:47:26.769Z">
+<meta property="article:modified_time" content="2022-03-30T01:51:53.697Z">
 <meta property="article:author" content="Li Tuo">
 <meta property="article:tag" content="对抗攻击">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s2.loli.net/2022/03/30/gKJcE8YfLVTMIN6.png">
+<meta name="twitter:image" content="https://s2.loli.net/2022/03/30/A741TU2bNDatK8h.png">
 
 <link rel="canonical" href="https://tuoli9.github.io/posts/cc97/">
 
@@ -227,7 +226,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-03-30 09:47:26" itemprop="dateModified" datetime="2022-03-30T09:47:26+08:00">2022-03-30</time>
+                <time title="修改时间：2022-03-30 09:51:53" itemprop="dateModified" datetime="2022-03-30T09:51:53+08:00">2022-03-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -300,18 +299,17 @@
 <li>对于 ImageNet 数据集，所提方法将平均攻击成功率由28.3%提高到47.0%</li>
 <li>ODI 的方法对人脸验证任务同样有效</li>
 </ul>
-<p><img src="https://s2.loli.net/2022/03/30/gKJcE8YfLVTMIN6.png" alt="img1"></p>
 <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本文提出一种ODI攻击，首先引入一个3D物体，将样本投影到它的表面，诱导这个渲染的物体在多种渲染环境下，例如不同光照和视角被分为目标类</p>
-<p><img src="https://gitee.com/chawucir/pic/raw/master/img/image-20220329221016779.png" alt="image-20220329221016779"></p>
+<p><img src="https://s2.loli.net/2022/03/30/A741TU2bNDatK8h.png" alt="image-20220329221016779"></p>
 <p>本文 ODI 过程是可微的，包括三个步骤</p>
 <p>1) <strong>准备一个3D对抗网络布。</strong>随机从目标物体池中挑选一个物体，所挑选的物体有一个三角形网布，一个纹理图，一个边框，这个边框代表画布区域，对抗样本将会画在纹理图上。将纹理图用随机纯色填充，对抗样本 resize 后插入纹理图边框区域。</p>
 <p>2) <strong>渲染环境设置。</strong>包括光照和相机设置。对于相机，固定内参，调整外参，相机角度有三种：elevation, azimuth, 和 tilt。3D 网布大小初始化，投影的图像可以占据它85%的空间。相机角度和距离在一个预设的区间内随机采样。</p>
 <p>   本文选取了 point lights 这个照明模型，但是 directional lights 模型也可以使用。亮度和散射条件在一个预设的区间内随机采样。同样光照位置在基准位置随机添加位移。</p>
 <p>3) <strong>渲染和与背景混合。</strong>在采样环境中渲染对抗三维网格，并将其与随机生成的背景图像混合，以创建最终的输出图像。</p>
 <p>ODI 的方法可以和 TI，MI，SI 等方法结合。算法流程图如下</p>
-<p><img src="https://gitee.com/chawucir/pic/raw/master/img/image-20220329223739949.png" alt="image-20220329223739949"></p>
+<p><img src="https://s2.loli.net/2022/03/30/S8kgGFKRH62CYna.png" alt="image-20220329223739949"></p>
 <h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p>这里贴一个实验结果，更多实验见原文</p>
-<p><img src="https://gitee.com/chawucir/pic/raw/master/img/image-20220329223855100.png" alt="image-20220329223855100"></p>
+<p><img src="https://s2.loli.net/2022/03/30/Bw5J2cUyfDXFZSI.png" alt="image-20220329223855100"></p>
 <p>主要的实验设定和[<a href="1">1</a>]相同，在一定范围内角度，距离和背景图可以提高攻击成功率。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>ODI-MI-TI-VT 可以实现SOTA，但是处理单张图像耗时我觉得有点无法接受。。。同样相机参数设置也对实验结果有一定影响。</p>
 <p><span id="[1]">[1] Zhengyu Zhao, Zhuoran Liu, and Martha Larson. On success and simplicity: A second look at transferable targeted attacks. In Advances in Neural Information Processing Systems, 2021.</span></p>
