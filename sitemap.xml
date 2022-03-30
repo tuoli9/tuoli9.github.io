@@ -124,7 +124,7 @@
   </url>
   
   <url>
-    <loc>https://tuoli9.github.io/categories/pytorch/</loc>
+    <loc>https://tuoli9.github.io/categories/%E5%85%B6%E4%BB%96/</loc>
     <lastmod>2022-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -138,7 +138,7 @@
   </url>
   
   <url>
-    <loc>https://tuoli9.github.io/categories/%E5%85%B6%E4%BB%96/</loc>
+    <loc>https://tuoli9.github.io/categories/pytorch/</loc>
     <lastmod>2022-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
