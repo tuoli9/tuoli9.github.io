@@ -33,6 +33,8 @@
 <meta property="og:image" content="https://s2.loli.net/2022/03/30/tWEpf2j1cvKS3aO.png">
 <meta property="og:image" content="https://s2.loli.net/2022/03/30/RGTV7ivhgqec6xY.png">
 <meta property="og:image" content="https://s2.loli.net/2022/03/30/1pouaWc7iqL2IBK.png">
+<meta property="og:image" content="https://github.githubassets.com/images/icons/emoji/unicode/2b50.png?v8">
+<meta property="og:image" content="https://github.githubassets.com/images/icons/emoji/unicode/2b50.png?v8">
 <meta property="og:image" content="https://s2.loli.net/2022/03/30/kzhH1pX6t4UeqIn.png">
 <meta property="og:image" content="https://s2.loli.net/2022/03/30/sbV8jXdxgnKcvrF.png">
 <meta property="og:image" content="https://s2.loli.net/2022/03/30/j9HzX3twDYvf7kN.png">
@@ -87,6 +89,8 @@
   </style>
 </noscript>
 
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -314,9 +318,9 @@
 <h3 id="Adversarial-Transferability-of-Features-特征的对抗迁移"><a href="#Adversarial-Transferability-of-Features-特征的对抗迁移" class="headerlink" title="Adversarial Transferability of Features 特征的对抗迁移"></a>Adversarial Transferability of Features 特征的对抗迁移</h3><p>这一部分展示略微鲁棒的网络比非鲁棒的网络和更鲁棒的网络表现出更高程度的表征可迁移性。这可以直接解释为什么用略微鲁棒的源网络构建的目标类对抗样本更容易转移，因为用略微鲁棒的网络生成的对抗样本将大量地转移特征，因此将较少地依赖少数可能不存在于每个模型中的高度脆弱的特征。</p>
 <p>实验设计出发点：$x$ 和 $y$ 是两个在源模型特征表达层（倒数第二层）非常相似的两个样本，如果源模型对目标模型的特征迁移程度很高，那么 $x$ 和 $y$ 在目标模型的特征表达应该也非常相似。</p>
 <p>从 ImageNet 测试集随机选择10张图像作为目标$x$，选择990张图像作为初始图像$y_0$，这1000张图像类别互不相同，对于每一个源模型，每一个目标类别，用 $y0$ 构造对抗样本，攻击算法和上一部分同为 TMDI-FGSM。对于每一个类别，990个 representation-targeted 的对抗样本 $y$ 应该和 $x$ 在源模型有相似的特征表达，通过度量（$x$,$y$）在目标模型的表达，可以度量源模型的特征迁移能力。</p>
-<p>采用两种度量相似性的方法，一种直观的方法是用 t-SNE 画出每一个 representation-targeted 对抗样本 $y$ 在目标模型的特征表达向量（图 3）。每一种颜色代表一个类别，每一张图中的:star:代表每一个目标 t-SNE 嵌入后的特征表达，如果与某一颜色相关的每个 $y$ 的目的网络表达都接近其对应的:star:，那么表达迁移性就很高。当表达转移性较低时，针对同一目标图像生成的目达表达对抗样本的是不相似的，因此在图中不会出现分组的情况。</p>
+<p>采用两种度量相似性的方法，一种直观的方法是用 t-SNE 画出每一个 representation-targeted 对抗样本 $y$ 在目标模型的特征表达向量（图 3）。每一种颜色代表一个类别，每一张图中的<span class="github-emoji"><span>⭐</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/2b50.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>代表每一个目标 t-SNE 嵌入后的特征表达，如果与某一颜色相关的每个 $y$ 的目的网络表达都接近其对应的<span class="github-emoji"><span>⭐</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/2b50.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>，那么表达迁移性就很高。当表达转移性较低时，针对同一目标图像生成的目达表达对抗样本的是不相似的，因此在图中不会出现分组的情况。</p>
 <p><img src="https://s2.loli.net/2022/03/30/kzhH1pX6t4UeqIn.png" alt="image-20220330211010465"></p>
-<p><img src="https://s2.loli.net/2022/03/30/sbV8jXdxgnKcvrF.png" alt></p>
+<p><img src="https://s2.loli.net/2022/03/30/sbV8jXdxgnKcvrF.png" alt=""></p>
 <p>图 3：使用特定 “鲁棒性 “的白盒 ResNet50 模型生成的目标表达的对抗样本在目标模型表达的t-SNE图。底部的10张图片是来自ImageNet 的图片，我们将其作为表达目标，如文中所述。(最好以彩色和放大的方式观看)。</p>
 <p>另外一种是采用平均余弦相似度度量($x$,$y$)在目标模型表达的相似度（表 2），平均余弦相似度越高，表示从源网络到对应的目标网络的表达迁移程度越高。</p>
 <p>​                                                 表 2：平均余弦相似度，每一个值都是9900个 ($x$,$y$) 目标表达相似度的平均</p>
