@@ -23,29 +23,25 @@
     var CONFIG = {"hostname":"tuoli9.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="A Little Robustness Goes a LongWay: Leveraging Robust Features for Targeted Transfer Attacks（NIPS2021） 代码：尚未开源 提出的问题之前的研究指出目标攻击很难迁移[1]，之前对迁移对抗样本的研究主要集中在改进生成成功的图像扰动的优化方法，本文研究了用于构建对抗样本的源神经网络对样本迁移的影响。本文提">
+  <meta name="description" content="On the Robustness of Vision Transformers to Adversarial Examples（ICCV2021）代码链接：https:&#x2F;&#x2F;github.com&#x2F;MetaMain&#x2F;ViTRobust 本文研究了ViT鲁棒性，迁移安全性研究分为3点：  在白盒和黑盒攻击场景下测试 transformer 鲁棒性 对抗样本很难从 CNN 迁移到 transformer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="A Little Robustness Goes a LongWay：Leveraging Robust Features for Targeted Transfer Attacks">
-<meta property="og:url" content="https://tuoli9.github.io/posts/639f/index.html">
+<meta property="og:title" content="On the Robustness of Vision Transformers to Adversarial Examples">
+<meta property="og:url" content="https://tuoli9.github.io/posts/e759/index.html">
 <meta property="og:site_name" content="Li&#39;s Blog">
-<meta property="og:description" content="A Little Robustness Goes a LongWay: Leveraging Robust Features for Targeted Transfer Attacks（NIPS2021） 代码：尚未开源 提出的问题之前的研究指出目标攻击很难迁移[1]，之前对迁移对抗样本的研究主要集中在改进生成成功的图像扰动的优化方法，本文研究了用于构建对抗样本的源神经网络对样本迁移的影响。本文提">
+<meta property="og:description" content="On the Robustness of Vision Transformers to Adversarial Examples（ICCV2021）代码链接：https:&#x2F;&#x2F;github.com&#x2F;MetaMain&#x2F;ViTRobust 本文研究了ViT鲁棒性，迁移安全性研究分为3点：  在白盒和黑盒攻击场景下测试 transformer 鲁棒性 对抗样本很难从 CNN 迁移到 transformer">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s2.loli.net/2022/03/30/tWEpf2j1cvKS3aO.png">
-<meta property="og:image" content="https://s2.loli.net/2022/03/30/RGTV7ivhgqec6xY.png">
-<meta property="og:image" content="https://s2.loli.net/2022/03/30/1pouaWc7iqL2IBK.png">
-<meta property="og:image" content="https://github.githubassets.com/images/icons/emoji/unicode/2b50.png?v8">
-<meta property="og:image" content="https://github.githubassets.com/images/icons/emoji/unicode/2b50.png?v8">
-<meta property="og:image" content="https://s2.loli.net/2022/03/30/kzhH1pX6t4UeqIn.png">
-<meta property="og:image" content="https://s2.loli.net/2022/03/30/sbV8jXdxgnKcvrF.png">
-<meta property="og:image" content="https://s2.loli.net/2022/03/30/j9HzX3twDYvf7kN.png">
-<meta property="article:published_time" content="2022-03-30T07:17:15.021Z">
-<meta property="article:modified_time" content="2022-03-31T14:30:08.606Z">
+<meta property="og:image" content="https://s2.loli.net/2022/04/21/br6u7qShJBWAIMZ.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/21/VaTbv5BQM72hqzn.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/22/1h7Xl5Se4IvuyCB.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/23/FVqsLCM23wApUbS.png">
+<meta property="article:published_time" content="2022-04-21T12:03:40.644Z">
+<meta property="article:modified_time" content="2022-04-23T10:51:55.851Z">
 <meta property="article:author" content="Li Tuo">
 <meta property="article:tag" content="对抗攻击">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s2.loli.net/2022/03/30/tWEpf2j1cvKS3aO.png">
+<meta name="twitter:image" content="https://s2.loli.net/2022/04/21/br6u7qShJBWAIMZ.png">
 
-<link rel="canonical" href="https://tuoli9.github.io/posts/639f/">
+<link rel="canonical" href="https://tuoli9.github.io/posts/e759/">
 
 
 <script id="page-configurations">
@@ -58,7 +54,7 @@
   };
 </script>
 
-  <title>A Little Robustness Goes a LongWay：Leveraging Robust Features for Targeted Transfer Attacks | Li's Blog</title>
+  <title>On the Robustness of Vision Transformers to Adversarial Examples | Li's Blog</title>
   
 
 
@@ -203,7 +199,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://tuoli9.github.io/posts/639f/">
+    <link itemprop="mainEntityOfPage" href="https://tuoli9.github.io/posts/e759/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/%E7%A8%8B%E5%BA%8F%E5%96%B5.png">
@@ -216,7 +212,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          A Little Robustness Goes a LongWay：Leveraging Robust Features for Targeted Transfer Attacks
+          On the Robustness of Vision Transformers to Adversarial Examples
         </h1>
 
         <div class="post-meta">
@@ -226,14 +222,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2022-03-30 15:17:15" itemprop="dateCreated datePublished" datetime="2022-03-30T15:17:15+08:00">2022-03-30</time>
+              <time title="创建时间：2022-04-21 20:03:40" itemprop="dateCreated datePublished" datetime="2022-04-21T20:03:40+08:00">2022-04-21</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-03-31 22:30:08" itemprop="dateModified" datetime="2022-03-31T22:30:08+08:00">2022-03-31</time>
+                <time title="修改时间：2022-04-23 18:51:55" itemprop="dateModified" datetime="2022-04-23T18:51:55+08:00">2022-04-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -243,14 +239,10 @@
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB/" itemprop="url" rel="index"><span itemprop="name">对抗攻击</span></a>
                 </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB/%E7%9B%AE%E6%A0%87%E6%94%BB%E5%87%BB/" itemprop="url" rel="index"><span itemprop="name">目标攻击</span></a>
-                </span>
             </span>
 
           
-            <span id="/posts/639f/" class="post-meta-item leancloud_visitors" data-flag-title="A Little Robustness Goes a LongWay：Leveraging Robust Features for Targeted Transfer Attacks" title="阅读次数">
+            <span id="/posts/e759/" class="post-meta-item leancloud_visitors" data-flag-title="On the Robustness of Vision Transformers to Adversarial Examples" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -265,8 +257,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/posts/639f/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/639f/" itemprop="commentCount"></span>
+    <a title="valine" href="/posts/e759/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/e759/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -276,7 +268,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.8k</span>
+              <span>3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -295,48 +287,41 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>A Little Robustness Goes a LongWay: Leveraging Robust Features for Targeted Transfer Attacks（NIPS2021）</p>
-<p>代码：尚未开源</p>
-<h2 id="提出的问题"><a href="#提出的问题" class="headerlink" title="提出的问题"></a>提出的问题</h2><p>之前的研究指出目标攻击很难迁移[<a href="#[1]">1</a>]，之前对迁移对抗样本的研究主要集中在改进生成成功的图像扰动的优化方法，本文研究了用于构建对抗样本的源神经网络对样本迁移的影响。本文提出略微鲁棒的CNN—被训练成对小的对抗扰动具有鲁棒性的网络，可以被利用来大幅提高目标对抗样本对不同架构的可迁移性，针对一个稍微鲁棒的CNN构建的目标对抗样本可以迁移到 transformer。同时每个单独的略微鲁棒的神经网络都能有效地将特征转移到所有测试的非鲁棒网络，这表明略微鲁棒的网络依赖于与每个非鲁棒网络重叠的特征，尽管任何特定的非鲁棒网络的特征并没有与所有其他非鲁棒网络严重重叠。</p>
-<span id="more"></span>
-<p>此外，本文利用对抗迁移技术来检验哪些特征是由神经网络学习的。根据先前的工作[<a href="#[2]">2</a>]，本文发现，在从非鲁棒（标准）到高鲁棒的分类器的频谱上，那些只有轻微鲁棒的分类器生成出最可能迁移的 representation-targeted 对抗样本，这表明轻微鲁棒的网络的特征与每个被测试的目标网络有很大的重叠。这可以解释为什么略微鲁棒的网络会产生更多可迁移对抗攻击，并且对于下游的迁移学习任务有更好的权重初始化。</p>
-<p>主要贡献：</p>
+        <h2 id="On-the-Robustness-of-Vision-Transformers-to-Adversarial-Examples（ICCV2021）"><a href="#On-the-Robustness-of-Vision-Transformers-to-Adversarial-Examples（ICCV2021）" class="headerlink" title="On the Robustness of Vision Transformers to Adversarial Examples（ICCV2021）"></a>On the Robustness of Vision Transformers to Adversarial Examples（ICCV2021）</h2><p>代码链接：<a target="_blank" rel="noopener" href="https://github.com/MetaMain/ViTRobust">https://github.com/MetaMain/ViTRobust</a></p>
+<p>本文研究了ViT鲁棒性，迁移安全性研究分为3点：</p>
 <ul>
-<li>相对于标准（非鲁棒）网络产生的对抗样本，针对轻微鲁棒的CNN产生的对抗样本更容易迁移，这种迁移不仅扩展到其他CNN，也扩展到 transformer 结构。</li>
-<li>随着源网络鲁棒性的增加，目标对抗样本对对抗防御网络的可迁移性也有大幅提高。</li>
-<li>研究了对抗损失函数在产生可迁移的对抗样本中的作用。</li>
-<li>非鲁棒的神经网络没有表现出实质性的特征（表征）可迁移性，而稍微鲁棒的神经网络则表现出可迁移性。这有助于解释为什么略微鲁棒的神经网络能使目标对抗样本的可迁移性更强。</li>
+<li>在白盒和黑盒攻击场景下测试 transformer 鲁棒性</li>
+<li>对抗样本很难从 CNN 迁移到 transformer，基于这一发现分析 CNN 和 transformer 简单的集成防御的安全性。</li>
+<li>提出一种 self-attention blended gradient attack(SAGA)，简单集成防御模型对于白盒攻击时不安全的，在黑盒对抗攻击下，作者指出集成防御模型可以在不牺牲准确率的情况下，达到较好的鲁棒性。</li>
 </ul>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><h3 id="Transferability-of-Adversarial-Examples"><a href="#Transferability-of-Adversarial-Examples" class="headerlink" title="Transferability of Adversarial Examples"></a>Transferability of Adversarial Examples</h3><p>从 ImageNet validation 随机挑选1000张图片，每张图片类别不同，随机为每张图片挑选目标类，保证目标类和原始类别不同。用TMDI-FGSM 方法迭代300步生成对抗样本。实验用到的 CNN 模型有：Xception，VGG，ResNet，Inception，MobileNet，DenseNet，NASNetLarge，EfficientNet，transformer 模型有：ViT，LeViT，CCT，CLIP</p>
-<h4 id="Transferability-to-Convolutional-Network-Classifiers"><a href="#Transferability-to-Convolutional-Network-Classifiers" class="headerlink" title="Transferability to Convolutional Network Classifiers"></a>Transferability to Convolutional Network Classifiers</h4><p>针对具有小的鲁棒性参数的源网络进行优化的对抗样本，与非鲁棒性（$\epsilon = 0$）网络的成功率相比（图<a href="#image-20220330163245061">1</a>）,在目标和非目标设定中都提高了迁移成功率。成功率的峰值对于每一个CNN目标网络大致相同（$\epsilon = 0.1$）</p>
-<p><img src="https://s2.loli.net/2022/03/30/tWEpf2j1cvKS3aO.png" alt="image-20220330163245061"></p>
-<p>图 1：针对 ImageNet 分类器的目标迁移攻击成功率，使用相对于 “鲁棒的 ResNet50 源模型优化的对抗样本。成功率是指被目标网络分分类为目标类的对抗样本的比例。值越高攻击越成功。Baseline 是指未受干扰的图像被分类为目标类别的比率。(最好以彩色查看）。</p>
-<p>当 $\epsilon$ 超过最佳值，攻击成功率会快速下降，我们假设，当源网络的鲁棒性增加到一定程度后，网络开始完全忽略（非鲁棒性）目标网络所依赖的许多非鲁棒性特征，因此攻击不会修改这些特征，从而降低攻击的成功率。</p>
-<h4 id="Transformer-Based-Classifiers"><a href="#Transformer-Based-Classifiers" class="headerlink" title="Transformer-Based Classifiers"></a>Transformer-Based Classifiers</h4><p>以前的研究中使用非鲁棒源网络的方法在使用卷积源模型构建目标的可迁移的对抗样本时几乎完全无效（表1）。这表明，基于 transformer 的模型和非鲁棒卷积模型所学习的特征在很大程度上是不同的。</p>
-<p>使用略微鲁棒的 ResNet50 分类器作为源网络，可以极大地提高目标对抗样本对 transformer 分类器的迁移性。源网络的最佳鲁棒性参数对于目标 transformer 网络和目标卷积网络是不同的 ，尽管我们发现源模型中任何数量的鲁棒性（低于一个临界值）都会大大改善可迁移性。因此，在现实世界的黑箱攻击设置中—目标网络的架构是完全未知的—攻击者可以在源网络鲁棒性参数之间找到一个平衡点，使CNN分类器和基于 transformer 的分类器的迁移性能达到最佳。</p>
-<p>​                                                                                     表 1：$l_{\infty}$范数，扰动上限 16/255</p>
-<p><img src="https://s2.loli.net/2022/03/30/RGTV7ivhgqec6xY.png" alt="image-20220330172625745"></p>
-<p>表1也比较了三种不同损失下的目标攻击攻击成功率。</p>
-<p>对经过对抗训练的模型的攻击。用于攻击模型的对抗扰动大小设置的要比对抗训练让模型鲁棒的扰动数值要大，没有鲁棒性的模型作为源模型时对抗样本迁移失败，源模型的鲁棒性越高，攻击成功率也越高。</p>
-<p><img src="https://s2.loli.net/2022/03/30/1pouaWc7iqL2IBK.png" alt="image-20220330201115016"></p>
-<p>​                                        图 2：对对抗训练的鲁棒模型的攻击（$\epsilon = 3$），源模型是$\epsilon$ - robust ResNet50</p>
-<h3 id="Adversarial-Transferability-of-Features-特征的对抗迁移"><a href="#Adversarial-Transferability-of-Features-特征的对抗迁移" class="headerlink" title="Adversarial Transferability of Features 特征的对抗迁移"></a>Adversarial Transferability of Features 特征的对抗迁移</h3><p>这一部分展示略微鲁棒的网络比非鲁棒的网络和更鲁棒的网络表现出更高程度的表征可迁移性。这可以直接解释为什么用略微鲁棒的源网络构建的目标类对抗样本更容易转移，因为用略微鲁棒的网络生成的对抗样本将大量地转移特征，因此将较少地依赖少数可能不存在于每个模型中的高度脆弱的特征。</p>
-<p>实验设计出发点：$x$ 和 $y$ 是两个在源模型特征表达层（倒数第二层）非常相似的两个样本，如果源模型对目标模型的特征迁移程度很高，那么 $x$ 和 $y$ 在目标模型的特征表达应该也非常相似。</p>
-<p>从 ImageNet 测试集随机选择10张图像作为目标$x$，选择990张图像作为初始图像$y_0$，这1000张图像类别互不相同，对于每一个源模型，每一个目标类别，用 $y0$ 构造对抗样本，攻击算法和上一部分同为 TMDI-FGSM。对于每一个类别，990个 representation-targeted 的对抗样本 $y$ 应该和 $x$ 在源模型有相似的特征表达，通过度量（$x$,$y$）在目标模型的表达，可以度量源模型的特征迁移能力。</p>
-<p>采用两种度量相似性的方法，一种直观的方法是用 t-SNE 画出每一个 representation-targeted 对抗样本 $y$ 在目标模型的特征表达向量（图 3）。每一种颜色代表一个类别，每一张图中的<span class="github-emoji"><span>⭐</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/2b50.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>代表每一个目标 t-SNE 嵌入后的特征表达，如果与某一颜色相关的每个 $y$ 的目的网络表达都接近其对应的<span class="github-emoji"><span>⭐</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/2b50.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>，那么表达迁移性就很高。当表达转移性较低时，针对同一目标图像生成的目达表达对抗样本的是不相似的，因此在图中不会出现分组的情况。</p>
-<p><img src="https://s2.loli.net/2022/03/30/kzhH1pX6t4UeqIn.png" alt="image-20220330211010465"></p>
-<p><img src="https://s2.loli.net/2022/03/30/sbV8jXdxgnKcvrF.png" alt></p>
-<p>图 3：使用特定 “鲁棒性 “的白盒 ResNet50 模型生成的目标表达的对抗样本在目标模型表达的t-SNE图。底部的10张图片是来自ImageNet 的图片，我们将其作为表达目标，如文中所述。(最好以彩色和放大的方式观看)。</p>
-<p>另外一种是采用平均余弦相似度度量($x$,$y$)在目标模型表达的相似度（表 2），平均余弦相似度越高，表示从源网络到对应的目标网络的表达迁移程度越高。</p>
-<p>​                                                 表 2：平均余弦相似度，每一个值都是9900个 ($x$,$y$) 目标表达相似度的平均</p>
-<p><img src="https://s2.loli.net/2022/03/30/j9HzX3twDYvf7kN.png" alt="image-20220330212309132"></p>
-<p>非鲁棒的模型生成的目标对抗样本，即使对抗分类结果成功迁移，但对于大部分目标模型（$\epsilon = 0$），特征表达没有充分迁移。这意味着 非鲁棒网络的特征可能不会彼此严重重叠。表2和图3观察到用非鲁棒网络生成的对抗样本对 DenseNet121 有一定程度的表达迁移性，这可能解释了图1中观察到的对 DenseNet121 的高度类转迁移性。</p>
-<p>但从稍微鲁棒的 ResNet50 分类器到 CLIP 的表示转移性是很高的，原因可能是 CLIP 不是在传统的分类问题上训练出来的，而是被训练来对图像和相应的文本描述进行类似的编码有关。高表达迁移性说明了略微鲁棒的网络的特征与每个被测试的（非鲁棒的）目标网络的特征有很大的重叠。</p>
-<p>当网络以大的 “$\epsilon$ “进行对抗性训练时，它们学到的特征与非鲁棒网络的特征重叠的程度随着 “$\epsilon $”的增加而减少。我们推测，某些非鲁棒的特征会被具有足够大的 “$\epsilon$ “的鲁棒神经网络所忽略，因此当鲁棒性增加到一定程度时，非鲁棒网络的许多特征会被忽略，表达的可迁移性会下降。</p>
-<h2 id="总结与改进"><a href="#总结与改进" class="headerlink" title="总结与改进"></a>总结与改进</h2><p>本文主要研究了略微鲁棒的模型可以促进目标表达对抗样本的迁移，可能的原因是略微鲁棒的模型表达和目标模型表达有很大的重叠，当源模型过于鲁棒时，会忽略对于目标模型分类重要的非鲁棒特征，造成攻击迁移率下降。这两条规律对 CNN 和 transformer 都适用。</p>
-<p><strong>参考文献</strong></p>
-<p><span id="[1]">[1] Y. Liu, X. Chen, C. Liu, and D. Song. Delving into transferable adversarial examples and black-box attacks. arXiv preprint arXiv:1611.02770, 2016.</span></p>
-<p><span id="[2]">[2] J. M. Springer, M. Mitchell, and G. T. Kenyon. Adversarial perturbations are not so weird: Entanglement of robust and non-robust features in neural network classifiers. arXiv preprint arXiv:2102.05110, 2021.</span></p>
+<h3 id="Vision-Transformer白盒攻击"><a href="#Vision-Transformer白盒攻击" class="headerlink" title="Vision Transformer白盒攻击"></a>Vision Transformer白盒攻击</h3><p>攻击方法：测试6种不同的白盒攻击方法：FGSM，MIN，PGD，APGD(Auto Projected Gradient Descent[<a href="#[1]">1</a>])，C&amp;W，当梯度masking或者梯度混淆出现时白盒攻击失败，Backward Pass Differentiable Approximation (BPDA)[<a href="#[2]">2</a>]，解决上述问题。</p>
+<p>分类模型：ViT-B-32，ViT-B-16，ViT-L-16，ViT-R50，B代表模型复杂度，B模型有12层，L模型有24层。Big Transfer Models：BiT-M-R50 和 BiT-M-R101x3，ResNet-56 和ResNet-164，对于CIFAR-10 和 CIFAR-100，攻击8个模型，ViT-B-32，ViT-B-16，ViT-L-16，ViT-R50，BiT-M-R50，BiT-M-R101x3，ResNet-56 和 ResNet-164，对于ImageNet，攻击7个模型：ViT-B-16，ViT-L-16（图片大小224），ViT-L-16 (图片大小512)，BiT-M-R50，BiT-MR152x4，ResNet-50 和 ResNet-152。</p>
+<p>实验结果：</p>
+<p>表一</p>
+<p><img src="https://s2.loli.net/2022/04/21/br6u7qShJBWAIMZ.png" alt="image-20220421204201334" style="zoom:80%;"></p>
+<p>ViT对白盒攻击没有鲁棒性，表中数值代表对抗样本分类准确率，Acc代表这个模型干净样本准确率。</p>
+<h3 id="ViT迁移性研究"><a href="#ViT迁移性研究" class="headerlink" title="ViT迁移性研究"></a>ViT迁移性研究</h3><p>表二</p>
+<p><img src="https://s2.loli.net/2022/04/21/VaTbv5BQM72hqzn.png" alt="image-20220421205559121"></p>
+<p>表中每个数据取几种攻击方法最高迁移率。</p>
+<h3 id="SAGA"><a href="#SAGA" class="headerlink" title="SAGA"></a>SAGA</h3><p>原文：</p>
+<p>Instead of focusing completely on optimizing over one of the models, SAGA focuses on breaking multiple models at once.</p>
+<p>攻击目标：Vision Transformers集合$V$，CNN集合$K$，在扰动$\epsilon$边界条件下使$V$和$K$所有成员都错分。</p>
+<script type="math/tex; mode=display">
+x_{a d v}^{(i+1)}=x_{a d v}^{(i)}+\epsilon_{s} * \operatorname{sign}\left(G_{b l e n d}\left(x_{a d v}^{(i)}\right)\right)</script><script type="math/tex; mode=display">
+G_{b l e n d}\left(x_{a d v}^{(i)}\right)=\sum_{k \in K} \alpha_{k} \frac{\partial L_{k}}{\partial x_{a d v}^{(i)}}+\sum_{v \in V} \alpha_{v} \phi_{v} \odot \frac{\partial L_{v}}{\partial x_{a d v}^{(i)}}</script><p>$\phi_{v}$ 是$v^{th}$ transformer 的自注意力图，用 attention rollout [<a href="#[3]">3</a>]计算如下</p>
+<script type="math/tex; mode=display">
+\phi_{v}=\left(\prod_{l=1}^{n_{l}}\left[\sum_{i=1}^{n_{h}}\left(0.5 W_{l, i}^{(a t t)}+0.5 I\right)\right]\right)</script><p>$n_h$ 是每层attention heads个数，$n_l$ 是注意力层数，$W_{l,i}^{(att)}$是每个attention heads注意力权重矩阵，$I$是恒等矩阵，$x$是输入图像，这个公式考虑到注意力从transformer 每一层流动到下一层，包括跳跃链接的影响。平均来自同一层内不同attention heads的注意力值，注意力值在不同层之间递归地相乘。</p>
+<p>实验结果：</p>
+<p><img src="https://s2.loli.net/2022/04/22/1h7Xl5Se4IvuyCB.png" alt="image-20220422223042259"></p>
+<p>对Vision Transformers 和 Big Transfer Models简单集成的攻击，使用1000张正确分类的图片，</p>
+<p>basic attack 是没有权重参数和自注意力的梯度的组合，SAGA攻击的贡献在于证明了Vision Transformers 和 Big Transfer Models简单集成对于白盒攻击是不安全的。SAGA攻击优于其他两种攻击。</p>
+<h3 id="黑盒安全性和迁移性"><a href="#黑盒安全性和迁移性" class="headerlink" title="黑盒安全性和迁移性"></a>黑盒安全性和迁移性</h3><p>测试了 RayS attack[<a href="#[4]">4</a>] 和 Adaptive Black-Box Attack[<a href="#[5]">5</a>] 的安全性，最大查询次数10000，对于 Adaptive Black-Box Attack，攻击者可以获得全部训练数据，synthetic model 为 ViTB-32。Vision Transformer 和 Big Transfer model 的简单集成大幅提高了安全性。</p>
+<p><img src="https://s2.loli.net/2022/04/23/FVqsLCM23wApUbS.png" alt="image-20220423185104889"></p>
+<p><span id="[1]">[1] Francesco Croce and Matthias Hein. Reliable evaluation of adversarial robustness with an ensemble of diverse parameter-free attacks. In International Conference on Machine Learning, pages 2206–2216. PMLR, 2020.</span></p>
+<p><span id="[2]">[2] Anish Athalye, Nicholas Carlini, and David Wagner. Obfuscated gradients give a false sense of security: Circumventing defenses to adversarial examples. In Proceedings of the 35th International Conference on Machine Learning, pages 274– 283, 2018.</span></p>
+<p><span id="[3]">[3] Samira Abnar and Willem Zuidema. Quantifying attention flow in transformers. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics, pages 4190–4197, 2020.</span></p>
+<p><span id="[4]">[4] Jinghui Chen and Quanquan Gu. Rays: A ray searching method for hard-label adversarial attack. In Proceedings of the 26th ACM SIGKDD International Conference on Knowledge Discovery &amp; Data Mining, pages 1739–1747, 2020.</span></p>
+<p><span id="[5]">[5] Kaleel Mahmood, Phuong Ha Nguyen, Lam M. Nguyen, Thanh Nguyen, and Marten van Dijk. Buzz: Buffer zones for defending adversarial examples in image classification, 2020.</span></p>
 
     </div>
 
@@ -352,7 +337,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://tuoli9.github.io/posts/639f/" title="A Little Robustness Goes a LongWay：Leveraging Robust Features for Targeted Transfer Attacks">https://tuoli9.github.io/posts/639f/</a>
+    <a href="https://tuoli9.github.io/posts/e759/" title="On the Robustness of Vision Transformers to Adversarial Examples">https://tuoli9.github.io/posts/e759/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -372,12 +357,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/cc97/" rel="prev" title="Improving the Transferability of Targeted Adversarial Examples through Object-Based Diverse Input">
-      <i class="fa fa-chevron-left"></i> Improving the Transferability of Targeted Adversarial Examples through Object-Based Diverse Input
+    <a href="/posts/f667/" rel="prev" title="numpy常用函数">
+      <i class="fa fa-chevron-left"></i> numpy常用函数
     </a></div>
       <div class="post-nav-item">
-    <a href="/posts/f667/" rel="next" title="numpy常用函数">
-      numpy常用函数 <i class="fa fa-chevron-right"></i>
+    <a href="/posts/6731/" rel="next" title="一些packages">
+      一些packages <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -438,7 +423,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">提出的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-number">2.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Transferability-of-Adversarial-Examples"><span class="nav-number">2.1.</span> <span class="nav-text">Transferability of Adversarial Examples</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Transferability-to-Convolutional-Network-Classifiers"><span class="nav-number">2.1.1.</span> <span class="nav-text">Transferability to Convolutional Network Classifiers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Transformer-Based-Classifiers"><span class="nav-number">2.1.2.</span> <span class="nav-text">Transformer-Based Classifiers</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Adversarial-Transferability-of-Features-%E7%89%B9%E5%BE%81%E7%9A%84%E5%AF%B9%E6%8A%97%E8%BF%81%E7%A7%BB"><span class="nav-number">2.2.</span> <span class="nav-text">Adversarial Transferability of Features 特征的对抗迁移</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%E4%B8%8E%E6%94%B9%E8%BF%9B"><span class="nav-number">3.</span> <span class="nav-text">总结与改进</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#On-the-Robustness-of-Vision-Transformers-to-Adversarial-Examples%EF%BC%88ICCV2021%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">On the Robustness of Vision Transformers to Adversarial Examples（ICCV2021）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vision-Transformer%E7%99%BD%E7%9B%92%E6%94%BB%E5%87%BB"><span class="nav-number">1.1.</span> <span class="nav-text">Vision Transformer白盒攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ViT%E8%BF%81%E7%A7%BB%E6%80%A7%E7%A0%94%E7%A9%B6"><span class="nav-number">1.2.</span> <span class="nav-text">ViT迁移性研究</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SAGA"><span class="nav-number">1.3.</span> <span class="nav-text">SAGA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BB%91%E7%9B%92%E5%AE%89%E5%85%A8%E6%80%A7%E5%92%8C%E8%BF%81%E7%A7%BB%E6%80%A7"><span class="nav-number">1.4.</span> <span class="nav-text">黑盒安全性和迁移性</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
