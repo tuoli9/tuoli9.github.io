@@ -325,7 +325,7 @@
 <p>从 ImageNet 测试集随机选择10张图像作为目标$x$，选择990张图像作为初始图像$y_0$，这1000张图像类别互不相同，对于每一个源模型，每一个目标类别，用 $y0$ 构造对抗样本，攻击算法和上一部分同为 TMDI-FGSM。对于每一个类别，990个 representation-targeted 的对抗样本 $y$ 应该和 $x$ 在源模型有相似的特征表达，通过度量（$x$,$y$）在目标模型的表达，可以度量源模型的特征迁移能力。</p>
 <p>采用两种度量相似性的方法，一种直观的方法是用 t-SNE 画出每一个 representation-targeted 对抗样本 $y$ 在目标模型的特征表达向量（图 3）。每一种颜色代表一个类别，每一张图中的<span class="github-emoji"><span>⭐</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/2b50.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>代表每一个目标 t-SNE 嵌入后的特征表达，如果与某一颜色相关的每个 $y$ 的目的网络表达都接近其对应的<span class="github-emoji"><span>⭐</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/2b50.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>，那么表达迁移性就很高。当表达转移性较低时，针对同一目标图像生成的目达表达对抗样本的是不相似的，因此在图中不会出现分组的情况。</p>
 <p><img src="https://s2.loli.net/2022/03/30/kzhH1pX6t4UeqIn.png" alt="image-20220330211010465"></p>
-<p><img src="https://s2.loli.net/2022/03/30/sbV8jXdxgnKcvrF.png" alt></p>
+<p><img src="https://s2.loli.net/2022/03/30/sbV8jXdxgnKcvrF.png" alt=""></p>
 <p>图 3：使用特定 “鲁棒性 “的白盒 ResNet50 模型生成的目标表达的对抗样本在目标模型表达的t-SNE图。底部的10张图片是来自ImageNet 的图片，我们将其作为表达目标，如文中所述。(最好以彩色和放大的方式观看)。</p>
 <p>另外一种是采用平均余弦相似度度量($x$,$y$)在目标模型表达的相似度（表 2），平均余弦相似度越高，表示从源网络到对应的目标网络的表达迁移程度越高。</p>
 <p>​                                                 表 2：平均余弦相似度，每一个值都是9900个 ($x$,$y$) 目标表达相似度的平均</p>
@@ -461,7 +461,7 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -516,13 +516,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">54k</span>
+    <span title="站点总字数">50k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">49 分钟</span>
+    <span title="站点阅读时长">45 分钟</span>
 </div>
 <!--
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
