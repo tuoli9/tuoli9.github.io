@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://tuoli9.github.io/posts/bc76/</loc>
+    <lastmod>2022-05-20</lastmod>
+  </url>
+  <url>
     <loc>https://tuoli9.github.io/posts/4b52/</loc>
     <lastmod>2022-05-12</lastmod>
   </url>
@@ -9,36 +13,16 @@
     <lastmod>2022-05-12</lastmod>
   </url>
   <url>
-    <loc>https://tuoli9.github.io/posts/6731/</loc>
-    <lastmod>2022-05-12</lastmod>
-  </url>
-  <url>
     <loc>https://tuoli9.github.io/posts/2bb2/</loc>
     <lastmod>2022-04-30</lastmod>
-  </url>
-  <url>
-    <loc>https://tuoli9.github.io/posts/f667/</loc>
-    <lastmod>2022-04-29</lastmod>
   </url>
   <url>
     <loc>https://tuoli9.github.io/posts/e759/</loc>
     <lastmod>2022-04-27</lastmod>
   </url>
   <url>
-    <loc>https://tuoli9.github.io/posts/be25/</loc>
-    <lastmod>2022-04-25</lastmod>
-  </url>
-  <url>
-    <loc>https://tuoli9.github.io/posts/bc76/</loc>
-    <lastmod>2022-04-21</lastmod>
-  </url>
-  <url>
     <loc>https://tuoli9.github.io/posts/e478/</loc>
     <lastmod>2022-04-11</lastmod>
-  </url>
-  <url>
-    <loc>https://tuoli9.github.io/posts/5d0/</loc>
-    <lastmod>2022-04-01</lastmod>
   </url>
   <url>
     <loc>https://tuoli9.github.io/posts/639f/</loc>
@@ -51,5 +35,9 @@
   <url>
     <loc>https://tuoli9.github.io/posts/cc97/</loc>
     <lastmod>2022-03-30</lastmod>
+  </url>
+  <url>
+    <loc>https://tuoli9.github.io/posts/6731/</loc>
+    <lastmod>2022-01-07</lastmod>
   </url>
 </urlset> 
