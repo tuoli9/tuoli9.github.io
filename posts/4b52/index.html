@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="-3Ooss4TReOVQ8s1w_6qvZ2BKeM6eokmZtrA3liJsdg" />
+  <meta name="msvalidate.01" content="606681E3EAAE30E996063E566AACAFE1" />
+  <meta name="baidu-site-verification" content="code-oKN8LopkWB" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tuoli9.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="Towards Transferable Adversarial Attacks on Vision Transformers 目前是关于transformer迁移攻击sota，发表在AAAI 2022，代码链接：https:&#x2F;&#x2F;github.com&#x2F;zhipeng-wei&#x2F;PNA-PatchOut">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Towards Transferable Adversarial Attacks on Vision Transformers">
+<meta property="og:url" content="https://tuoli9.github.io/posts/4b52/index.html">
+<meta property="og:site_name" content="Li&#39;s Blog">
+<meta property="og:description" content="Towards Transferable Adversarial Attacks on Vision Transformers 目前是关于transformer迁移攻击sota，发表在AAAI 2022，代码链接：https:&#x2F;&#x2F;github.com&#x2F;zhipeng-wei&#x2F;PNA-PatchOut">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tuoli9.github.io/posts/4b52/Users/502/AppData/Roaming/Typora/typora-user-images/image-20220428184941701.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/28/PX5Tle2pUEBJoNH.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/28/ufKO3mzARTbcg1U.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/28/YAbBRV5lyvcsGFQ.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/28/T8h9uQrvJz6SO2y.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/28/IHqF9fCJXsyNVGn.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/28/s8qo4Hv6x9F7TBl.png">
+<meta property="article:published_time" content="2023-02-10T06:41:35.933Z">
+<meta property="article:modified_time" content="2022-05-12T13:59:38.000Z">
+<meta property="article:author" content="Li tuo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tuoli9.github.io/posts/4b52/Users/502/AppData/Roaming/Typora/typora-user-images/image-20220428184941701.png">
+
+<link rel="canonical" href="https://tuoli9.github.io/posts/4b52/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Towards Transferable Adversarial Attacks on Vision Transformers | Li's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Li's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tuoli9.github.io/posts/4b52/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/%E7%A8%8B%E5%BA%8F%E5%96%B5.png">
+      <meta itemprop="name" content="Li tuo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Li's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Towards Transferable Adversarial Attacks on Vision Transformers
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-02-10 14:41:35" itemprop="dateCreated datePublished" datetime="2023-02-10T14:41:35+08:00">2023-02-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-12 21:59:38" itemprop="dateModified" datetime="2022-05-12T21:59:38+08:00">2022-05-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%94%BB%E5%87%BB/" itemprop="url" rel="index"><span itemprop="name">攻击</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/posts/4b52/" class="post-meta-item leancloud_visitors" data-flag-title="Towards Transferable Adversarial Attacks on Vision Transformers" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/4b52/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/4b52/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="towards-transferable-adversarial-attacks-on-vision-transformers">Towards Transferable Adversarial Attacks on Vision Transformers</h2>
+<p>目前是关于transformer迁移攻击sota，发表在AAAI 2022，代码链接：https://github.com/zhipeng-wei/PNA-PatchOut</p>
+<span id="more"></span>
+<p>对于transformer的攻击要同时考虑patch和self-attention，本文提出 Pay No Attention (PNA) 攻击和 PatchOut 攻击，在反向传播时跳过注意力可以提高迁移性，同时攻击最优的一部分patch比攻击所有的patch效果好。实验证明所提方法可以提高ViTs之间的迁移和ViTs到CNNs的迁移。</p>
+<p>PNA攻击固定attention前向计算数值，在反向传播时跳过这一部分梯度的计算，这阻止了不同patch之间的交互，图像不同区域之间的交互强度和迁移性是负相关的[<a href="#1">1</a>]。</p>
+<p>PatchOut 攻击在每一次迭代随机选择一部分patch攻击，有点像drop-out缓解过拟合，这和随机森林随机选择特征和DIM攻击相似。</p>
+<p>本文主要贡献点</p>
+<ul>
+<li>PAN攻击不经过对attention的反向传播构造对抗样本。</li>
+<li>研究扰动随机patch子集可以提高迁移性，提出PatchOut 方法在每轮迭代时使用不同的patch作为输入。</li>
+<li>4个不同白盒ViTs，8个黑盒ViTs，4个黑盒CNNs，3个鲁棒训练CNNs进行实验，两种攻击方法有效并且可以和其他方法结合。</li>
+</ul>
+<p>对于第一二点贡献进行了两个toy experiments，ViT-B/16白盒模型的BIM攻击（<span class="math inline">\(L_{\infty}\)</span>范数下，迭代10次，<span class="math inline">\(\epsilon = 16\)</span>），PNA攻击，将12个Self-attention Block分为3组，反向传播时就有八条路线，攻击成功率见下图</p>
+<p><img src="/posts/4b52/Users/502/AppData/Roaming/Typora/typora-user-images/image-20220428184941701.png" alt="image-20220428184941701" style="zoom:80%;"></p>
+<p>PatchOut 攻击随机选取10个patchs作为一种输入模式，记为“ten-patch”，进行多次“ten-patch”攻击成功率高</p>
+<figure>
+<img src="https://s2.loli.net/2022/04/28/PX5Tle2pUEBJoNH.png" alt="image-20220428185342850"><figcaption aria-hidden="true">image-20220428185342850</figcaption>
+</figure>
+<h3 id="方法">方法</h3>
+<h4 id="pay-no-attention-pna">Pay No Attention (PNA)</h4>
+<p>给定一个patch embedding <span class="math inline">\(Z\in \mathbb{R}^{N\times D}\)</span>，query，key，和value 权重<span class="math inline">\(W^{Q}\)</span>，<span class="math inline">\(W^{K}\)</span>，<span class="math inline">\(W^{V}\)</span><span class="math inline">\(\in\)</span> <span class="math inline">\(\mathbb{R}^{D\times D_h}\)</span>，attention计算如下 <span class="math display">\[
+A=\operatorname{softmax}\left(Z W^{Q}\left(Z W^{K}\right)^{T} / \sqrt{D_{h}}\right)
+\]</span> <span class="math inline">\(A\in\mathbb{R}^{N\times N}\)</span>表示注意力权重，一个head的输出定义如下 <span class="math display">\[
+Z^{\prime}=A\left(Z W^{V}\right)
+\]</span> 输出<span class="math inline">\(Z^{\prime}\)</span>对于输入<span class="math inline">\(Z\)</span>的梯度如下 <span class="math display">\[
+\frac{\partial Z^{\prime}}{\partial Z}=(\mathbb{I} \bigotimes A) \frac{\partial\left(Z W^{V}\right)}{\partial Z}+\left(\left(Z W^{V}\right)^{T} \bigotimes \mathbb{I}\right) \frac{\partial A}{\partial Z}
+\]</span> PNA方法忽视注意力部分的梯度，<span class="math inline">\(\frac{\partial A}{\partial Z}=0\)</span>，这相当于将attention weights固定为一个常数。最终梯度计算如下 <span class="math display">\[
+\frac{\partial Z^{\prime}}{\partial Z} \approx(\mathbb{I} \bigotimes A) \frac{\partial\left(Z W^{V}\right)}{\partial Z}=(\mathbb{I} \bigotimes A)\left(\left(W^{V}\right)^{T} \bigotimes \mathbb{I}\right)
+\]</span> <span class="math inline">\(\bigotimes\)</span>表示克罗内克积，PNA迫使扰动只通过使用特征表征来利用网络，而不是通过利用注意力的高度模型特定属性。这导致了具有高迁移性的对抗样本。跳过注意力也允许梯度关注每个patch，而不是依赖patch之间的复杂相互作用。</p>
+<h4 id="patchout-attack">PatchOut Attack</h4>
+<p>DIM攻击表明输入多样性有利于对抗向本迁移，PatchOut Attack每次迭代随机选择patch子集攻击。</p>
+<p>用<span class="math inline">\(T\)</span>控制每一轮使用的patch数量，<span class="math inline">\(x_s=\{x_s^{1},...,x_s^{t},...,x_s^{T}\}\)</span>表示被选择的patch，攻击的mask <span class="math inline">\(M\in {0,1}^{H\times W\times C}\)</span> 定义如下 <span class="math display">\[
+M_{p}^{i}= \begin{cases}1, &amp; \text { if } x_{p}^{i} \text { in } x_{s} \\ 0, &amp; \text { otherwise }\end{cases}
+\]</span> <span class="math inline">\(M_{p}^{i} \in\{0,1\}^{P \times P \times C}\)</span>是<span class="math inline">\(x_p ^{i}\)</span>在图像中区域，整个攻击的优化目标 <span class="math display">\[
+\underset{\delta}{\arg \max } J(f(x+M \odot \delta), y)+\lambda\|\delta\|_{2}$, s.t. $\|\delta\|_{\infty}&lt;\epsilon
+\]</span> <span class="math inline">\(\odot\)</span>是element-wise乘法，第二项鼓励扰动有一个较大的<span class="math inline">\(l_2\)</span>范数，两种攻击的伪代码如下</p>
+<figure>
+<img src="https://s2.loli.net/2022/04/28/ufKO3mzARTbcg1U.png" alt="image-20220428204122682"><figcaption aria-hidden="true">image-20220428204122682</figcaption>
+</figure>
+<h3 id="实验结果">实验结果</h3>
+<p>在CNNS上的效果</p>
+<p>数据集：ImageNet val中1000张不同类所有模型正确分类图像，白盒模型 ViT-B/16，PiT-B，CaiT-S-24，Visformer-S，图中每个数据都是四种替代模型迁移攻击成功率的平均。</p>
+<figure>
+<img src="https://s2.loli.net/2022/04/28/YAbBRV5lyvcsGFQ.png" alt="image-20220428204253145"><figcaption aria-hidden="true">image-20220428204253145</figcaption>
+</figure>
+<p>本文方法和之前方法的结合，白盒模型ViT-B/16，表中是平均迁移攻击成功率，8个ViTs：ViT-B/16，DeiT-B，TNT-S，LeViT-256，PiT-B ，CaiT-S-24，ConViT-B 和 Visformer-S，4个CNNs：Inception v3 (Inc-v3)，Inception v4 (Incv4)，Inception ResNet v2 (IncRes-v2)， 和 ResNet v2-152 (Res-v2)。</p>
+<figure>
+<img src="https://s2.loli.net/2022/04/28/T8h9uQrvJz6SO2y.png" alt="image-20220428204936007"><figcaption aria-hidden="true">image-20220428204936007</figcaption>
+</figure>
+<h4 id="消融实验">消融实验</h4>
+<p>白盒模型 ViT-B/16，数据 2000张随机采样图像，平均迁移攻击成功率</p>
+<figure>
+<img src="https://s2.loli.net/2022/04/28/IHqF9fCJXsyNVGn.png" alt="image-20220428210344909"><figcaption aria-hidden="true">image-20220428210344909</figcaption>
+</figure>
+<p>三部分都有效，一起使用效果最佳</p>
+<p>超参数影响，ViTs 平均攻击成功率 <span class="math inline">\(T=N\)</span> PatchOut 退化成 BIM，</p>
+<figure>
+<img src="https://s2.loli.net/2022/04/28/s8qo4Hv6x9F7TBl.png" alt="image-20220428210530488"><figcaption aria-hidden="true">image-20220428210530488</figcaption>
+</figure>
+<p><span id="1">[1] Wang, X.; Ren, J.; Lin, S.; Zhu, X.;Wang, Y.; and Zhang, Q.2020. A unified approach to interpreting and boosting adversarial transferability. arXiv preprint arXiv:2010.04055.</span></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Li tuo
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://tuoli9.github.io/posts/4b52/" title="Towards Transferable Adversarial Attacks on Vision Transformers">https://tuoli9.github.io/posts/4b52/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/e759/" rel="prev" title="On the Robustness of Vision Transformers to Adversarial Examples">
+      <i class="fa fa-chevron-left"></i> On the Robustness of Vision Transformers to Adversarial Examples
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/6731/" rel="next" title="一些packages">
+      一些packages <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#towards-transferable-adversarial-attacks-on-vision-transformers"><span class="nav-number">1.</span> <span class="nav-text">Towards Transferable Adversarial Attacks on Vision Transformers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#pay-no-attention-pna"><span class="nav-number">1.1.1.</span> <span class="nav-text">Pay No Attention (PNA)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#patchout-attack"><span class="nav-number">1.1.2.</span> <span class="nav-text">PatchOut Attack</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">1.2.</span> <span class="nav-text">实验结果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C"><span class="nav-number">1.2.1.</span> <span class="nav-text">消融实验</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Li tuo"
+      src="/images/%E7%A8%8B%E5%BA%8F%E5%96%B5.png">
+  <p class="site-author-name" itemprop="name">Li tuo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/tuoli9" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;tuoli9" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lit7292@163.com" title="E-Mail → mailto:lit7292@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2022 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+
+  <span class="author" itemprop="copyrightHolder">Li Tuo</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">61k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">55 分钟</span>
+</div>
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+
+
+<div class="powered-by">
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <i class="fa fa-user"></i>
+    <span id="busuanzi_container_site_uv">
+        本站访客数:<span id="busuanzi_value_site_uv"></span>人
+    </span>
+    <span class="post-meta-divider">|</span>
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_container_site_pv">
+        本站访问量<span id="busuanzi_value_site_pv"></span>次
+    </span>
+</div>
+
+<br />
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("03/09/2022 13:14:15");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  <!-- -->
+
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'sJ7SWKM4esacypuxxr3mV4bt-gzGzoHsz',
+      appKey     : 'QLeoqU5ouqhEKyAp4N7VRTdC',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/love.js"></script>

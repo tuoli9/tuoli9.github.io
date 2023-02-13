@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="-3Ooss4TReOVQ8s1w_6qvZ2BKeM6eokmZtrA3liJsdg" />
+  <meta name="msvalidate.01" content="606681E3EAAE30E996063E566AACAFE1" />
+  <meta name="baidu-site-verification" content="code-oKN8LopkWB" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tuoli9.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="timm 官方文档 Model Summaries - Pytorch Image Models (rwightman.github.io) 安装 1pip install timm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一些packages">
+<meta property="og:url" content="https://tuoli9.github.io/posts/6731/index.html">
+<meta property="og:site_name" content="Li&#39;s Blog">
+<meta property="og:description" content="timm 官方文档 Model Summaries - Pytorch Image Models (rwightman.github.io) 安装 1pip install timm">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-02-10T06:41:35.940Z">
+<meta property="article:modified_time" content="2022-01-07T05:03:04.000Z">
+<meta property="article:author" content="Li tuo">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://tuoli9.github.io/posts/6731/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>一些packages | Li's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Li's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tuoli9.github.io/posts/6731/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/%E7%A8%8B%E5%BA%8F%E5%96%B5.png">
+      <meta itemprop="name" content="Li tuo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Li's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          一些packages
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-02-10 14:41:35" itemprop="dateCreated datePublished" datetime="2023-02-10T14:41:35+08:00">2023-02-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-07 13:03:04" itemprop="dateModified" datetime="2022-01-07T13:03:04+08:00">2022-01-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%85%B6%E4%BB%96/" itemprop="url" rel="index"><span itemprop="name">其他</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/posts/6731/" class="post-meta-item leancloud_visitors" data-flag-title="一些packages" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/6731/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/6731/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="timm">timm</h2>
+<p>官方文档</p>
+<p><a target="_blank" rel="noopener" href="https://rwightman.github.io/pytorch-image-models/models/">Model Summaries - Pytorch Image Models (rwightman.github.io)</a></p>
+<p>安装</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install timm</span><br></pre></td></tr></tbody></table></figure>
+<span id="more"></span>
+<p>建立模型</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> timm</span><br><span class="line"></span><br><span class="line">m = timm.create_model(<span class="string">'mobilenetv3_large_100'</span>, pretrained=<span class="literal">True</span>)</span><br><span class="line">m.<span class="built_in">eval</span>()</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> timm</span><br><span class="line"><span class="keyword">from</span> pprint <span class="keyword">import</span> pprint</span><br><span class="line">model_names = timm.list_models(pretrained=<span class="literal">True</span>)</span><br><span class="line">pprint(model_names)</span><br></pre></td></tr></tbody></table></figure>
+<ol start="2" type="1">
+<li>模块调用</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://rwightman.github.io/pytorch-image-models/training_hparam_examples/">Training Examples - Pytorch Image Models (rwightman.github.io)</a></p>
+<p><a target="_blank" rel="noopener" href="https://rwightman.github.io/pytorch-image-models/feature_extraction/">Feature Extraction - Pytorch Image Models (rwightman.github.io)</a></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> timm</span><br><span class="line">m = timm.create_model(<span class="string">'resnet50'</span>, pretrained=<span class="literal">True</span>, num_classes=<span class="number">0</span>, global_pool=<span class="string">''</span>)</span><br><span class="line">o = m(torch.randn(<span class="number">2</span>, <span class="number">3</span>, <span class="number">224</span>, <span class="number">224</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f'Unpooled shape: <span class="subst">{o.shape}</span>'</span>)</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="pretrainedmodels">pretrainedmodels</h2>
+<p>https://github.com/Cadene/pretrained-models.pytorch</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pretrainedmodels</span><br><span class="line"><span class="built_in">print</span>(pretrainedmodels.model_names)</span><br><span class="line">&gt; [<span class="string">'fbresnet152'</span>, <span class="string">'bninception'</span>, <span class="string">'resnext101_32x4d'</span>, <span class="string">'resnext101_64x4d'</span>, <span class="string">'inceptionv4'</span>, <span class="string">'inceptionresnetv2'</span>, <span class="string">'alexnet'</span>, <span class="string">'densenet121'</span>, <span class="string">'densenet169'</span>, <span class="string">'densenet201'</span>, <span class="string">'densenet161'</span>, <span class="string">'resnet18'</span>, <span class="string">'resnet34'</span>, <span class="string">'resnet50'</span>, <span class="string">'resnet101'</span>, <span class="string">'resnet152'</span>, <span class="string">'inceptionv3'</span>, <span class="string">'squeezenet1_0'</span>, <span class="string">'squeezenet1_1'</span>, <span class="string">'vgg11'</span>, <span class="string">'vgg11_bn'</span>, <span class="string">'vgg13'</span>, <span class="string">'vgg13_bn'</span>, <span class="string">'vgg16'</span>, <span class="string">'vgg16_bn'</span>, <span class="string">'vgg19_bn'</span>, <span class="string">'vgg19'</span>, <span class="string">'nasnetalarge'</span>, <span class="string">'nasnetamobile'</span>, <span class="string">'cafferesnet101'</span>, <span class="string">'senet154'</span>,  <span class="string">'se_resnet50'</span>, <span class="string">'se_resnet101'</span>, <span class="string">'se_resnet152'</span>, <span class="string">'se_resnext50_32x4d'</span>, <span class="string">'se_resnext101_32x4d'</span>, <span class="string">'cafferesnet101'</span>, <span class="string">'polynet'</span>, <span class="string">'pnasnet5large'</span>]</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(pretrainedmodels.pretrained_settings[<span class="string">'nasnetalarge'</span>])</span><br><span class="line">&gt; {<span class="string">'imagenet'</span>: {<span class="string">'url'</span>: <span class="string">'http://data.lip6.fr/cadene/pretrainedmodels/nasnetalarge-a1897284.pth'</span>, <span class="string">'input_space'</span>: <span class="string">'RGB'</span>, <span class="string">'input_size'</span>: [<span class="number">3</span>, <span class="number">331</span>, <span class="number">331</span>], <span class="string">'input_range'</span>: [<span class="number">0</span>, <span class="number">1</span>], <span class="string">'mean'</span>: [<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="number">0.5</span>], <span class="string">'std'</span>: [<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="number">0.5</span>], <span class="string">'num_classes'</span>: <span class="number">1000</span>}, <span class="string">'imagenet+background'</span>: {<span class="string">'url'</span>: <span class="string">'http://data.lip6.fr/cadene/pretrainedmodels/nasnetalarge-a1897284.pth'</span>, <span class="string">'input_space'</span>: <span class="string">'RGB'</span>, <span class="string">'input_size'</span>: [<span class="number">3</span>, <span class="number">331</span>, <span class="number">331</span>], <span class="string">'input_range'</span>: [<span class="number">0</span>, <span class="number">1</span>], <span class="string">'mean'</span>: [<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="number">0.5</span>], <span class="string">'std'</span>: [<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="number">0.5</span>], <span class="string">'num_classes'</span>: <span class="number">1001</span>}}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">model_name = <span class="string">'nasnetalarge'</span> <span class="comment"># could be fbresnet152 or inceptionresnetv2</span></span><br><span class="line">model = pretrainedmodels.__dict__[model_name](num_classes=<span class="number">1000</span>, pretrained=<span class="string">'imagenet'</span>)</span><br><span class="line">model.<span class="built_in">eval</span>()</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="各种vit">各种ViT</h2>
+<p>https://github.com/lucidrains/vit-pytorch</p>
+<p>专栏：https://www.zhihu.com/column/c_1260183218026213376</p>
+<h2 id="torchsummary可视化">torchsummary可视化</h2>
+<ol type="1">
+<li>安装</li>
+</ol>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install torchsummary</span><br></pre></td></tr></tbody></table></figure>
+<ol start="2" type="1">
+<li>使用方法</li>
+</ol>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch, torchvision</span><br><span class="line">model = torchvision.models.vgg</span><br><span class="line">model = torchvision.models.vgg16()</span><br><span class="line"><span class="keyword">from</span> torchsummary <span class="keyword">import</span> summary</span><br><span class="line">summary(model, (<span class="number">3</span>, <span class="number">224</span>, <span class="number">224</span>))</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="可视化">可视化</h2>
+<p>https://github.com/utkuozbulak/pytorch-cnn-visualizations</p>
+<p>https://github.com/JonnesLin/Evison</p>
+<p>https://www.jianshu.com/p/0431d6d89d8e</p>
+<p>CAM可视化：</p>
+<p>https://github.com/jacobgil/pytorch-grad-cam</p>
+<p>t-SNE可视化</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/DmitryUlyanov/Multicore-TSNE">DmitryUlyanov/Multicore-TSNE: Parallel t-SNE implementation with Python and Torch wrappers. (github.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/CannyLab/tsne-cuda">CannyLab/tsne-cuda: GPU Accelerated t-SNE for CUDA with Python bindings (github.com)</a></p>
+<h3 id="优雅地操作张量维度">优雅地操作张量维度</h3>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install einops</span><br></pre></td></tr></tbody></table></figure>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/342675997">PyTorch 70.einops：优雅地操作张量维度 - 知乎 (zhihu.com)</a></p>
+<h3 id="可微cv库">可微cv库</h3>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install Kornia</span><br></pre></td></tr></tbody></table></figure>
+<p>官方文档</p>
+<p>https://kornia.readthedocs.io/en/latest/index.html</p>
+<h2 id="其它">其它</h2>
+<h3 id="基于-pytorch-的开源-图像视频复原工具箱-比如-超分辨率-去噪-去模糊-去-jpeg-压缩噪声等.">基于 PyTorch 的开源 图像视频复原工具箱, 比如 超分辨率, 去噪, 去模糊, 去 JPEG 压缩噪声等.</h3>
+<p>https://github.com/xinntao/BasicSR</p>
+<h3 id="去雨去噪去模糊">去雨去噪去模糊</h3>
+<p><a target="_blank" rel="noopener" href="https://github.com/hpcaitech/ColossalAI">hpcaitech/ColossalAI: Colossal-AI: A Unified Deep Learning System for Large-Scale Parallel Training (github.com)</a></p>
+<h3 id="用于模型训练">用于模型训练</h3>
+<p><a target="_blank" rel="noopener" href="https://github.com/facebookresearch/fairscale">fairscale</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/hpcaitech/ColossalAI">hpcaitech/ColossalAI: Colossal-AI: A Unified Deep Learning System for Large-Scale Parallel Training (github.com)</a></p>
+<h3 id="gan">GAN</h3>
+<p><a target="_blank" rel="noopener" href="https://github.com/eriklindernoren/PyTorch-GAN">eriklindernoren/PyTorch-GAN: PyTorch implementations of Generative Adversarial Networks. (github.com)</a></p>
+<h3 id="autodl">AutoDL</h3>
+<p><a target="_blank" rel="noopener" href="https://github.com/D-X-Y/AutoDL-Projects">D-X-Y/AutoDL-Projects: Automated deep learning algorithms implemented in PyTorch. (github.com)</a></p>
+<h3 id="攻击防御">攻击&amp;防御</h3>
+<p>https://github.com/thu-ml/ares</p>
+<h3 id="调参">调参</h3>
+<p>https://github.com/optuna/optuna</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/399174504">用Optuna进行Pytorch超参数调优教程 - 知乎 (zhihu.com)</a></p>
+<p>https://github.com/ray-project/ray</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/364613087">AutoML: 自动调参工具-Ray Tune - 知乎 (zhihu.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://scikit-optimize.github.io/stable/index.html">scikit-optimize: sequential model-based optimization in Python — scikit-optimize 0.8.1 documentation</a></p>
+<h3 id="ml_collections">ml_collections</h3>
+<p>ML Collections是为ML use cases而设计的一个Python Collections的一个库。它的两个类是ConfigDict和FrozenConfigDict，是"dict-like" 的数据结构，以下是ConfigDict、FrozenConfigDict和FieldReference的示例用法，</p>
+<p>https://blog.csdn.net/weixin_47066348/article/details/113954876</p>
+<p><a target="_blank" rel="noopener" href="https://ml-collections.readthedocs.io/en/latest/">Welcome to ml_collections’s documentation! — ml_collections 0.1.0 documentation (ml-collections.readthedocs.io)</a></p>
+<p>https://github.com/google/ml_collections</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ml_collections</span><br><span class="line"></span><br><span class="line">cfg = ml_collections.ConfigDict()</span><br><span class="line">cfg.float_field = <span class="number">12.6</span> <span class="comment">#float类型</span></span><br><span class="line">cfg.integer_field = <span class="number">123</span> <span class="comment">#int类型</span></span><br><span class="line">cfg.another_integer_field = <span class="number">234</span> <span class="comment">#int类型</span></span><br><span class="line">cfg.nested = ml_collections.ConfigDict() <span class="comment">#嵌套了ml_collections.ConfigDict()</span></span><br><span class="line">cfg.nested.string_field = <span class="string">'tom'</span> <span class="comment">#str类型</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(cfg.integer_field)  <span class="comment"># 输出结果 123.</span></span><br><span class="line"><span class="built_in">print</span>(cfg[<span class="string">'integer_field'</span>])  <span class="comment"># 也输出123.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">  cfg.integer_field = <span class="string">'tom'</span>  <span class="comment"># 输出会报错错误类型是TypeError，因为这你field是整数类型</span></span><br><span class="line"><span class="keyword">except</span> TypeError <span class="keyword">as</span> e:</span><br><span class="line">  <span class="built_in">print</span>(e)</span><br><span class="line"></span><br><span class="line">cfg.float_field = <span class="number">12</span>  <span class="comment"># int类型也可以指定给float类型.</span></span><br><span class="line">cfg.nested.string_field = <span class="string">u'bob'</span>  <span class="comment"># string可以储存Unicode字符串</span></span><br><span class="line"><span class="built_in">print</span>(cfg)</span><br><span class="line"><span class="comment">##############################</span></span><br><span class="line">输出</span><br><span class="line"><span class="number">123</span></span><br><span class="line"><span class="number">123</span></span><br><span class="line">Could <span class="keyword">not</span> override field <span class="string">'integer_field'</span> (reference). tom <span class="keyword">is</span> of <span class="built_in">type</span> &lt;<span class="keyword">class</span> <span class="string">'str'</span>&gt; but should be of <span class="built_in">type</span> &lt;<span class="keyword">class</span> <span class="string">'int'</span>&gt; <span class="comment">#报错的地方</span></span><br><span class="line"><span class="comment">#以下输出是所有的cfg的结果，以及嵌套的nested</span></span><br><span class="line">another_integer_field: <span class="number">234</span></span><br><span class="line">float_field: <span class="number">12.0</span></span><br><span class="line">integer_field: <span class="number">123</span></span><br><span class="line">nested:</span><br><span class="line">  string_field: bob</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<p>不可以改变的<code>ConfigDict</code></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ml_collections</span><br><span class="line"><span class="comment">#初始化一个字典</span></span><br><span class="line">initial_dictionary = {</span><br><span class="line">    <span class="string">'int'</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="string">'list'</span>: [<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">    <span class="string">'tuple'</span>: (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>),</span><br><span class="line">    <span class="string">'set'</span>: {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>},</span><br><span class="line">    <span class="string">'dict_tuple_list'</span>: {<span class="string">'tuple_list'</span>: ([<span class="number">1</span>, <span class="number">2</span>], <span class="number">3</span>)}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">cfg = ml_collections.ConfigDict(initial_dictionary)<span class="comment">#把这个字典通过ConfigDict赋值给cfg</span></span><br><span class="line">frozen_dict = ml_collections.FrozenConfigDict(initial_dictionary)<span class="comment">#把这个字典通过FrozenConfigDict赋值给frozen_dict</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(frozen_dict.<span class="built_in">tuple</span>)  <span class="comment"># 输出(1, 2, 3)</span></span><br><span class="line"><span class="built_in">print</span>(frozen_dict.<span class="built_in">list</span>)  <span class="comment"># 输出 (1, 2)</span></span><br><span class="line"><span class="built_in">print</span>(frozen_dict.<span class="built_in">set</span>)  <span class="comment"># 输出 {1, 2, 3, 4}</span></span><br><span class="line"><span class="built_in">print</span>(frozen_dict.dict_tuple_list.tuple_list[<span class="number">0</span>])  <span class="comment"># 输出 (1, 2)</span></span><br><span class="line"></span><br><span class="line">frozen_cfg = ml_collections.FrozenConfigDict(cfg)<span class="comment">#将cfg变成Forzen类型，即不可再改变其中常量的值</span></span><br><span class="line"><span class="built_in">print</span>(frozen_cfg == frozen_dict)  <span class="comment"># True</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">hash</span>(frozen_cfg) == <span class="built_in">hash</span>(frozen_dict))  <span class="comment"># True</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">  frozen_dict.<span class="built_in">int</span> = <span class="number">2</span> <span class="comment"># 会报错，因为FrozenConfigDict是不可以改变其中的值的</span></span><br><span class="line"><span class="keyword">except</span> AttributeError <span class="keyword">as</span> e:</span><br><span class="line">  <span class="built_in">print</span>(e)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在`FrozenConfigDict` 与 `ConfigDict`之间进行转换:</span></span><br><span class="line">thawed_frozen_cfg = ml_collections.ConfigDict(frozen_dict) <span class="comment">#将frozen_dict转化为ConfigDict</span></span><br><span class="line"><span class="built_in">print</span>(thawed_frozen_cfg == cfg)  <span class="comment"># True</span></span><br><span class="line">frozen_cfg_to_cfg = frozen_dict.as_configdict()<span class="comment">#将frozen_dict通过as_configdict方法转化为ConfigDict</span></span><br><span class="line"><span class="built_in">print</span>(frozen_cfg_to_cfg == cfg)  <span class="comment"># True</span></span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="可解释性">可解释性</h3>
+<p>https://github.com/pytorch/captum</p>
+<p>沙普利值，归因</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Li tuo
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://tuoli9.github.io/posts/6731/" title="一些packages">https://tuoli9.github.io/posts/6731/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/4b52/" rel="prev" title="Towards Transferable Adversarial Attacks on Vision Transformers">
+      <i class="fa fa-chevron-left"></i> Towards Transferable Adversarial Attacks on Vision Transformers
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/bc76/" rel="next" title="迁移目标攻击文献阅读">
+      迁移目标攻击文献阅读 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#timm"><span class="nav-number">1.</span> <span class="nav-text">timm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pretrainedmodels"><span class="nav-number">2.</span> <span class="nav-text">pretrainedmodels</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%84%E7%A7%8Dvit"><span class="nav-number">3.</span> <span class="nav-text">各种ViT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#torchsummary%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">4.</span> <span class="nav-text">torchsummary可视化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">5.</span> <span class="nav-text">可视化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E9%9B%85%E5%9C%B0%E6%93%8D%E4%BD%9C%E5%BC%A0%E9%87%8F%E7%BB%B4%E5%BA%A6"><span class="nav-number">5.1.</span> <span class="nav-text">优雅地操作张量维度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E5%BE%AEcv%E5%BA%93"><span class="nav-number">5.2.</span> <span class="nav-text">可微cv库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E5%AE%83"><span class="nav-number">6.</span> <span class="nav-text">其它</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E-pytorch-%E7%9A%84%E5%BC%80%E6%BA%90-%E5%9B%BE%E5%83%8F%E8%A7%86%E9%A2%91%E5%A4%8D%E5%8E%9F%E5%B7%A5%E5%85%B7%E7%AE%B1-%E6%AF%94%E5%A6%82-%E8%B6%85%E5%88%86%E8%BE%A8%E7%8E%87-%E5%8E%BB%E5%99%AA-%E5%8E%BB%E6%A8%A1%E7%B3%8A-%E5%8E%BB-jpeg-%E5%8E%8B%E7%BC%A9%E5%99%AA%E5%A3%B0%E7%AD%89."><span class="nav-number">6.1.</span> <span class="nav-text">基于 PyTorch 的开源 图像视频复原工具箱, 比如 超分辨率, 去噪, 去模糊, 去 JPEG 压缩噪声等.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%BB%E9%9B%A8%E5%8E%BB%E5%99%AA%E5%8E%BB%E6%A8%A1%E7%B3%8A"><span class="nav-number">6.2.</span> <span class="nav-text">去雨去噪去模糊</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E4%BA%8E%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83"><span class="nav-number">6.3.</span> <span class="nav-text">用于模型训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gan"><span class="nav-number">6.4.</span> <span class="nav-text">GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#autodl"><span class="nav-number">6.5.</span> <span class="nav-text">AutoDL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E9%98%B2%E5%BE%A1"><span class="nav-number">6.6.</span> <span class="nav-text">攻击&amp;防御</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E5%8F%82"><span class="nav-number">6.7.</span> <span class="nav-text">调参</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ml_collections"><span class="nav-number">6.8.</span> <span class="nav-text">ml_collections</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%A7%A3%E9%87%8A%E6%80%A7"><span class="nav-number">6.9.</span> <span class="nav-text">可解释性</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Li tuo"
+      src="/images/%E7%A8%8B%E5%BA%8F%E5%96%B5.png">
+  <p class="site-author-name" itemprop="name">Li tuo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/tuoli9" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;tuoli9" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lit7292@163.com" title="E-Mail → mailto:lit7292@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2022 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+
+  <span class="author" itemprop="copyrightHolder">Li Tuo</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">61k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">55 分钟</span>
+</div>
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+
+
+<div class="powered-by">
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <i class="fa fa-user"></i>
+    <span id="busuanzi_container_site_uv">
+        本站访客数:<span id="busuanzi_value_site_uv"></span>人
+    </span>
+    <span class="post-meta-divider">|</span>
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_container_site_pv">
+        本站访问量<span id="busuanzi_value_site_pv"></span>次
+    </span>
+</div>
+
+<br />
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("03/09/2022 13:14:15");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  <!-- -->
+
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'sJ7SWKM4esacypuxxr3mV4bt-gzGzoHsz',
+      appKey     : 'QLeoqU5ouqhEKyAp4N7VRTdC',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/love.js"></script>

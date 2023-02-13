@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="-3Ooss4TReOVQ8s1w_6qvZ2BKeM6eokmZtrA3liJsdg" />
+  <meta name="msvalidate.01" content="606681E3EAAE30E996063E566AACAFE1" />
+  <meta name="baidu-site-verification" content="code-oKN8LopkWB" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tuoli9.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="Towards transferable targeted attack（2020CVPR） 代码链接：https:&#x2F;&#x2F;github.com&#x2F;TiJoy&#x2F;Towards-Transferable-Targeted-Attack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="迁移目标攻击文献阅读">
+<meta property="og:url" content="https://tuoli9.github.io/posts/bc76/index.html">
+<meta property="og:site_name" content="Li&#39;s Blog">
+<meta property="og:description" content="Towards transferable targeted attack（2020CVPR） 代码链接：https:&#x2F;&#x2F;github.com&#x2F;TiJoy&#x2F;Towards-Transferable-Targeted-Attack">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/03/30/slbjGoC3k8q1Yx9.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/30/RbkWgGL7J96VOid.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/30/R8O6i5e3MCQFqvo.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/30/L7Y1CTuSEONIcd3.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/30/zwiKEJkBLgqRaCt.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/30/WqwZuzsS2vP43ky.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/30/9J67qMVSLcWohnI.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/30/vCRMBWNakojnhzE.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/30/PaUwECf2sWqDSvH.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/30/zRqbiPowtdGYmMF.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/30/qEYofU9DKepFWha.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/30/GlYAviuMJERagNz.png">
+<meta property="article:published_time" content="2023-02-10T06:41:35.946Z">
+<meta property="article:modified_time" content="2022-11-12T06:45:54.000Z">
+<meta property="article:author" content="Li tuo">
+<meta property="article:tag" content="对抗攻击">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/03/30/slbjGoC3k8q1Yx9.png">
+
+<link rel="canonical" href="https://tuoli9.github.io/posts/bc76/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>迁移目标攻击文献阅读 | Li's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Li's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tuoli9.github.io/posts/bc76/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/%E7%A8%8B%E5%BA%8F%E5%96%B5.png">
+      <meta itemprop="name" content="Li tuo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Li's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          迁移目标攻击文献阅读
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-02-10 14:41:35" itemprop="dateCreated datePublished" datetime="2023-02-10T14:41:35+08:00">2023-02-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-12 14:45:54" itemprop="dateModified" datetime="2022-11-12T14:45:54+08:00">2022-11-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%94%BB%E5%87%BB/" itemprop="url" rel="index"><span itemprop="name">攻击</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%94%BB%E5%87%BB/%E7%9B%AE%E6%A0%87%E6%94%BB%E5%87%BB/" itemprop="url" rel="index"><span itemprop="name">目标攻击</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/posts/bc76/" class="post-meta-item leancloud_visitors" data-flag-title="迁移目标攻击文献阅读" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/bc76/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/bc76/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>14k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>13 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="towards-transferable-targeted-attack2020cvpr">Towards transferable targeted attack（2020CVPR）</h2>
+<p>代码链接：https://github.com/TiJoy/Towards-Transferable-Targeted-Attack</p>
+<span id="more"></span>
+<h3 id="摘要">摘要</h3>
+<p>目标攻击比非目标攻击更难迁移，在本文中分析了两点造成这种困难的原因，1）在迭代攻击中存在梯度消失的现象，在累计动量时，相邻两次成功的噪声过分一致，造成噪声固化；2）目标对抗样本只与目标类别接近还不够，还要远离原始的类别。为解决上述问题引入庞加莱距离（Poincaré distance），作为相似性度量，使得在迭代攻击中梯度大小自适应以缓解噪声固化。进一步，在用度量学习（metric learning）对目标攻击过程正则化处理，使对抗样本远离真实标签并且获得高迁移目标对抗样本。lmageNet上的实验证实了我们的方法的优越性，在黑盒针对性攻击中，与其他最新技术相比,其攻击成功率平均提高了8%</p>
+<h3 id="庞加莱距离度量poincare-distance-metric">庞加莱距离度量（Poincar´e Distance Metric）</h3>
+<p>大多数黑盒攻击使用softmax作为损失函数， <span class="math display">\[
+\frac{\partial L}{\partial o_{i}}=p_{i}-y_{i}
+\]</span> <span class="math inline">\(p_i\)</span>是预测概率，<span class="math inline">\(y_i\)</span>是标签one-hot编码，对于目标攻击，损失函数对softmax输出的向量<strong><span class="math inline">\(o\)</span></strong>，在迭代攻击中<span class="math inline">\(p_i\)</span>逐渐靠近<span class="math inline">\(y_i\)</span>，梯度消失，造成噪声固化，用Poincaré distance替代交叉熵损失可以解决这个问题。</p>
+<p>关于Poincaré distance：</p>
+<p>Poincaré ball上所有点都在一个单位n维<span class="math inline">\(l_2\)</span>球上，两点间的距离定义如下： <span class="math display">\[
+d(u, v)=\operatorname{arccosh}(1+\delta(u, v))
+\]</span> 其中<span class="math inline">\(u\)</span>和<span class="math inline">\(v\)</span>是n维欧几里得空间<span class="math inline">\(l_2\)</span>范数小于1的两点，<span class="math inline">\(\delta(u,v)\)</span>是等距不变量定义如下 <span class="math display">\[
+\delta(u, v)=2 \frac{\|u-v\|^{2}}{\left(1-\|u\|^{2}\right)\left(1-\|v\|^{2}\right)}
+\]</span></p>
+<figure>
+<img src="https://s2.loli.net/2022/03/30/slbjGoC3k8q1Yx9.png" alt="image-20220329224955169"><figcaption aria-hidden="true">image-20220329224955169</figcaption>
+</figure>
+<p>图b中任一点到边缘的距离都是<span class="math inline">\(\infty\)</span>，图c中，当接近球的表面时，Poincaré distance增长非常快。这意味着当向表面移动时，梯度大小将会增长。</p>
+<p>由以上定义，对于one-hot编码的标签<span class="math inline">\(y\)</span>，有<span class="math inline">\(\sum_{i}y_i=1\)</span>，这表示标签在一个单位<span class="math inline">\(l_1\)</span>球上。当<span class="math inline">\(y\)</span>是一个未经平滑处理的one-hot标签，有<span class="math inline">\(\|y\|_2=1\)</span>，所以点<span class="math inline">\(y\)</span>在Poincaré ball的边缘，这意味着任一点到<span class="math inline">\(y\)</span>的距离都是<span class="math inline">\(+\infty\)</span> 。在目标攻击中，我们的目标是减少模型输出的logits和目标标签之间的距离。</p>
+<p>但使用Poincaré distance存在另外一个问题，融合的logits不满足<span class="math inline">\(\|l(x)\|_2&lt;1\)</span>，所以本文中logits用<span class="math inline">\(l_1\)</span>距离归一化。对于目标标签，任一点到它的距离是+<span class="math inline">\(\infty\)</span> ，这难以优化。将y减去一个非常小的常数<span class="math inline">\(\xi=0.0001\)</span> ，Poincaré distance 度量损失 <span class="math display">\[
+\mathcal{L}_{P o}(x, y)=d(u, v)=\operatorname{arccosh}(1+\delta(u, v))
+\]</span> 其中<span class="math inline">\(u=l_k(x)/\|l_k(x)\|_1\)</span>，<span class="math inline">\(v=\max \{y-\xi, 0\}\)</span>，<span class="math inline">\(l(x)\)</span>是融合的logits。在本文中，<span class="math inline">\(l(x)\)</span>是融合了多个模型的logits。 <span class="math display">\[
+l(x)=\sum_{k=1}^{K} w_{k} l_{k}(x)
+\]</span> <span class="math inline">\(K\)</span>是集成模型数量，<span class="math inline">\(l_k(x)\)</span>表示第<span class="math inline">\(k\)</span>个模型输出的logits，<span class="math inline">\(w_k\)</span>是每个模型的权重，<span class="math inline">\(w_k&gt;0\)</span>(<span class="math inline">\(\sum_{k=1}^{K}w_k=1\)</span>) ，在本文中每个模型的权重相等。通过引入Poincaré度量，当且仅当数据接近目标标签时梯度才会变大。</p>
+<h3 id="目标攻击三元损失triplet-loss-for-targeted-attack">目标攻击三元损失（Triplet Loss for Targeted Attack）</h3>
+<p>以往的目标攻击生成的对抗样本和原始类别过于接近，这不利于样本的迁移，本文中引入三元损失，三元损失不仅减少对抗样本和目标类别的距离，还增加对抗样本和原始标签的距离，本文使用干净样本的logits <span class="math inline">\(l(x_{clean})\)</span>，one-hot编码的目标标签<span class="math inline">\(y_{tar}\)</span>和真实标签<span class="math inline">\(y_{true}\)</span>构成三元损失： <span class="math display">\[
+\begin{aligned} &amp; \mathcal{L}_{\text {trip }}\left(y_{\text {tar }}, l\left(x_{i}\right), y_{\text {true }}\right) \\=&amp; {\left[D\left(l\left(x_{i}\right), y_{\text {tar }}\right)-D\left(l\left(x_{i}\right), y_{\text {true }}\right)+\gamma\right]_{+} . }\end{aligned}
+\]</span> 注意到<span class="math inline">\(l(x_{adv})\)</span>没有归一化，本文中使用角距离（angular distance）作为距离度量： <span class="math display">\[
+D\left(l\left(x^{a d v}\right), y_{\text {tar }}\right)=1-\frac{\left|l\left(x^{a d v}\right) \cdot y_{\text {tar }}\right|}{\left\|l\left(x^{a d v}\right)\right\|_{2}\left\|y_{\text {tar }}\right\|_{2}} .
+\]</span> 将三元损失加到损失函数，得到整个的损失函数： <span class="math display">\[
+\mathcal{L}_{\text {all }}=\mathcal{L}_{P o}\left(l(x), y_{\text {tar }}\right)+\lambda \cdot \mathcal{L}_{\text {trip }}\left(y_{\text {tar }}, l\left(x_{i}\right), y_{\text {true }}\right)
+\]</span> 基于MI-FGSM，本文也使用输入多样性的方法，整体算法流程如下图：</p>
+<figure>
+<img src="https://s2.loli.net/2022/03/30/RbkWgGL7J96VOid.png" alt="image-20220329225043631"><figcaption aria-hidden="true">image-20220329225043631</figcaption>
+</figure>
+<h3 id="实验">实验</h3>
+<p>实验细节自己看</p>
+<p>参考</p>
+<p>https://blog.csdn.net/sydukee/article/details/110822003</p>
+<p>https://www.jianshu.com/p/afaf551d145e</p>
+<h2 id="on-generating-transferable-targeted-perturbationsiccv2021">On Generating Transferable Targeted Perturbations（ICCV2021）</h2>
+<p>代码链接：https://github.com/Muzammal-Naseer/TTP</p>
+<p>本文提出一种基于生成方法的高迁移目标扰动（transferable targeted perturbations，TTP)，现有的方法依赖于从一个模型到另一个模型的类别边界信息，不利于扰动的迁移。本文的方法匹配扰动图像的"分布"和目标类别，最后提出一种新的目标函数不仅对齐原始图像和目标图像的全局分布，也匹配两种域的局部邻域结构。基于所提出的目标，我们训练一个生成器，可以自适应地合成特定于给定输入的扰动。我们的生成方法与源或目标域标签无关，同时对广泛的攻击设定，始终比最先进的方法表现更好。</p>
+<p>主要方法概括：提出一种新的生成训练框架，通过最大化源分布和目标分布在一个预训练的判别器隐空间共同一致性，将源分布映射为目标分布。</p>
+<p>主要贡献</p>
+<ul>
+<li>生成目标迁移：我们提出了一种新的生成方法来学习可迁移的目标对抗扰动。我们独特的训练机制允许生成器在训练期间探索增强的对抗性空间，这提高了推理期间对抗性样本的可转移性。</li>
+<li>互相分布匹配：我们的训练方法是基于给定的源分布和目标分布之间的相互一致。因此，我们的方法可以对训练不需要分类边界信息的生成器提供有针对性的指导。这允许攻击者从无监督的特征中学习有针对性的生成扰动，并消除标记数据的成本。</li>
+<li>邻域相似性匹配：除了全局分布匹配方面，我们在对抗和目标类样本之间引入批处理邻域相似性匹配目标，以最大化两个分布之间的局部对齐。</li>
+</ul>
+<h3 id="相关工作">相关工作</h3>
+<p>基于实例的迭代扰动（PGD,MI,DIM,Po-TRIP,FDA-fd,FDA-N，SGM,LinBP），对每一个样本迭代优化，优化费时并且对于每一个样本独立进行，基于生成的方法虽然需要训练但是可以适应样本，仅通过一次前向传播就可以得到对抗样本。</p>
+<p>目标全局扰动更具有迁移性，基于迭代的方法单次迭代一张图像，缺少特定类别全局信息。需要目标类别标签，只能应用于有监督情况。</p>
+<p><strong>主要迭代攻击（Iterative Attacks）</strong></p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1706.06083">PGD</a>攻击因过拟合而导致的低迁移性（ICRL-2018）。</p></li>
+<li><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1710.06081">MI</a>引入动量。它在迭代中累积梯度以减少过拟合（CVPR-2018）。</p></li>
+<li><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1803.06978">DIM</a>引入输入变换，如填充（padding）或尺度调节（rescaling）以使模式多样化。将其视为减少过拟合的输入空间中的正则项（CVPR-2019）。</p></li>
+<li><p><a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_CVPR_2020/papers/Li_Towards_Transferable_Targeted_Attack_CVPR_2020_paper.pdf">Po-TRIP</a>引入了三元损失，以推动对靶标签的对手示例，同时增加与原始标签的距离（CVPR 2020）。</p></li>
+<li><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2004.12519">FDA-fd</a>提出了一种在网络的不同层内模拟特征空间中的类别分布的方法。然后从单个最佳层（ICLR 2020）迁移目标扰动。</p></li>
+<li><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2004.14861">FDA-N</a>横跨多层和分类器（NeurlPS2020）相适用于FDA-FD。</p></li>
+<li><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2002.05990">SGM</a>发现，在反向传播时，从跳跃连接提供更大的梯度权重增加了可迁移性（ICLR 2020）。</p></li>
+<li><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2012.03528">LinBP</a>发现线性反向传播可以提高可迁移性（Neurips 2020）。</p></li>
+</ul>
+<p><strong>主要生成攻击（Generative Attacks）</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1712.02328">GAP</a>提出了通过交叉熵训练生成模型抵抗预训练模型的机制（CVPR 2018）。</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1905.11736">CDA</a>提出了通过相对交叉熵训练生成模型抵抗预训练模型的机制（Neurips 2019）。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/Muzammal-Naseer/TTP#Citation">TTP</a>提出基于全局分布匹配目标函数，在一个预训练模型的潜在空间匹配源域和目标域。它不依赖于数据注释（标签）或分类边界信息（ICCV 2021）。</li>
+</ul>
+<h3 id="基于生成的目标攻击">基于生成的目标攻击</h3>
+<h4 id="生成模型">生成模型</h4>
+<p>目标类别<span class="math inline">\(t\)</span>，<span class="math inline">\(P\)</span>和<span class="math inline">\(Q\)</span>分别表示源域和目标域对抗样本，<span class="math inline">\(x_s\)</span> ~ <span class="math inline">\(P\)</span>，<span class="math inline">\(x_t\)</span> ~ <span class="math inline">\(Q\)</span>，扰动的源域数据<span class="math inline">\(P^{\prime}\)</span>，<span class="math inline">\(x^{\prime}\)</span> ~ <span class="math inline">\(P^{'}\)</span>，<span class="math inline">\(x^{'}=x_s+\delta\)</span>，<span class="math inline">\(\mathcal{D}_\psi(x_s)\)</span>，<span class="math inline">\(\mathcal{D}_\psi(x^{\prime}_s)\)</span>，<span class="math inline">\(\mathcal{D}_\psi(x_t)\)</span>分别代表潜在分布。</p>
+<p>实验框架如下图，<span class="math inline">\(\mathcal{G}_\theta\)</span>是生成器，<span class="math inline">\(\mathcal{D}_\theta\)</span>是判别器，<span class="math inline">\(\mathcal{G}_{\theta}\)</span>学习源域到目标域的映射，使源域图像获得最小改动，对抗扰动<span class="math inline">\(\delta\)</span>限制在范数距离<span class="math inline">\(l_{\infty} \leq \epsilon\)</span>，这通过一个可微的裁剪操作将无界的生成器<span class="math inline">\(\mathcal{G}_\theta\)</span>生成的对抗扰动投影到距<span class="math inline">\(x_s\)</span>固定范数距离内实现。 <span class="math display">\[
+x^{'}_s=clip(min(x_s+\epsilon,max(\mathcal{W}*\mathcal{G}_\theta,x_s-\epsilon))),\tag 1
+\]</span> <span class="math inline">\(\mathcal{W}\)</span>是固定权重的平滑操作，在不破坏<span class="math inline">\(l_{\infty}\)</span>范数限制下减少高频信息，使生成器收敛到一个有意义的结果。</p>
+<p><img src="https://s2.loli.net/2022/03/30/R8O6i5e3MCQFqvo.png" alt="image-20220329225202825" style="zoom:80%;"></p>
+<p>原有的基于生成的方法依赖于判别器的分类边界，攻击者必须可以获得一个大量标签数据训练的判别器，进一步生成器依赖于输入的特定实例特征，缺少对全局目标分布特征的把握，造成低迁移性。</p>
+<p>为解决上述问题，本文对目标分布<span class="math inline">\(Q\)</span>建模并使在隐层空间<span class="math inline">\(\mathcal{D}_{\psi}\)</span>中扰动的源域分布<span class="math inline">\(P^{'}\)</span>更接近于<span class="math inline">\(Q\)</span> <span class="math display">\[
+\left\| \delta \right\|_{\infty} \le \epsilon,     s.t., \quad \mathcal{D}_\psi(x^{'}_s)\approx \mathcal{D}_\psi(x_t)  \tag 2
+\]</span> 这个全局的目标函数有两个优势，1）减少扰动和目标分布的不匹配程度，为生成器提供一种引导，2）不需要目标类别信息，判别器可以是一种无监督的方式训练得到</p>
+<h4 id="分布匹配">分布匹配</h4>
+<p>用KL散度表示<span class="math inline">\(p^{'}\)</span>和<span class="math inline">\(Q\)</span>之间的共同一致性，判别特征<span class="math inline">\(\mathcal{D}_\psi(x^{'}_s)\)</span>和<span class="math inline">\(\mathcal{D}_\psi(x_t)\)</span>的KL散度定义如下 <span class="math display">\[
+D_{K L}\left(P^{\prime} \| Q\right)=\frac{1}{N} \sum_{i=1}^{N} \sum_{j=1}^{n} \sigma\left(\mathcal{D}_{\psi}\left(\boldsymbol{x}_{s}^{\prime, i}\right)\right)_{j} \log \frac{\sigma\left(\mathcal{D}_{\psi}\left(\boldsymbol{x}_{s}^{\prime, i}\right)\right)_{j}}{\sigma\left(\mathcal{D}_{\psi}\left(\boldsymbol{x}_{t}^{i}\right)\right)_{j}}
+\]</span> N代表样本数量，n是判别器输出的特征维数，<span class="math inline">\(\sigma\)</span>表示sigmoid操作，由于KL散度非对称<span class="math inline">\(D_{K L}\left( P^{\prime} \| Q\right)\neq D_{K L}\left(Q \| P^{\prime}\right)\)</span>，不是一种距离的度量，损失函数定义 <span class="math display">\[
+\mathcal{L}=D_{K L}\left(P^{\prime} \| Q\right)+D_{K L}\left(Q \| P^{\prime}\right)\tag{3}
+\]</span> 作为一种常规性度量，引入在分布对齐时添加源域样本的增广版本，这能使生成器更关注于特定目标类类别信息，对输入变换更鲁棒。本文中随机使用旋转，裁剪，水平翻转，颜色抖动或者灰度处理变换，从源域<span class="math inline">\(x_s\)</span>得到增广样本<span class="math inline">\(\widetilde{x}_s\)</span> 。<span class="math inline">\(\widetilde{x}_s\)</span> ~ <span class="math inline">\(\widetilde{P}\)</span>送入生成器<span class="math inline">\(\mathcal{G}_{\theta}\)</span> ，扰动的增广样本<span class="math inline">\(\widetilde{x}_s ^{'}\)</span> ~ <span class="math inline">\(\widetilde{P}^{'}\)</span> 用公式（1）投影到增广样本附近，目标域样本没有任何增广操作，<span class="math inline">\(\widetilde{x}_s ^{'}\)</span> 送入判别器计算$ _(^{}<em>s)<span class="math inline">\(和\)</span> </em>(x_t)$之间的共同一致性，公式如下 <span class="math display">\[
+\mathcal{L}^{a u g}=D_{K L}\left(\tilde{P}^{\prime} \| Q\right)+D_{K L}\left(Q \| \tilde{P}^{\prime}\right) \tag 4
+\]</span></p>
+<h4 id="邻域相似度匹配">邻域相似度匹配</h4>
+<p>上述损失函数没有考虑局部结构，例如一个样本和它增广版本之间的关系，为了扰动的源域和目标类别样本的可靠对齐，提出匹配两种域之间的邻域相似度分布。考虑一批目标域样本<span class="math inline">\(\left\{x_{t}^{i}\right\}_{i=1}^{N}\)</span>和一批扰动的源域样本<span class="math inline">\(\left\{x_{s}^{'i}\right\}_{i=1}^{N}\)</span> ，对于一个训练批次<span class="math inline">\(x_s ^{'}\)</span>，计算相似度矩阵<span class="math inline">\(\mathcal{S}^s\)</span>，它的元素编码了原始样本和它的增广版本<span class="math inline">\(\widetilde{x}_s ^ {'}\)</span>之间的余弦相似度。 <span class="math display">\[
+\mathcal{S}_{i, j}^{s}=\frac{\mathcal{D}_{\psi}\left(\boldsymbol{x}_{s}^{\prime, i}\right) \cdot \mathcal{D}_{\psi}\left(\tilde{x}_{s}^{\prime, j}\right)}{\left\|\mathcal{D}_{\psi}\left(x_{s}^{\prime, i}\right)\right\|\left\|\mathcal{D}_{\psi}\left(\tilde{x}_{s}^{\prime, j}\right)\right\|} \tag 5
+\]</span> 作为对比，对于目标类别样本<span class="math inline">\(x_t\)</span> ，计算样本之间的余弦相似度矩阵<span class="math inline">\(\mathcal{S}^t\)</span> <span class="math display">\[
+\mathcal{S}_{i, j}^{t}=\frac{\mathcal{D}_{\psi}\left(x_{t}^{i}\right) \cdot \mathcal{D}_{\psi}\left(x_{t}^{j}\right)}{\left\|\mathcal{D}_{\psi}\left(x_{t}^{i}\right)\right\|\left\|\mathcal{D}_{\psi}\left(x_{t}^{j}\right)\right\|} \tag6
+\]</span> 对上面两个相似度矩阵沿着每一行做softmax操作得到概率估计 <span class="math display">\[
+\overline{\mathcal{S}}_{i, j}=\frac{\exp \left(\mathcal{S}_{i, j}\right)}{\sum_{k} \exp \left(\mathcal{S}_{i, k}\right)}, where, \mathcal{S} \in\left\{\mathcal{S}^{s}, \mathcal{S}^{t}\right\} \tag 7
+\]</span> 为了匹配源域和目标域局部邻域模式，计算<span class="math inline">\(\overline{\mathcal{S}}^s\)</span>和<span class="math inline">\(\overline{\mathcal{S}}^t\)</span>KL散度作为损失项 <span class="math display">\[
+\mathcal{L}^{s i m}=\sum_{i, j} \overline{\mathcal{S}}_{i, j}^{t} \log \frac{\overline{\mathcal{S}}_{i, j}^{t}}{\overline{\mathcal{S}}_{i, j}^{s}}+\sum_{i, j} \overline{\mathcal{S}}_{i, j}^{s} \log \frac{\overline{\mathcal{S}}_{i, j}^{s}}{\overline{\mathcal{S}}_{i, j}^{t}} \tag 8
+\]</span></p>
+<h4 id="整体损失函数">整体损失函数</h4>
+<p>生成器参数通过最小化下面损失更新 <span class="math display">\[
+\mathcal{L}_{\mathcal{G}}=\mathcal{L}+\mathcal{L}^{a u g}+\mathcal{L}^{sim } \tag 9
+\]</span> 上述损失激励生成器在扰动源域样本时不仅匹配目标分布的全局特征（<span class="math inline">\(\mathcal{L}+\mathcal{L}^{a u g}\)</span>），而且基于邻域连通匹配局部信息（<span class="math inline">\(\mathcal{L}^{sim }\)</span>）</p>
+<p>整体算法流程</p>
+<p><img src="https://s2.loli.net/2022/03/30/L7Y1CTuSEONIcd3.png" alt="image-20220329225416383" style="zoom:80%;"></p>
+<h3 id="实验-1">实验</h3>
+<p>实验细节自己看吧，对比了很多基于迭代和基于生成的模型</p>
+<h2 id="on-success-and-simplicity-a-second-look-at-transferable-targeted-attacksneurips-2021">On Success and Simplicity: A Second Look at Transferable Targeted Attacks（NeurIPS 2021）</h2>
+<p>代码链接：https://github.com/ZhengyuZhao/Targeted-Tansfer</p>
+<p>本文提出一个简单的logit损失，相比于资源密集型的模型取得了更好的目标迁移效果，在三个新的现实场景：</p>
+<ul>
+<li>低模型相似度的集成迁移（ensemble transfer）</li>
+<li>a worse-case scenario with low-ranked target classes</li>
+<li>Google Cloud Vision API 真实世界的攻击</li>
+</ul>
+<p>中验证了所提方法的优越性，并展示了这个损失对data-free方法生成的目标通用扰动的实用性。</p>
+<h3 id="简介">简介</h3>
+<p>目前目标攻击 resource-intensive transferable attacks可以取得SOTA效果，主要有两种方法：FDA和TTP。FDA的方法[<a href="#%5B1%5D">1</a>][<a href="#%5B2%5D">2</a>]通过在大规模标签数据上训练target-class-specific辅助分类器，然后再深度特征空间中，用辅助分类器优化对抗扰动。TTP[<a href="#%5B3%5D">3</a>]方法基于匹配全局和局部分布训练target-class-specific 对抗生成网络（GANs）,然后使用训练好的生成器对任意输入图像直接生成扰动。</p>
+<p>本文主要贡献在于发现不需要模型训练和外加数据的简单迁移攻击(MI-FGSM，DI-FGSM，TI-FGSM)也能实现强目标迁移性。我们认为这一观点被忽略了，主要是因为目前的研究只使用了少量的迭代次数不合理地限制了攻击收敛性，另一个主要贡献是阐述非常简单的logit loss的普遍优越性，甚至比 resource-intensive SOTA方法表现更好。</p>
+<h3 id="对简单迁移攻击的新见解">对简单迁移攻击的新见解</h3>
+<p>集成三种迁移攻击（MI, DI, TI）可以获得最好效果，其实只使用DI就已经能获得很好的迁移效果，MI和TI和原本效果不好的目标攻击效果差不多。DI比TI表现更好的原因可能是由于DI在每次迭代时随机图像增广而不是TI的固定增广。在这种方式下，对目标攻击的梯度更具有一般性，所以能避免对白盒源模型的过拟合。（？？？不理解）MI和DI，TI有本质区别，它只能固定更新方向，而不能用于向一个特定（目标）实现更准确的梯度方向。</p>
+<figure>
+<img src="https://s2.loli.net/2022/03/30/zwiKEJkBLgqRaCt.png" alt="image-20220329225608693"><figcaption aria-hidden="true">image-20220329225608693</figcaption>
+</figure>
+<p>​ 图1.</p>
+<p>通常目标迁移攻击限制攻击将攻击优化限制在少数迭代（通常小于20次）。在图1中目标攻击比非目标攻击达到收敛所需要的迭代次数更多。这意味着在只有少数迭代的情况下评估目标迁移性是有问题的。</p>
+<p>现有简单攻击通常使用交叉熵（CE）损失。但随着迭代次数增加，CE损失会造成梯度消失。为解决这个问题，Po+Trip 损失[<a href="#%5B4%5D">4</a>]以一种贪婪的方式随意的逆转梯度的减少，例如在迭代时增大梯度。然而我们发现这种操作导致迭代次数太大，因此造成攻击优化错过最小值。</p>
+<p>在这里，对于损失函数，我们消除了CE损失中使用的最终softmax函数，只是从logit输出中反向传播梯度。 <span class="math display">\[
+L_{Logit }=-l_{t}\left(x^{\prime}\right) \tag 1
+\]</span> <span class="math inline">\(l_t(·)\)</span>表示对目标类别 logit的输出。虽然用logit攻击的想法并不新，但它在目标迁移性方面的优越性能至今还没有被认识。我们还发现，使用著名的基于logit的损失，C&amp;W，得到的结果一直比较糟糕。</p>
+<p>下面公式<span class="math inline">\(\eqref{eq22}\)</span>展示logit损失比CE损失有更强的梯度。CE损失对目标logit输入<span class="math inline">\(z_t\)</span>的梯度对<span class="math inline">\(p_t\)</span>单调递减，因为使用softmax函数，<span class="math inline">\(p_t\)</span>很快到达1，因此梯度几乎消失。这种现象使得即使应用更多的迭代，也很难改善攻击。公式<span class="math inline">\(\eqref{eq3}\)</span>logit损失是一个常数。 <span class="math display">\[
+\begin{aligned} L_{C E} &amp;=-1 \cdot \log \left(p_{t}\right)=-\log \left(\frac{e^{z_{t}}}{\sum e^{z_{j}}}\right)=-z_{t}+\log \left(\sum e^{z_{j}}\right) \\ \frac{\partial L_{C E}}{\partial z_{t}} &amp;=-1+\frac{\partial \log \left(\sum e^{z_{j}}\right)}{\partial e^{z_{t}}} \cdot \frac{\partial e^{z_{t}}}{\partial z_{t}}=-1+\frac{e^{z_{t}}}{\sum e^{z_{j}}}=-1+p_{t} \end{aligned} \tag 2\label {eq22}
+\]</span></p>
+<p><span class="math display">\[
+L_{\text {Logit }}=-z_{t}, \frac{\partial L_{\text {Logit }}}{\partial z_{t}}=-1 \tag 3 \label{eq3}
+\]</span></p>
+<h3 id="实验-2">实验</h3>
+<p>实验数据集：NIPS 2017对抗攻击和防御<a target="_blank" rel="noopener" href="https://github.com/cleverhans-lab/cleverhans/tree/master/cleverhans_v3.%201.0/examples/nips17_adversarial_competition/dataset">数据集</a>，在TI中<span class="math inline">\(\|W\|_1=5\)</span>，所有攻击迭代次数300。</p>
+<h4 id="单个模型迁移效果">单个模型迁移效果</h4>
+<figure>
+<img src="https://s2.loli.net/2022/03/30/WqwZuzsS2vP43ky.png" alt="image-20220329225646394"><figcaption aria-hidden="true">image-20220329225646394</figcaption>
+</figure>
+<p>目标模型是resnet和densenet时目标迁移攻击成功率较高，一种解释是网络中的跳跃连接（skip connection）提高迁移率[<a href="#%22%5B5%5D%22">5</a>,<a href="#%22%5B6%5D%22">6</a>]，目标模型是Inception-v3 迁移成功率较低，一个可能的原因是Inception 结构有多尺度卷积和两个辅助分类器。</p>
+<h4 id="在简单和有挑战性场景下的集成迁移">在简单和有挑战性场景下的集成迁移</h4>
+<p>（1）在简单情况下Po+Trip 在迭代次数限制在20次时效果比CE好，在足够迭代次数效果变差，下表对应20/100迭代次数。</p>
+<figure>
+<img src="https://s2.loli.net/2022/03/30/9J67qMVSLcWohnI.png" alt="image-20220329225711185"><figcaption aria-hidden="true">image-20220329225711185</figcaption>
+</figure>
+<p>（2）在源模型和目标模型没有交叉，logit方法攻击效果比CE和Po+Trip 有显著提升。三种方法比单个模型情况都有本质提升。Po+Trip方法在一些情况下表现最差因为它随机增加梯度大小，因为模型的多样性，损失面不光滑，造成优化过程错过最小值点。和单个模型的迁移场景一样，这种情况下Inception-v3的迁移也是最困难的。</p>
+<figure>
+<img src="https://s2.loli.net/2022/03/30/vCRMBWNakojnhzE.png" alt="image-20220329225950346"><figcaption aria-hidden="true">image-20220329225950346</figcaption>
+</figure>
+<p>（3）目前基于迁移攻击的评估仅限于攻击最佳和平均的情况，为了解决这一局限性，我们考虑了一种更坏的转移情况，通过将目标从最高排序类别逐渐改变为最低排序的类别。在下表中，目标类别排名位置和目标迁移率有不可忽略的关系。具体地说，当目标标签预测概率越低，攻击越困难，排名较高的目标的结果可能不会像排名较低的目标的更现实、更糟糕的情况那样揭示不同攻击的实际强度。特别是，只看排名最高的目标的最佳情况可能会导致一个误导性的结论，即CE是最有效的攻击。这一发现表明，对目标可迁移性的更有意义的评估应进一步增加难度，超越目前的最佳和平均情况。</p>
+<figure>
+<img src="https://s2.loli.net/2022/03/30/PaUwECf2sWqDSvH.png" alt="image-20220329225826328"><figcaption aria-hidden="true">image-20220329225826328</figcaption>
+</figure>
+<p>（4）对Google Cloud Vision迁移攻击。API预测了一组语义标签和置信度分数。具体来说，只返回顶部置信度不低于50%的类，最多显示10个类。请注意这里的置信度分数不是概率(总和为1)。我们测试了目标和非目标的可迁移性。由于所有返回的标签都具有较高的可信度(<span class="math inline">\(\ge\)</span> 50%)，我们不会将成功率的衡量限制在top-1类别。相反，对于非目标成功率，我们测试真实标签是否出现在返回的列表中，而对于目标成功率，测试目标类是否出现。由于API预测的语义标签集并不完全对应1000个ImageNet类，所以我们将语义相似的类视为同一个类。</p>
+<figure>
+<img src="https://s2.loli.net/2022/03/30/zRqbiPowtdGYmMF.png" alt="image-20220329225851266"><figcaption aria-hidden="true">image-20220329225851266</figcaption>
+</figure>
+<p>表4报告了超过100张图像的平均结果，这些图像最初产生的是正确的预测。可以看出，总的来说，实现目标转移的成功要比非目标转移的成功困难得多。特别是，Logit攻击实现了最佳的目标可迁移性，图4中显示了准不可察觉的扰动。我们的研究结果揭示了Google Cloud Vision在简单的基于迁移的攻击中存在的潜在漏洞，这种攻击不需要查询交互。</p>
+<h4 id="logit方法和resource-intensive迁移攻击方法对比">Logit方法和Resource-Intensive迁移攻击方法对比</h4>
+<p>（1）和TTP对比</p>
+<p>参数：10-Targets（all-source），单个模型情况：ResNet50，集成模型情况ResNet{18,50,101,152}。目标模型：DenseNet121 和 VGG16 bn。</p>
+<figure>
+<img src="https://s2.loli.net/2022/03/30/qEYofU9DKepFWha.png" alt="image-20220329230031257"><figcaption aria-hidden="true">image-20220329230031257</figcaption>
+</figure>
+<p>在上表中，在一般情况下<span class="math inline">\(\epsilon=16\)</span>，logit攻击能获得和TTP差不多的效果，集成模型对logit攻击提升更大，这可能是因为即使使用单模型作为判别器，TTP也可以通过训练很好地学习目标语义的特征和通过大规模数据学习目标类别分布。图5. 通过比较TTP实现的无边界扰动与Logit实现的无界扰动，可以确定TTP学习到的更清晰的目标语义。</p>
+<p>（2）和<span class="math inline">\(\text{FDA}^{N}\)</span>+xent方法对比</p>
+<p>CE, Po+Trip, 和 Logit三种方法和<span class="math inline">\(\text{FDA}^{N}\)</span>+xent 在生成无边界对抗图像对比，对抗扰动初始化为随机高斯噪声并且要求越大越好。在4000张图像上实验，每一张图像朝着随机目标优化。MI迁移模型在无边界情况下有损表现，去除。表6所有的三种简单迁移攻击都比<span class="math inline">\(\text{FDA}^{N}\)</span>+xent的方法要好，在图5中无边界的对抗扰动能够在某种程度上反应目标的语义。这一发现表明，实现目标可迁移性依赖于鲁棒的，语义特征，这些特征被各种模型所学习，也被人类所理解。这样，实现有目标的可迁移性与非有目标的可迁移性有本质区别，非目标攻击攻击非鲁棒特征就足够。同样值得注意的是，在具有较小范数边界的实际场景中，语义对齐扰动不改变人类的判断。</p>
+<figure>
+<img src="https://s2.loli.net/2022/03/30/GlYAviuMJERagNz.png" alt="image-20220329230110609"><figcaption aria-hidden="true">image-20220329230110609</figcaption>
+</figure>
+<p>（3）简单Logit攻击在Data-Free通用扰动应用</p>
+<p>上述对扰动的观察可以反映出特定的目标语义激励我们应用Logit攻击来实现目标的通用对抗扰动(UAPs)，这可以将多个原始图像分类到特定的目标类。现有的实现目标通用扰动主要依赖于对附加数据的大规模优化。然而，简单logit攻击能容易的扩展到data-free目标通用扰动，上述迁移logit攻击和唯一区别是用平均图像（所有像素值设为0.5而不是[0, 1]）作为原始图像。</p>
+<p>在我们的实验中，对于每个目标类，我们进行300次迭代生成一个单一的目标UAP向量(<span class="math inline">\(\epsilon\)</span> = 16)，并将其应用到我们数据集中的所有1000张图像。表7报告了所有1000个ImageNet类的平均结果。可以看出，logit loss可以带来实质性的成功，明显优于CE损失。图6可以确认这一点，图6显示了logit攻击可以产生比CE更多的语义对齐的扰动。这个观察结果也支持来自[<a href="#%22%5B7%5D%22">7</a>]的结论，即通用扰动包含域特征，而图像就扰动而言就像噪音。</p>
+<h3 id="结论和回顾">结论和回顾</h3>
+<p>在这篇论文中，我们已经证明了实现有针对性的可迁移并不像目前的工作总结的那么困难。具体地说，我们发现，当给定足够的收敛迭代时，简单的可转移攻击实际上可以实现惊人的目标可迁移性。我们已经在广泛的场景中验证了简单可迁移攻击的有效性，包括三个新引入的具有挑战性的场景。这些具有挑战性的场景更好地揭示了不同攻击的实际能力。特别地，我们证明了一个非常简单的Logit攻击在所有迁移场景中都具有优越性，可以获得比最先进的资源密集型（resource-intensive）方法更好的结果。我们还展示了Logit攻击在以无数据方式产生目标通用对抗扰动方面的潜在应用。总的来说，我们希望我们的研究成果能够对未来的研究工作有所启发，对目标可迁移性进行更有意义的评估。我们未来的工作将集中于研究为什么不同的模型架构产生不同的可移植性。特别的我们应该去探索Inception-v3的低成功率。接下来，需要从多个方面对不同攻击的资源消耗进行更全面的讨论，例如训练和推理时间、硬件资源和数据大小。</p>
+<p>较强的可移动性明显有利于对抗性图像在黑盒社交公益上应用。此外，考虑到我们的发现，即使是简单的攻击也可以产生高度可迁移的对抗图像，这也将激励社区设计更强大的防御。我们的方法仍有可能被恶意行为者滥用，以破坏合法的系统。然而，我们坚信，我们的论文能够为研究人员提供的帮助远远大于它可能为一个实际的恶意行动者提供的帮助。</p>
+<p>参考文献</p>
+<p><span id="[1]">[1] Nathan Inkawhich, Kevin Liang, Lawrence Carin, and Yiran Chen. Transferable perturbations of deep feature distributions. In ICLR, 2020.</span></p>
+<p><span id="[2]">[2] Nathan Inkawhich, Kevin J Liang, Binghui Wang, Matthew Inkawhich, Lawrence Carin, and Yiran Chen. Perturbing across the feature hierarchy to improve standard and strict blackbox attack transferability. In NeurIPS, 2020.</span></p>
+<p><span id="[3]">[3] Muzammal Naseer, Salman Khan, Munawar Hayat, Fahad Shahbaz Khan, and Fatih Porikli. On generating transferable targeted perturbations. In ICCV, 2021.</span></p>
+<p><span id="[4]">[4] Maosen Li, Cheng Deng, Tengjiao Li, Junchi Yan, Xinbo Gao, and Heng Huang. Towards transferable targeted attack. In CVPR, 2020.</span></p>
+<p><span id="[5]">[5] Nathan Inkawhich, Kevin Liang, Lawrence Carin, and Yiran Chen. Transferable perturbations of deep feature distributions. In ICLR, 2020.</span></p>
+<p><span id="[6]">[6] Nathan Inkawhich, Kevin J Liang, Binghui Wang, Matthew Inkawhich, Lawrence Carin, and Yiran Chen. Perturbing across the feature hierarchy to improve standard and strict blackbox attack transferability. In NeurIPS, 2020.</span></p>
+<p><span id="[7]">[7] Chaoning Zhang, Philipp Benz, Tooba Imtiaz, and In So Kweon. Understanding adversarial examples from the mutual influence of images and perturbations. In CVPR, 2020.</span></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Li tuo
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://tuoli9.github.io/posts/bc76/" title="迁移目标攻击文献阅读">https://tuoli9.github.io/posts/bc76/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB/" rel="tag"># 对抗攻击</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/6731/" rel="prev" title="一些packages">
+      <i class="fa fa-chevron-left"></i> 一些packages
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#towards-transferable-targeted-attack2020cvpr"><span class="nav-number">1.</span> <span class="nav-text">Towards transferable targeted attack（2020CVPR）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%91%98%E8%A6%81"><span class="nav-number">1.1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%9E%E5%8A%A0%E8%8E%B1%E8%B7%9D%E7%A6%BB%E5%BA%A6%E9%87%8Fpoincare-distance-metric"><span class="nav-number">1.2.</span> <span class="nav-text">庞加莱距离度量（Poincar´e Distance Metric）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E6%94%BB%E5%87%BB%E4%B8%89%E5%85%83%E6%8D%9F%E5%A4%B1triplet-loss-for-targeted-attack"><span class="nav-number">1.3.</span> <span class="nav-text">目标攻击三元损失（Triplet Loss for Targeted Attack）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-number">1.4.</span> <span class="nav-text">实验</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#on-generating-transferable-targeted-perturbationsiccv2021"><span class="nav-number">2.</span> <span class="nav-text">On Generating Transferable Targeted Perturbations（ICCV2021）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.1.</span> <span class="nav-text">相关工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%94%9F%E6%88%90%E7%9A%84%E7%9B%AE%E6%A0%87%E6%94%BB%E5%87%BB"><span class="nav-number">2.2.</span> <span class="nav-text">基于生成的目标攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.2.1.</span> <span class="nav-text">生成模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%8C%B9%E9%85%8D"><span class="nav-number">2.2.2.</span> <span class="nav-text">分布匹配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%82%BB%E5%9F%9F%E7%9B%B8%E4%BC%BC%E5%BA%A6%E5%8C%B9%E9%85%8D"><span class="nav-number">2.2.3.</span> <span class="nav-text">邻域相似度匹配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B4%E4%BD%93%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.4.</span> <span class="nav-text">整体损失函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C-1"><span class="nav-number">2.3.</span> <span class="nav-text">实验</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#on-success-and-simplicity-a-second-look-at-transferable-targeted-attacksneurips-2021"><span class="nav-number">3.</span> <span class="nav-text">On Success and Simplicity: A Second Look at Transferable Targeted Attacks（NeurIPS 2021）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">3.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E7%AE%80%E5%8D%95%E8%BF%81%E7%A7%BB%E6%94%BB%E5%87%BB%E7%9A%84%E6%96%B0%E8%A7%81%E8%A7%A3"><span class="nav-number">3.2.</span> <span class="nav-text">对简单迁移攻击的新见解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C-2"><span class="nav-number">3.3.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E4%B8%AA%E6%A8%A1%E5%9E%8B%E8%BF%81%E7%A7%BB%E6%95%88%E6%9E%9C"><span class="nav-number">3.3.1.</span> <span class="nav-text">单个模型迁移效果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E7%AE%80%E5%8D%95%E5%92%8C%E6%9C%89%E6%8C%91%E6%88%98%E6%80%A7%E5%9C%BA%E6%99%AF%E4%B8%8B%E7%9A%84%E9%9B%86%E6%88%90%E8%BF%81%E7%A7%BB"><span class="nav-number">3.3.2.</span> <span class="nav-text">在简单和有挑战性场景下的集成迁移</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#logit%E6%96%B9%E6%B3%95%E5%92%8Cresource-intensive%E8%BF%81%E7%A7%BB%E6%94%BB%E5%87%BB%E6%96%B9%E6%B3%95%E5%AF%B9%E6%AF%94"><span class="nav-number">3.3.3.</span> <span class="nav-text">Logit方法和Resource-Intensive迁移攻击方法对比</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA%E5%92%8C%E5%9B%9E%E9%A1%BE"><span class="nav-number">3.4.</span> <span class="nav-text">结论和回顾</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Li tuo"
+      src="/images/%E7%A8%8B%E5%BA%8F%E5%96%B5.png">
+  <p class="site-author-name" itemprop="name">Li tuo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/tuoli9" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;tuoli9" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lit7292@163.com" title="E-Mail → mailto:lit7292@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2022 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+
+  <span class="author" itemprop="copyrightHolder">Li Tuo</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">61k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">55 分钟</span>
+</div>
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+
+
+<div class="powered-by">
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <i class="fa fa-user"></i>
+    <span id="busuanzi_container_site_uv">
+        本站访客数:<span id="busuanzi_value_site_uv"></span>人
+    </span>
+    <span class="post-meta-divider">|</span>
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_container_site_pv">
+        本站访问量<span id="busuanzi_value_site_pv"></span>次
+    </span>
+</div>
+
+<br />
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("03/09/2022 13:14:15");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  <!-- -->
+
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'sJ7SWKM4esacypuxxr3mV4bt-gzGzoHsz',
+      appKey     : 'QLeoqU5ouqhEKyAp4N7VRTdC',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/love.js"></script>

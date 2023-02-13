@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="-3Ooss4TReOVQ8s1w_6qvZ2BKeM6eokmZtrA3liJsdg" />
+  <meta name="msvalidate.01" content="606681E3EAAE30E996063E566AACAFE1" />
+  <meta name="baidu-site-verification" content="code-oKN8LopkWB" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tuoli9.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="Practical No-box Adversarial Attacks against DNNs 发表在 NeurIPS 2020，代码：https:&#x2F;&#x2F;github.com&#x2F;qizhangli&#x2F;nobox-attacks">
+<meta property="og:type" content="article">
+<meta property="og:title" content="No-box Attack">
+<meta property="og:url" content="https://tuoli9.github.io/posts/5b1c/index.html">
+<meta property="og:site_name" content="Li&#39;s Blog">
+<meta property="og:description" content="Practical No-box Adversarial Attacks against DNNs 发表在 NeurIPS 2020，代码：https:&#x2F;&#x2F;github.com&#x2F;qizhangli&#x2F;nobox-attacks">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/11/12/lWj9aoREbqxUiCc.png">
+<meta property="og:image" content="https://s2.loli.net/2022/11/13/Eby2HjlkUP4WItT.png">
+<meta property="og:image" content="https://s2.loli.net/2022/11/14/S816zNAhk4ECIPv.png">
+<meta property="og:image" content="https://s2.loli.net/2022/11/14/k29vzrt1N3BYCHX.png">
+<meta property="og:image" content="https://s2.loli.net/2022/11/14/kBcXtZC9fJjF52s.png">
+<meta property="og:image" content="https://s2.loli.net/2022/11/17/FezKWilNa87L4G1.png">
+<meta property="og:image" content="https://s2.loli.net/2022/11/17/m24vPhSbnFq7lIL.png">
+<meta property="article:published_time" content="2023-02-10T06:41:35.919Z">
+<meta property="article:modified_time" content="2022-11-17T13:57:32.000Z">
+<meta property="article:author" content="Li tuo">
+<meta property="article:tag" content="对抗攻击">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/11/12/lWj9aoREbqxUiCc.png">
+
+<link rel="canonical" href="https://tuoli9.github.io/posts/5b1c/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>No-box Attack | Li's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Li's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tuoli9.github.io/posts/5b1c/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/%E7%A8%8B%E5%BA%8F%E5%96%B5.png">
+      <meta itemprop="name" content="Li tuo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Li's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          No-box Attack
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-02-10 14:41:35" itemprop="dateCreated datePublished" datetime="2023-02-10T14:41:35+08:00">2023-02-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-17 21:57:32" itemprop="dateModified" datetime="2022-11-17T21:57:32+08:00">2022-11-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%94%BB%E5%87%BB/" itemprop="url" rel="index"><span itemprop="name">攻击</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%94%BB%E5%87%BB/%E8%87%AA%E7%9B%91%E7%9D%A3/" itemprop="url" rel="index"><span itemprop="name">自监督</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/posts/5b1c/" class="post-meta-item leancloud_visitors" data-flag-title="No-box Attack" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/5b1c/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/5b1c/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="practical-no-box-adversarial-attacks-against-dnns">Practical No-box Adversarial Attacks against DNNs</h1>
+<p>发表在 NeurIPS 2020，代码：https://github.com/qizhangli/nobox-attacks</p>
+<span id="more"></span>
+<p>提出 no box 设定：禁止查询目标模型，模型结构参数和训练数据也未知，攻击者只能收集来自相似任务的少量数据（几十张或者更少）。依靠这些少量的数据进行有监督的训练得到一个替代模型十分困难。</p>
+<p>本文使用 auto-encoders 从少量数据（来自两个类别的20张图片）学习判别性的特征，并研究了三种训练机制：a) 估计每个旋转图像的正面视图，b) 估计每个可能的拼图的最佳拟合，c) 构建原型图像。auto-encoding 模型生成的对抗样本可以很好的迁移到不同的目标模型上，它的有效性有时与使用在与目标模型相同的大规模数据集上训练的预训练模型构建的样本不相上下。</p>
+<h2 id="方法">方法</h2>
+<h3 id="训练方法">训练方法</h3>
+<p>本文针对非目标攻击，训练集 <span class="math inline">\(\mathcal{X}:=\{(x_i,y_i)\}_{i=0}^{n-1}\)</span> ，本文考虑这个辅助数据集一共有两类，i.e.，<span class="math inline">\(y_i\in \{0,1\}\)</span>。</p>
+<p>Baseline 借助于图像到图像的映射，它们在建模数据的内部分布方面是成功的，最小化<span class="math inline">\(\sum_i \Vert\text{Dec}(\text{Enc}(x_i))-x_i \Vert^2\)</span>， 这样的模型一方面能够捕获低层次的图像表示，不会遭受严重的过拟合，另一方面，模型没有判别能力，因此针对模型生成的对样本例很难迁移到其他模型上。</p>
+<p><strong>Reconstruction from chaos</strong> 已有研究表明，预测图像旋转角度和拼图构型赋予DNNs相当大的判别能力，使用image-to-image auto-encoding 模型，结合上述辅助信息，引入评估任务：(a) 每个旋转图像的前视图和 (b) 每一个可能的拼图的完美配合，学习目标函数： <span class="math display">\[
+L_{\text{rotaion/jigsaw}}=\frac{1}{n}\sum_{i=0}^{n-1}\Vert \text{Dec}(\text{Enc}(T(x_i)))-x_i\Vert^2
+\]</span></p>
+<p>上式图像转换函数<span class="math inline">\(T(\cdot)\)</span> 对于这两个任务分别是旋转图像和随机打乱图像patches，虽然学习任务仍然像经典的自动编码器一样是无监督，但辅助信息是与内容相关的，应该有利于分类。</p>
+<p><strong>Prototypical image reconstruction</strong> 利用标签信息，鼓励模型重建特定类别原型， <span class="math display">\[
+L_{\text {prototypical}}=\frac{1}{n} \sum_{i=0}^{n-1}\left(\left(1-y_i\right)\left\|\text{Dec}\left(\text{Enc}\left(x_i\right)\right)-
+x^{(0)}\right\|^2+y_i\left\|\text{Dec}\left(\text{Enc}\left(x_i\right)\right)-x^{(1)}\right\|^2\right)
+\]</span> 上式<span class="math inline">\(x^0 \in \{x_i|y_i=0\}\)</span>，<span class="math inline">\(x^1 \in \{x_i|y_i=1\}\)</span>是随机选择的类别原型，这种机制背后的直觉是，一个模型将必须区分具有不同标签的样本，以获得完美的训练</p>
+<figure>
+<img src="https://s2.loli.net/2022/11/12/lWj9aoREbqxUiCc.png" alt="image-20221112205641760"><figcaption aria-hidden="true">image-20221112205641760</figcaption>
+</figure>
+<h3 id="提高攻击迁移性">提高攻击迁移性</h3>
+<p>定义 auto-encoding 模型的对抗损失，这个损失用来训练模型，对每个<span class="math inline">\(x_i\)</span> 重建 <span class="math inline">\(\tilde{x}_i\)</span>。 <span class="math display">\[
+L_{\text {adversarial }}=-\log p\left(y_i \mid x_i\right) \quad \text { where } \quad p\left(y_i \mid x_i\right)=\frac{\exp \left(-\lambda\left\|\text{Dec}\left(\text{Enc}\left(x_i\right)\right)-\tilde{x}_i\right\|^2\right)}{\sum_j \exp \left(-\lambda\left\|\text{Dec}\left(\text{Enc}\left(x_i\right)\right)-\tilde{x}_j\right\|^2\right)}
+\]</span> <span class="math inline">\(\lambda&gt;0\)</span>，对于旋转和拼图，<span class="math inline">\(\tilde{x}_i:=x\)</span>，对于原型重建，当 <span class="math inline">\(x_i\)</span> 的标签 <span class="math inline">\(y_i=0\)</span>，<span class="math inline">\(\tilde{x}_i:=x^{(0)}\)</span>。这样的<span class="math inline">\(\tilde{x}_i\)</span>被称为 <span class="math inline">\(x_i\)</span> 的 positive prototype，通过攻击，他们的距离增大，对抗损失<span class="math inline">\(L_{\text{adversarial}}\)</span>最大化。在本文中使用ILA攻击方法，首先使用一个基于梯度的攻击方法获得一个攻击扰动，然后用编码器的输出进行ILA攻击。</p>
+<h2 id="实验">实验</h2>
+<p><strong>设定</strong> 分类任务：从 ImageNet 随机选择5000张（500类，一类10张），<span class="math inline">\(\epsilon = 0.1\)</span>或者<span class="math inline">\(0.8\)</span>。人脸验证任务：LFW数据集，随机选取来自400个个体2110张图，<span class="math inline">\(\epsilon = 0.1\)</span>，攻击一个商用系统 clarifai.com。图片resize为<span class="math inline">\(112\times112\)</span>。</p>
+<p><strong>方法</strong> 对于rotation，考虑四个选择角度：0°，90°，180°，270°，对于jigsaw，原始图形平均分为四部分随机打乱，优化器adam，学习率0.001，最大训练次数15000，一个替代模型训练完毕后，I-FGSM攻击200步，然后ILA 100步，<span class="math inline">\(\lambda = 1\)</span>，对于ImageNet和LFW，攻击步长1/255.</p>
+<p><strong>Competitors</strong> 本文提出两个baseline，<span class="math inline">\(naïve^{\dagger}\)</span>：监督训练的ResNets，正则化和数据增广训练得到，<span class="math inline">\(naïve^{\ddagger}\)</span>：无监督训练的 auto-encoders，<span class="math inline">\(naïve^{\dagger}\)</span>和<span class="math inline">\(naïve^{\ddagger}\)</span>训练数据不超过20张图像，<span class="math inline">\(Beyonder\)</span>：在大规模数据集预训练的模型，训练数据和目标模型一致，在本文中选取ResNet-50</p>
+<p><strong>实验结果</strong> 对于prototypical机制测试单个解码器和多个解码器的模型，无监督训练的模型rotation最优，</p>
+<figure>
+<img src="https://s2.loli.net/2022/11/13/Eby2HjlkUP4WItT.png" alt="image-20221113215728529"><figcaption aria-hidden="true">image-20221113215728529</figcaption>
+</figure>
+<h1 id="adversarial-pixel-restoration-as-a-pretext-task-for-transferable-perturbations">Adversarial Pixel Restoration as a Pretext Task for Transferable Perturbations</h1>
+<p>发表在 BMVC 2022，代码：https://github.com/HashmatShadab/APR</p>
+<p>设定和上一篇相同，在上一篇工作中prototypical方法需要有监督训练，为了减小对少量样本数据的过拟合，并且找到鲁棒的特征，提出对抗像素复原（Adversarial Pixel Restoration）自监督任务，用少量无标签样本训练替代模型。本文提出的min-max目标函数可以找到一个更鲁棒更平坦的最小值，提高对抗迁移性。</p>
+<p>本文3点贡献：1. 提出了一种自监督对抗像素恢复方法，通过在平坦损失表面上学习来找到高度可转移的模式。我们的训练方法允许在不访问大规模标记数据或预训练模型的情况下实现cross-domain 攻击。2. 对抗攻击方法是自监督的，和任务无关。所提方法生成的扰动可以迁移到不同任务中。3. 本文方法使损失更平滑，有助于生成更通用的对抗样本。当训练集仅包含两个样本时方法依然有效。</p>
+<h2 id="方法-1">方法</h2>
+<p>给定一个无标签的数据分布<span class="math inline">\(p_s\)</span>，样本数量<span class="math inline">\(\leq 20\)</span>，由于数据都是无标签的，可以定义一个自监督学习任务<span class="math inline">\(\mathcal{T}_s\)</span>训练替代模型，一个主要的挑战是，深度神经网络可以很容易地记忆数据，即使使用较强的数据增广方法，模型还是会快速过拟合少数可用的样本。这导致替代模型的可泛化性较差，因此，从该模型生成的对抗攻击具有较弱的可转移性。</p>
+<p><strong>Adversarial Training via Denoising</strong> 本文提出一个min-max训练过程，max过程通过单步攻击的对抗像素变换欺骗模型<span class="math inline">\(\mathcal{F}\)</span>，min过程去噪并恢复特征和像素空间，实现可泛化的损失面。</p>
+<p><strong>对抗像素变换</strong> 对于输入<span class="math inline">\(x \sim P_s\)</span>，通过下面目标寻找满足<span class="math inline">\(\Vert x-x^{\prime}\Vert_{\infty} \leq \varepsilon\)</span>对抗样本<span class="math inline">\(x^{\prime}\)</span>， <span class="math display">\[
+\underset{\boldsymbol{x}^{\prime}}{\operatorname{maximize}} \quad \mathcal{L}_{\max }=\left\|\mathcal{F}\left(\mathcal{T}_s\left(\boldsymbol{x}^{\prime}\right)\right)-\boldsymbol{x}\right\|^p \tag{1}
+\]</span> <span class="math inline">\(\mathcal{T}_s\)</span>代表像素变换，例如rotation或者jigsaw shuffle，因此，我们的攻击通过最大化式5中所示的损失来欺骗模型恢复转换像素空间的能力，并最终帮助鲁棒自监督特征。上述攻击方法扩展到有监督的情况： <span class="math display">\[
+\underset{\boldsymbol{x}^{\prime}}{\operatorname{maximize}} \sum_{c=1}^C\left(y_c\left\|\mathcal{F}\left(\mathcal{T}_s\left(\boldsymbol{x}^{\prime}\right)\right)-\boldsymbol{x}^{(c)}\right\|^p\right) \tag{2}
+\]</span> 其中<span class="math inline">\(C\)</span>是类别数，<span class="math inline">\(y_c\)</span>是one-hot标签，<span class="math inline">\(x^{(c)}\)</span>是选取的特定类别原型。</p>
+<p><strong>像素重建</strong> 对于公式1生成的对抗样本<span class="math inline">\(x^{\prime}\)</span>，最小化原始图像<span class="math inline">\(x\)</span>和模型对抗变换输出以及原始样本变换输出之间的重建错误： <span class="math display">\[
+\mathcal{L}_{\text {out }}=\left\|\mathcal{F}\left(\mathcal{T}_s\left(\boldsymbol{x}^{\prime}\right)\right)-\boldsymbol{x}\right\|^p+\left\|\mathcal{F}\left(\mathcal{T}_s(\boldsymbol{x})\right)-\boldsymbol{x}\right\|^p \tag{3}
+\]</span> 在对抗训练中，我们进一步调节模型的特征空间，通过强制原始和对抗特征分布之间的对齐，如下所示： <span class="math display">\[
+\mathcal{L}_{\text {feature }}=\left\|\mathcal{F}^n\left(\mathcal{T}_s\left(\boldsymbol{x}^{\prime}\right)\right)-\mathcal{F}^n\left(\mathcal{T}_s(\boldsymbol{x})\right)\right\|^p \tag{4}
+\]</span> 其中<span class="math inline">\(\mathcal{F}^n\)</span>代表encoder中间层输出，整个训练目标： <span class="math display">\[
+\mathcal{L}_{\text {min }}=\mathcal{L}_{\text {out }}+\lambda \mathcal{L}_{\text {feature }} \tag{5}
+\]</span> 训练过程伪代码：</p>
+<figure>
+<img src="https://s2.loli.net/2022/11/14/S816zNAhk4ECIPv.png" alt="image-20221114195358774"><figcaption aria-hidden="true">image-20221114195358774</figcaption>
+</figure>
+<h2 id="实验-1">实验</h2>
+<p>本文考虑<span class="math inline">\(x_{\infty}\)</span>对抗攻击，扰动边界<span class="math inline">\(\varepsilon \leq 0.1\)</span>，考虑in-domian和cross-domain数据，adam优化器学习率0.001，<span class="math inline">\(\delta=\frac{2}{255},\lambda=1,p=2\)</span>。</p>
+<p><strong>Surrogate Training with Few Samples:</strong> 使用公式1作为无监督对抗像素变换（<span class="math inline">\(\mathcal{T}\)</span>）,公式2针对有标签，使用多个decoder的模型。</p>
+<p><strong>Surrogate Training with Large Dataset:</strong> 在paintings（79K 样本），CoCo（40K 样本），和Comics（50K 样本）训练替代模型，测试本文所提方法的cross-domain对抗迁移性。</p>
+<p><strong>目标模型：</strong> VGG-19，Inc-V3，Res152，Dense161，SeNet，WRN，MNet-V2，ViT-S，DeiT-T 和DeiT-S，鲁棒ResNet-50，DETR 和DINO评估跨任务迁移性。</p>
+<p><strong>数据集：</strong>在5K 来自ImageNet Val样本测试分类模型，目标检测CoCo（5K）视频分割DAVIS （2K）</p>
+<p><strong>Baseline 对抗攻击：</strong>200 iterations I-FGSM，100 iterations of ILA，攻击目标：公式1</p>
+<p>in-domain</p>
+<figure>
+<img src="https://s2.loli.net/2022/11/14/k29vzrt1N3BYCHX.png" alt="image-20221114204819477"><figcaption aria-hidden="true">image-20221114204819477</figcaption>
+</figure>
+<p>cross-domain：在所有CNNs上求平均的结果</p>
+<figure>
+<img src="https://s2.loli.net/2022/11/14/kBcXtZC9fJjF52s.png" alt="image-20221114204952181"><figcaption aria-hidden="true">image-20221114204952181</figcaption>
+</figure>
+<p>消融实验结果省略......</p>
+<h1 id="practical-no-box-adversarial-attacks-with-training-free-hybrid-image-transformation">Practical No-box Adversarial Attacks with Training-free Hybrid Image Transformation</h1>
+<p>还未正式发表</p>
+<h2 id="动机">动机</h2>
+<p>针对no-box提出一种不需要训练的方法，在分类任务中低层网络提取到的特征的高频部分（HFC）至关重要，如果一个扰动可以有效地控制图像的HFC，模型将会提取完全不同的底层特征，导致模型错分。[<a href="#id2">2</a>]表明对抗扰动的有效性在于它包含不相关的特征，这些扰动的特征在原始图像特征中占主导地位，文本设计包含不相关特征的的对抗HFC，本文发现有效噪声HFC是区域均匀，重复密集的。</p>
+<h2 id="方法-2">方法</h2>
+<p>本文猜测有效的扰动应该是均匀重复密集的，采用混合图像（hybrid image [<a href="#id1">1</a>]）的思想，提出一种 Hybrid Image Transformation (HIT) 攻击方法。hybrid image：将一张图像的HFC替换为另一张精心挑选的图像的HFC，并用两种不同的解释制作混合图像:一种是在近距离观看图像时出现的，另一种是从远处出现的。HIT 减少了原始的HFC，同时增加了精心设计的噪声HFC来攻击dnn。</p>
+<p>具体实现就是生成由下面三种图案均匀排列的patch <span class="math inline">\(x^p\)</span>，这个patch的大小和要攻击的图像相同，一个图案包括几个形状定义为密集度</p>
+<figure>
+<img src="https://s2.loli.net/2022/11/17/FezKWilNa87L4G1.png" alt="image-20221117210037610"><figcaption aria-hidden="true">image-20221117210037610</figcaption>
+</figure>
+<p>然后定义一个高斯低通滤波器<span class="math inline">\(G\)</span>，大小是（<span class="math inline">\(4k+1 \times 4k+1\)</span> ）,定义为： <span class="math display">\[
+G_{i,j}=\frac{1}{2\pi \sigma^2}e^{-(\frac{i^2+j^2}{2\sigma^2})} \tag{1}
+\]</span> <span class="math inline">\(\sigma\)</span>越大，更多的HFC将被过滤掉，用原始图像的低频部分和patch的高频部分融合生成对抗样本： <span class="math display">\[
+x^{a d v}=\operatorname{clip}_{x, \varepsilon}\left(x * G+\lambda \cdot\left(x^p-x^p * G\right)\right) \tag{2}
+\]</span> 从下图可以直观的看到，黄框框出来的box，HIT减小相关的HFC并且添加了不相关的噪声，目标模型无法提取正确的特征来做出合理的预测，从而导致分类错误</p>
+<figure>
+<img src="https://s2.loli.net/2022/11/17/m24vPhSbnFq7lIL.png" alt="image-20221117211822937"><figcaption aria-hidden="true">image-20221117211822937</figcaption>
+</figure>
+<h2 id="实验-2">实验</h2>
+<p>实验部分考虑了ImageNet和三个DCL 框架[<a href="#id3">3</a>]下细粒度分类CUB-200-2011，Stanford Cars 和 FGVC Aircraft，由圆组成的patch攻击效果更好，实验结果和消融实验具体看原本，这里就不放了</p>
+<p><a id="id1">[1] Aude Oliva. The art of hybrid images: Two for the view of one. Art &amp; Perception, 1(1-2):65–74, 2013.</a></p>
+<p><a id="id2">[2] Chaoning Zhang, Philipp Benz, Tooba Imtiaz, and In-So Kweon. Understanding adversarial examples from the mutual influence of images and perturbations. In CVPR, 2020.</a>&gt;</p>
+<p><a id="id3">[3] Yue Chen, Yalong Bai,Wei Zhang, and Tao Mei. Destruction and construction learning for fine-grained image recognition. In CVPR, 2019.</a></p>
+<h1 id="总结">总结</h1>
+<p>这两篇工作考虑了实际中训练替代模型和目标模型的数据分布不一致，且仅有少量训练数据（有标签/无标签）可用是如何训练替代模型。但是在实验设定上用20个样本训练一个替代模型，攻击5000个样本需要训练250个替代模型，在实验设置上并没有对比用5000个样本训练一个模型的迁移效果。在第一篇中Beyonder作为替代模型测试IFGSM对5000样本攻击迁移效果，其他方法都是IFGSM+ILA，对于不太公平。IFGSM和ILA攻击收敛慢，在文章中分别要迭代200和100步，减少迭代次数达不到最佳效果。</p>
+<p>在第三个方法中，HIT用在某些中间层feature上效果如何还可进一步研究。图案的选取没有什么依据，在文章中对比了三种最常见的形状，对抗样本的生成不需要训练，也不需要迭代，从这一点来看是一种非深度学习的方法。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Li tuo
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://tuoli9.github.io/posts/5b1c/" title="No-box Attack">https://tuoli9.github.io/posts/5b1c/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB/" rel="tag"># 对抗攻击</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/ecaa/" rel="prev" title="NIPS2022对抗攻击&防御论文汇总">
+      <i class="fa fa-chevron-left"></i> NIPS2022对抗攻击&防御论文汇总
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/e759/" rel="next" title="On the Robustness of Vision Transformers to Adversarial Examples">
+      On the Robustness of Vision Transformers to Adversarial Examples <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#practical-no-box-adversarial-attacks-against-dnns"><span class="nav-number">1.</span> <span class="nav-text">Practical No-box Adversarial Attacks against DNNs</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.1.</span> <span class="nav-text">训练方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E9%AB%98%E6%94%BB%E5%87%BB%E8%BF%81%E7%A7%BB%E6%80%A7"><span class="nav-number">1.1.2.</span> <span class="nav-text">提高攻击迁移性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-number">1.2.</span> <span class="nav-text">实验</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#adversarial-pixel-restoration-as-a-pretext-task-for-transferable-perturbations"><span class="nav-number">2.</span> <span class="nav-text">Adversarial Pixel Restoration as a Pretext Task for Transferable Perturbations</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95-1"><span class="nav-number">2.1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C-1"><span class="nav-number">2.2.</span> <span class="nav-text">实验</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#practical-no-box-adversarial-attacks-with-training-free-hybrid-image-transformation"><span class="nav-number">3.</span> <span class="nav-text">Practical No-box Adversarial Attacks with Training-free Hybrid Image Transformation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%9C%BA"><span class="nav-number">3.1.</span> <span class="nav-text">动机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95-2"><span class="nav-number">3.2.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C-2"><span class="nav-number">3.3.</span> <span class="nav-text">实验</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Li tuo"
+      src="/images/%E7%A8%8B%E5%BA%8F%E5%96%B5.png">
+  <p class="site-author-name" itemprop="name">Li tuo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/tuoli9" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;tuoli9" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lit7292@163.com" title="E-Mail → mailto:lit7292@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2022 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+
+  <span class="author" itemprop="copyrightHolder">Li Tuo</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">61k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">55 分钟</span>
+</div>
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+
+
+<div class="powered-by">
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <i class="fa fa-user"></i>
+    <span id="busuanzi_container_site_uv">
+        本站访客数:<span id="busuanzi_value_site_uv"></span>人
+    </span>
+    <span class="post-meta-divider">|</span>
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_container_site_pv">
+        本站访问量<span id="busuanzi_value_site_pv"></span>次
+    </span>
+</div>
+
+<br />
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("03/09/2022 13:14:15");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  <!-- -->
+
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'sJ7SWKM4esacypuxxr3mV4bt-gzGzoHsz',
+      appKey     : 'QLeoqU5ouqhEKyAp4N7VRTdC',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/love.js"></script>
