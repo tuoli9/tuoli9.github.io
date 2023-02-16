@@ -23,19 +23,28 @@
     var CONFIG = {"hostname":"tuoli9.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="ICLR2022对抗攻击&amp;防御论文汇总 ICLR 2022 Conference | OpenReview 攻击 On Improving Adversarial Transferability of Vision Transformers Online Adversarial Attacks">
+  <meta name="description" content="Towards Lightweight Black-Box Attacks Against Deep （NeurIPS 2022） 代码：https:&#x2F;&#x2F;github.com&#x2F;sunch-ustc&#x2F;Error_TransFormer&#x2F;tree&#x2F;ETF">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ICLR2022对抗攻击&amp;防御论文汇总">
-<meta property="og:url" content="https://tuoli9.github.io/posts/2bb2/index.html">
+<meta property="og:title" content="Towards Lightweight Black-Box Attacks Against Deep">
+<meta property="og:url" content="https://tuoli9.github.io/posts/f707/index.html">
 <meta property="og:site_name" content="Li&#39;s Blog">
-<meta property="og:description" content="ICLR2022对抗攻击&amp;防御论文汇总 ICLR 2022 Conference | OpenReview 攻击 On Improving Adversarial Transferability of Vision Transformers Online Adversarial Attacks">
+<meta property="og:description" content="Towards Lightweight Black-Box Attacks Against Deep （NeurIPS 2022） 代码：https:&#x2F;&#x2F;github.com&#x2F;sunch-ustc&#x2F;Error_TransFormer&#x2F;tree&#x2F;ETF">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-02-10T06:41:35.899Z">
-<meta property="article:modified_time" content="2022-04-30T02:47:00.000Z">
+<meta property="og:image" content="https://s2.loli.net/2023/02/16/MrnU9zQvmikO6hL.png">
+<meta property="og:image" content="https://s2.loli.net/2023/02/16/pvbxEDFCQeT6KjM.png">
+<meta property="og:image" content="https://s2.loli.net/2023/02/16/fJb3qXYF4aPySVT.png">
+<meta property="og:image" content="https://s2.loli.net/2023/02/16/dJzVEalDjRFHOeh.png">
+<meta property="og:image" content="https://s2.loli.net/2023/02/16/GZ8mInMrON3Rhlg.png">
+<meta property="og:image" content="https://s2.loli.net/2023/02/16/i7OtJQDMhqbIxAH.png">
+<meta property="og:image" content="https://s2.loli.net/2023/02/16/6lNxfyagQFitYVn.png">
+<meta property="article:published_time" content="2023-02-16T05:52:38.062Z">
+<meta property="article:modified_time" content="2023-02-16T14:07:55.086Z">
 <meta property="article:author" content="Li tuo">
+<meta property="article:tag" content="对抗攻击">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/02/16/MrnU9zQvmikO6hL.png">
 
-<link rel="canonical" href="https://tuoli9.github.io/posts/2bb2/">
+<link rel="canonical" href="https://tuoli9.github.io/posts/f707/">
 
 
 <script id="page-configurations">
@@ -48,7 +57,7 @@
   };
 </script>
 
-  <title>ICLR2022对抗攻击&防御论文汇总 | Li's Blog</title>
+  <title>Towards Lightweight Black-Box Attacks Against Deep | Li's Blog</title>
   
 
 
@@ -193,7 +202,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://tuoli9.github.io/posts/2bb2/">
+    <link itemprop="mainEntityOfPage" href="https://tuoli9.github.io/posts/f707/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/%E7%A8%8B%E5%BA%8F%E5%96%B5.png">
@@ -206,7 +215,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          ICLR2022对抗攻击&防御论文汇总
+          Towards Lightweight Black-Box Attacks Against Deep
         </h1>
 
         <div class="post-meta">
@@ -215,28 +224,22 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2023-02-10 14:41:35" itemprop="dateCreated datePublished" datetime="2023-02-10T14:41:35+08:00">2023-02-10</time>
+              <time title="创建时间：2023-02-16 13:52:38 / 修改时间：22:07:55" itemprop="dateCreated datePublished" datetime="2023-02-16T13:52:38+08:00">2023-02-16</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-30 10:47:00" itemprop="dateModified" datetime="2022-04-30T10:47:00+08:00">2022-04-30</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%BA%E6%96%87%E6%B1%87%E6%80%BB/" itemprop="url" rel="index"><span itemprop="name">论文汇总</span></a>
+                  <a href="/categories/%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB/" itemprop="url" rel="index"><span itemprop="name">对抗攻击</span></a>
                 </span>
             </span>
 
           
-            <span id="/posts/2bb2/" class="post-meta-item leancloud_visitors" data-flag-title="ICLR2022对抗攻击&防御论文汇总" title="阅读次数">
+            <span id="/posts/f707/" class="post-meta-item leancloud_visitors" data-flag-title="Towards Lightweight Black-Box Attacks Against Deep" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -251,8 +254,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/posts/2bb2/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/2bb2/" itemprop="commentCount"></span>
+    <a title="valine" href="/posts/f707/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/f707/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -262,7 +265,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.3k</span>
+              <span>2.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -281,48 +284,42 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="iclr2022对抗攻击防御论文汇总">ICLR2022对抗攻击&amp;防御论文汇总</h2>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/group?id=ICLR.cc/2022/Conference">ICLR 2022 Conference | OpenReview</a></p>
-<h3 id="攻击">攻击</h3>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/pdf?id=D6nH3719vZy">On Improving Adversarial Transferability of Vision Transformers</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=bYGSzbCM_i">Online Adversarial Attacks</a></p>
+        <p>Towards Lightweight Black-Box Attacks Against Deep （NeurIPS 2022）</p>
+<p>代码：https://github.com/sunch-ustc/Error_TransFormer/tree/ETF</p>
 <span id="more"></span>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=Zf4ZdI4OQPV">Attacking deep networks with surrogate-based adversarial black-box methods is easy</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=gVRhIEajG1k">Rethinking Adversarial Transferability from a Data Distribution Perspective</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=73MEhZ0anV">Query Efficient Decision Based Sparse Attacks Against Black-Box Deep Learning Models</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=B5XahNLmna">Data Poisoning Won’t Save You From Facial Recognition</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=DesNW4-5ai9">Transferable Adversarial Attack based on Integrated Gradients</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=28ib9tf6zhr">Patch-Fool: Are Vision Transformers Always Robust Against Adversarial Perturbations?</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=QkRV50TZyP">Beyond ImageNet Attack: Towards Crafting Adversarial Examples for Black-box Domains</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=Bn09TnDngN">How to Inject Backdoors with Better Consistency: Logit Anchoring on Clean Data</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=af1eUDdUVz">Evading Adversarial Example Detection Defenses with Orthogonal Projected Gradient Descent</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=UMfhoMtIaP5">Provably Robust Adversarial Examples</a></p>
-<h3 id="防御">防御</h3>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=W9G_ImpHlQd">How to Robustify Black-Box ML Models? A Zeroth-Order Optimization Perspective</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=gpp7cf0xdfN">Reverse Engineering of Imperceptible Adversarial Image Perturbations</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/pdf?id=yeP_zx9vqNm">Finding Biological Plausibility for Adversarially Robust Features via Metameric Tasks</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=_5js_8uTrx1">Towards Evaluating the Robustness of Neural Networks Learned by Transduction</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=MSgB8D4Hy51">Post-Training Detection of Backdoor Attacks for Two-Class and Multi-Attack Scenarios</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=TySnJ-0RdKI">Backdoor Defense via Decoupling the Training Process</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=MeeQkFYVbzW">Adversarial Unlearning of Backdoors via Implicit Hypergradient</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=af1eUDdUVz">Evading Adversarial Example Detection Defenses with Orthogonal Projected Gradient Descent</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=BmJV7kyAmg">Towards Understanding the Robustness Against Evasion Attack on Categorical Data</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=gJLEXy3ySpu">Almost Tight L0-norm Certified Robustness of Top-k Predictions against Adversarial Perturbations</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=OM_lYiHXiCL">AEVA: Black-box Backdoor Detection Using Adversarial Extreme Value Analysis</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=cZAi1yWpiXQ">Adversarial Robustness Through the Lens of Causality</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=hcoswsDHNAW">Fast AdvProp</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=oU3aTsmeRQV">Self-ensemble Adversarial Training for Improved Robustness</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=TXsjU8BaibT">Trigger Hunting with a Topological Prior for Trojan Detection</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=UMfhoMtIaP5">Provably Robust Adversarial Examples</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=Dzpe9C1mpiv">A Unified Wasserstein Distributional Robustness Framework for Adversarial Training</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=tUa4REjGjTf">On the Certified Robustness for Ensemble Models and Beyond</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=jJOjjiZHy3h">Defending Against Image Corruptions Through Adversarial Augmentations</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=vJZ7dPIjip3">Generalization of Neural Combinatorial Solvers Through the Lens of Adversarial Robustness</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=YeShU5mLfLt">On the Convergence of Certified Robust Training with Interval Bound Propagation</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=WVX0NNVBBkV">Robust Learning Meets Generative Models: Can Proxy Distributions Improve Adversarial Robustness?</a><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=tD7eCtaSkR">Improved deterministic l2 robustness on CIFAR-10 and CIFAR-100</a></p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/pdf?id=7gE9V9GBZaI">Exploring Memorization in Adversarial Training</a></p>
-<p>？？？</p>
-<p><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=9L1BsI4wP1H">Adversarially Robust Conformal Prediction</a></p>
+<p>本文主要考虑在严格黑盒场景下的迁移攻击，黑盒模型的训练数据未知，只能获取少量测试数据。作者发现攻击一个只用少量测试数据训练的替代模型的浅层可以生成强有力的对抗样本，作者把他称为lightweight black-box attacks。促进轻量级攻击的主要挑战是减轻浅层近似误差造成的不利影响。由于可用样本很少，很难减小近似误差，作者提出了用于轻量级攻击的误差变换器(error TransFormer, ETF)。ETF将参数空间中的近似误差转化为特征空间中的扰动，并通过扰动特征来缓解误差。在实验中，即使每个类别只有1个样本，轻量级黑盒攻击实现的攻击成功率仅比使用完整训练数据的黑盒攻击低3%左右。</p>
+<h2 id="方法">方法</h2>
+<p>本片也属于no-box攻击，有研究表明[<a href="#%5B1%5D">1</a>]少量数据无监督训练的模型浅层特征提取效果和有监督大规模训练相似，在数据量有限的情况下，利用浅模型特征进行攻击是一种有效的方法。</p>
+<h3 id="轻量化替代模型">轻量化替代模型</h3>
+<p>假定用于生成对抗样本的干净样本的标签已知，轻量化替代模型可以以一种有监督的方式训练得到：</p>
+<p><img src="https://s2.loli.net/2023/02/16/MrnU9zQvmikO6hL.png" alt="image-20230216140530359" style="zoom: 67%;"></p>
+<p><span class="math inline">\(l(\cdot)\)</span>通常是交叉熵。在黑盒攻击中，攻击者只利用dnn的浅层，可以以对比的方式训练轻量级代理模型，其中监督信息非必要：</p>
+<p><img src="https://s2.loli.net/2023/02/16/pvbxEDFCQeT6KjM.png" alt="image-20230216141035124" style="zoom:67%;"></p>
+<p>其中<span class="math inline">\(\sigma\)</span>是一种相似性度量，<span class="math inline">\(\mathcal{T}\)</span>是数据增广，<span class="math inline">\(\hat{D} \backslash x\)</span>表示<span class="math inline">\(x\)</span>从<span class="math inline">\(\hat{D}\)</span>中移除。</p>
+<h3 id="特征空间扰动">特征空间扰动</h3>
+<p>给定原始样本<span class="math inline">\(x_s\)</span>，添加扰动，使其特征和引导样本<span class="math inline">\(x_g\)</span>相似，原始样本和引导样本标签不同。</p>
+<p><img src="https://s2.loli.net/2023/02/16/fJb3qXYF4aPySVT.png" alt="image-20230216142858155"></p>
+<h3 id="误差变换">误差变换</h3>
+<p>虽然将特征空间攻击应用于轻量替代模型可以生成可转移的对抗样本，但近似误差会对攻击造成不利影响。原因是替代模型与目标模型之间存在较大的差异，降低了攻击成功率。因此，使用轻量级攻击的主要挑战是减轻近似误差造成的不利影响。然而，在no-box威胁模型中，可用的样本通常是有限的，这使得其难以减小近似误差。</p>
+<p>为了解决这一难题，作者提出将参数空间的近似误差转换为特征空间的扰动。具体来说，我们很少知道哪些扰动可以(从替代模型)指向目标模型，这使得减轻权重空间中的近似误差具有挑战性。相比之下，我们有一个先验，具有不同标签的样本应该有可区分的表示。因此，我们可以利用这种先验知识来选择特征空间中的首选扰动，即，我们更喜欢可以使具有不同标签的样本表示难以区分的扰动。同样，定义“坏”扰动也很简单，这引出了最小—最大优化的设计，以确定“最坏”模型。因此，将参数空间和特征空间连接起来，可以减轻近似误差带来的不利影响。为了连接两者，引入以下等式:</p>
+<figure>
+<img src="https://s2.loli.net/2023/02/16/dJzVEalDjRFHOeh.png" alt="image-20230216144750623"><figcaption aria-hidden="true">image-20230216144750623</figcaption>
+</figure>
+<p><span class="math inline">\(\omega^1\)</span>模型<span class="math inline">\(\varphi\)</span>第一层的参数，A是一个扰动<span class="math inline">\(\omega^1\)</span>的变换矩阵，<span class="math inline">\(\{\omega^1+\omega^1 A\}\cup\{\omega \backslash \omega^1\}\)</span>表示第一层的参数被扰动，其它层的参数保持不变，根据上面公式，可以将参数空间的扰动转换为数据空间，<span class="math inline">\(\varphi(x;\{\omega^1+\omega^1A\}\cup\{\omega \backslash \omega^1\})=\varphi(x+Ax;\omega)\)</span>。</p>
+<p>由上面分析，现在可以将替代模型和目标模型第一层参数的差异变换，以第一层为例，<span class="math inline">\(\omega_t\)</span>代表目标模型的参数，<span class="math inline">\(\omega_t^1\)</span>使它第一层参数，其它参数和替代模型一致。假设存在一个变换矩阵A（这条假设的讨论在附录E），用于替代模型第一层的参数<span class="math inline">\(\omega_t^1=\omega^1+\omega^1 A\)</span>，有如下结果：</p>
+<figure>
+<img src="https://s2.loli.net/2023/02/16/GZ8mInMrON3Rhlg.png" alt="image-20230216150324237"><figcaption aria-hidden="true">image-20230216150324237</figcaption>
+</figure>
+<p>公式5中的恒等式表明，我们可以在数据空间中找到一个扰动，以缓解这两个模型之间第一层参数的差异。在变换的基础上，我们可以将最坏的近似误差转换为数据空间中的最坏扰动。因此，我们可以采用最小-最大策略，通过在最坏扰动下生成对抗性样本来减轻近似误差的不利影响。因此，使用ETF的轻量级黑盒攻击生成的对抗样本如下:</p>
+<figure>
+<img src="https://s2.loli.net/2023/02/16/i7OtJQDMhqbIxAH.png" alt="image-20230216152911644"><figcaption aria-hidden="true">image-20230216152911644</figcaption>
+</figure>
+<p><span class="math inline">\(\Delta_g\)</span>和<span class="math inline">\(\Delta_s\)</span>是数据空间扰动，用于缓解参数空间近似误差，<span class="math inline">\(x^{\prime}\)</span>是被扰动的原始样本。给定一个扰动对抗样本，通过在特征空间中产生扰动来解决内部最大化问题。这一步用于减轻近似误差。外部最小化问题是通过在输入空间中寻找对抗扰动来解决，与对抗样本生成相同。在迭代生成扰动后，通过攻击具有减小近似误差的模型来生成对抗示例。</p>
+<h2 id="实验">实验</h2>
+<figure>
+<img src="https://s2.loli.net/2023/02/16/6lNxfyagQFitYVn.png" alt="image-20230216210124618"><figcaption aria-hidden="true">image-20230216210124618</figcaption>
+</figure>
+<p>轻量化模型作为替代模型可以得到与所有数据训练的模型相当的效果，用整个轻量化模型得到的对抗样本迁移性并不高，证明了所提方法的有效性。但表一中个人感觉应该加上用所有数据训练的模型使用ETF生成对抗样本的迁移性，毕竟用所有数据训练的模型和目标模型还是存在差异。</p>
 
     </div>
 
@@ -338,7 +335,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://tuoli9.github.io/posts/2bb2/" title="ICLR2022对抗攻击&amp;防御论文汇总">https://tuoli9.github.io/posts/2bb2/</a>
+    <a href="https://tuoli9.github.io/posts/f707/" title="Towards Lightweight Black-Box Attacks Against Deep">https://tuoli9.github.io/posts/f707/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -348,6 +345,9 @@
 
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB/" rel="tag"># 对抗攻击</a>
+          </div>
 
         
 
@@ -355,13 +355,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/3c67/" rel="prev" title="ECCV2022对抗攻击&防御论文汇总">
-      <i class="fa fa-chevron-left"></i> ECCV2022对抗攻击&防御论文汇总
+    <a href="/posts/52af/" rel="prev" title="ILA-DA：Improving Transferability of Intermediate Level Attack with Data Augmentation">
+      <i class="fa fa-chevron-left"></i> ILA-DA：Improving Transferability of Intermediate Level Attack with Data Augmentation
     </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/cc97/" rel="next" title="Improving the Transferability of Targeted Adversarial Examples through Object-Based Diverse Input">
-      Improving the Transferability of Targeted Adversarial Examples through Object-Based Diverse Input <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -421,7 +418,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#iclr2022%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB%E9%98%B2%E5%BE%A1%E8%AE%BA%E6%96%87%E6%B1%87%E6%80%BB"><span class="nav-number">1.</span> <span class="nav-text">ICLR2022对抗攻击&amp;防御论文汇总</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%BB%E5%87%BB"><span class="nav-number">1.1.</span> <span class="nav-text">攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B2%E5%BE%A1"><span class="nav-number">1.2.</span> <span class="nav-text">防御</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%BB%E9%87%8F%E5%8C%96%E6%9B%BF%E4%BB%A3%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text">轻量化替代模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E7%A9%BA%E9%97%B4%E6%89%B0%E5%8A%A8"><span class="nav-number">1.2.</span> <span class="nav-text">特征空间扰动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AF%E5%B7%AE%E5%8F%98%E6%8D%A2"><span class="nav-number">1.3.</span> <span class="nav-text">误差变换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-number">2.</span> <span class="nav-text">实验</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
