@@ -23,12 +23,12 @@
     var CONFIG = {"hostname":"tuoli9.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="On the Robustness of Vision Transformers to Adversarial Examples（ICCV2021） 代码链接：https:&#x2F;&#x2F;github.com&#x2F;MetaMain&#x2F;ViTRobust 本文研究了ViT鲁棒性，迁移安全性研究分为3点：  在白盒和黑盒攻击场景下测试 transformer 鲁棒性 对抗样本很难从 CNN 迁移到 transforme">
+  <meta name="description" content="On the Robustness of Vision Transformers to Adversarial Examples（ICCV2021）代码链接：https:&#x2F;&#x2F;github.com&#x2F;MetaMain&#x2F;ViTRobust 本文研究了ViT鲁棒性，迁移安全性研究分为3点：  在白盒和黑盒攻击场景下测试 transformer 鲁棒性 对抗样本很难从 CNN 迁移到 transformer">
 <meta property="og:type" content="article">
 <meta property="og:title" content="On the Robustness of Vision Transformers to Adversarial Examples">
 <meta property="og:url" content="https://tuoli9.github.io/posts/e759/index.html">
 <meta property="og:site_name" content="Li&#39;s Blog">
-<meta property="og:description" content="On the Robustness of Vision Transformers to Adversarial Examples（ICCV2021） 代码链接：https:&#x2F;&#x2F;github.com&#x2F;MetaMain&#x2F;ViTRobust 本文研究了ViT鲁棒性，迁移安全性研究分为3点：  在白盒和黑盒攻击场景下测试 transformer 鲁棒性 对抗样本很难从 CNN 迁移到 transforme">
+<meta property="og:description" content="On the Robustness of Vision Transformers to Adversarial Examples（ICCV2021）代码链接：https:&#x2F;&#x2F;github.com&#x2F;MetaMain&#x2F;ViTRobust 本文研究了ViT鲁棒性，迁移安全性研究分为3点：  在白盒和黑盒攻击场景下测试 transformer 鲁棒性 对抗样本很难从 CNN 迁移到 transformer">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2022/04/21/br6u7qShJBWAIMZ.png">
 <meta property="og:image" content="https://s2.loli.net/2022/04/21/VaTbv5BQM72hqzn.png">
@@ -268,7 +268,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.1k</span>
+              <span>3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -287,50 +287,36 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="on-the-robustness-of-vision-transformers-to-adversarial-examplesiccv2021">On the Robustness of Vision Transformers to Adversarial Examples（ICCV2021）</h2>
-<p>代码链接：https://github.com/MetaMain/ViTRobust</p>
+        <h2 id="On-the-Robustness-of-Vision-Transformers-to-Adversarial-Examples（ICCV2021）"><a href="#On-the-Robustness-of-Vision-Transformers-to-Adversarial-Examples（ICCV2021）" class="headerlink" title="On the Robustness of Vision Transformers to Adversarial Examples（ICCV2021）"></a>On the Robustness of Vision Transformers to Adversarial Examples（ICCV2021）</h2><p>代码链接：<a target="_blank" rel="noopener" href="https://github.com/MetaMain/ViTRobust">https://github.com/MetaMain/ViTRobust</a></p>
 <p>本文研究了ViT鲁棒性，迁移安全性研究分为3点：</p>
 <ul>
 <li>在白盒和黑盒攻击场景下测试 transformer 鲁棒性</li>
 <li>对抗样本很难从 CNN 迁移到 transformer，基于这一发现分析 CNN 和 transformer 简单的集成防御的安全性。</li>
 <li>提出一种 self-attention blended gradient attack(SAGA)，简单集成防御模型对于白盒攻击时不安全的，在黑盒对抗攻击下，作者指出集成防御模型可以在不牺牲准确率的情况下，达到较好的鲁棒性。</li>
 </ul>
-<h3 id="vision-transformer白盒攻击">Vision Transformer白盒攻击</h3>
-<p>攻击方法：测试6种不同的白盒攻击方法：FGSM，MIN，PGD，APGD(Auto Projected Gradient Descent[<a href="#%5B1%5D">1</a>])，C&amp;W，当梯度masking或者梯度混淆出现时白盒攻击失败，Backward Pass Differentiable Approximation (BPDA)[<a href="#%5B2%5D">2</a>]，解决上述问题。</p>
+<h3 id="Vision-Transformer白盒攻击"><a href="#Vision-Transformer白盒攻击" class="headerlink" title="Vision Transformer白盒攻击"></a>Vision Transformer白盒攻击</h3><p>攻击方法：测试6种不同的白盒攻击方法：FGSM，MIN，PGD，APGD(Auto Projected Gradient Descent[<a href="#[1]">1</a>])，C&amp;W，当梯度masking或者梯度混淆出现时白盒攻击失败，Backward Pass Differentiable Approximation (BPDA)[<a href="#[2]">2</a>]，解决上述问题。</p>
 <p>分类模型：ViT-B-32，ViT-B-16，ViT-L-16，ViT-R50，B代表模型复杂度，B模型有12层，L模型有24层。Big Transfer Models：BiT-M-R50 和 BiT-M-R101x3，ResNet-56 和ResNet-164，对于CIFAR-10 和 CIFAR-100，攻击8个模型，ViT-B-32，ViT-B-16，ViT-L-16，ViT-R50，BiT-M-R50，BiT-M-R101x3，ResNet-56 和 ResNet-164，对于ImageNet，攻击7个模型：ViT-B-16，ViT-L-16（图片大小224），ViT-L-16 (图片大小512)，BiT-M-R50，BiT-MR152x4，ResNet-50 和 ResNet-152。</p>
 <p>实验结果：</p>
 <p>表一</p>
 <p><img src="https://s2.loli.net/2022/04/21/br6u7qShJBWAIMZ.png" alt="image-20220421204201334" style="zoom:80%;"></p>
 <p>ViT对白盒攻击没有鲁棒性，表中数值代表对抗样本分类准确率，Acc代表这个模型干净样本准确率。</p>
-<h3 id="vit迁移性研究">ViT迁移性研究</h3>
-<p>表二</p>
-<figure>
-<img src="https://s2.loli.net/2022/04/21/VaTbv5BQM72hqzn.png" alt="image-20220421205559121"><figcaption aria-hidden="true">image-20220421205559121</figcaption>
-</figure>
+<h3 id="ViT迁移性研究"><a href="#ViT迁移性研究" class="headerlink" title="ViT迁移性研究"></a>ViT迁移性研究</h3><p>表二</p>
+<p><img src="https://s2.loli.net/2022/04/21/VaTbv5BQM72hqzn.png" alt="image-20220421205559121"></p>
 <p>表中每个数据取几种攻击方法最高迁移率。</p>
-<h3 id="saga">SAGA</h3>
-<p>原文：</p>
+<h3 id="SAGA"><a href="#SAGA" class="headerlink" title="SAGA"></a>SAGA</h3><p>原文：</p>
 <p>Instead of focusing completely on optimizing over one of the models, SAGA focuses on breaking multiple models at once.</p>
-<p>攻击目标：Vision Transformers集合<span class="math inline">\(V\)</span>，CNN集合<span class="math inline">\(K\)</span>，在扰动<span class="math inline">\(\epsilon\)</span>边界条件下使<span class="math inline">\(V\)</span>和<span class="math inline">\(K\)</span>所有成员都错分。 <span class="math display">\[
-x_{a d v}^{(i+1)}=x_{a d v}^{(i)}+\epsilon_{s} * \operatorname{sign}\left(G_{b l e n d}\left(x_{a d v}^{(i)}\right)\right)
-\]</span></p>
-<p><span class="math display">\[
-G_{b l e n d}\left(x_{a d v}^{(i)}\right)=\sum_{k \in K} \alpha_{k} \frac{\partial L_{k}}{\partial x_{a d v}^{(i)}}+\sum_{v \in V} \alpha_{v} \phi_{v} \odot \frac{\partial L_{v}}{\partial x_{a d v}^{(i)}}
-\]</span></p>
-<p><span class="math inline">\(\phi_{v}\)</span> 是<span class="math inline">\(v^{th}\)</span> transformer 的自注意力图，用 attention rollout [<a href="#%5B3%5D">3</a>]计算如下 <span class="math display">\[
-\phi_{v}=\left(\prod_{l=1}^{n_{l}}\left[\sum_{i=1}^{n_{h}}\left(0.5 W_{l, i}^{(a t t)}+0.5 I\right)\right]\right)
-\]</span> <span class="math inline">\(n_h\)</span> 是每层attention heads个数，<span class="math inline">\(n_l\)</span> 是注意力层数，<span class="math inline">\(W_{l,i}^{(att)}\)</span>是每个attention heads注意力权重矩阵，<span class="math inline">\(I\)</span>是恒等矩阵，<span class="math inline">\(x\)</span>是输入图像，这个公式考虑到注意力从transformer 每一层流动到下一层，包括跳跃链接的影响。平均来自同一层内不同attention heads的注意力值，注意力值在不同层之间递归地相乘。</p>
+<p>攻击目标：Vision Transformers集合$V$，CNN集合$K$，在扰动$\epsilon$边界条件下使$V$和$K$所有成员都错分。</p>
+<script type="math/tex; mode=display">
+x_{a d v}^{(i+1)}=x_{a d v}^{(i)}+\epsilon_{s} * \operatorname{sign}\left(G_{b l e n d}\left(x_{a d v}^{(i)}\right)\right)</script><script type="math/tex; mode=display">
+G_{b l e n d}\left(x_{a d v}^{(i)}\right)=\sum_{k \in K} \alpha_{k} \frac{\partial L_{k}}{\partial x_{a d v}^{(i)}}+\sum_{v \in V} \alpha_{v} \phi_{v} \odot \frac{\partial L_{v}}{\partial x_{a d v}^{(i)}}</script><p>$\phi_{v}$ 是$v^{th}$ transformer 的自注意力图，用 attention rollout [<a href="#[3]">3</a>]计算如下</p>
+<script type="math/tex; mode=display">
+\phi_{v}=\left(\prod_{l=1}^{n_{l}}\left[\sum_{i=1}^{n_{h}}\left(0.5 W_{l, i}^{(a t t)}+0.5 I\right)\right]\right)</script><p>$n_h$ 是每层attention heads个数，$n_l$ 是注意力层数，$W_{l,i}^{(att)}$是每个attention heads注意力权重矩阵，$I$是恒等矩阵，$x$是输入图像，这个公式考虑到注意力从transformer 每一层流动到下一层，包括跳跃链接的影响。平均来自同一层内不同attention heads的注意力值，注意力值在不同层之间递归地相乘。</p>
 <p>实验结果：</p>
-<figure>
-<img src="https://s2.loli.net/2022/04/22/1h7Xl5Se4IvuyCB.png" alt="image-20220422223042259"><figcaption aria-hidden="true">image-20220422223042259</figcaption>
-</figure>
+<p><img src="https://s2.loli.net/2022/04/22/1h7Xl5Se4IvuyCB.png" alt="image-20220422223042259"></p>
 <p>对Vision Transformers 和 Big Transfer Models简单集成的攻击，使用1000张正确分类的图片，</p>
 <p>basic attack 是没有权重参数和自注意力的梯度的组合，SAGA攻击的贡献在于证明了Vision Transformers 和 Big Transfer Models简单集成对于白盒攻击是不安全的。SAGA攻击优于其他两种攻击。</p>
-<h3 id="黑盒安全性和迁移性">黑盒安全性和迁移性</h3>
-<p>测试了 RayS attack[<a href="#%5B4%5D">4</a>] 和 Adaptive Black-Box Attack[<a href="#%5B5%5D">5</a>] 的安全性，最大查询次数10000，对于 Adaptive Black-Box Attack，攻击者可以获得全部训练数据，synthetic model 为 ViTB-32。Vision Transformer 和 Big Transfer model 的简单集成大幅提高了安全性。</p>
-<figure>
-<img src="https://s2.loli.net/2022/04/23/FVqsLCM23wApUbS.png" alt="image-20220423185104889"><figcaption aria-hidden="true">image-20220423185104889</figcaption>
-</figure>
+<h3 id="黑盒安全性和迁移性"><a href="#黑盒安全性和迁移性" class="headerlink" title="黑盒安全性和迁移性"></a>黑盒安全性和迁移性</h3><p>测试了 RayS attack[<a href="#[4]">4</a>] 和 Adaptive Black-Box Attack[<a href="#[5]">5</a>] 的安全性，最大查询次数10000，对于 Adaptive Black-Box Attack，攻击者可以获得全部训练数据，synthetic model 为 ViTB-32。Vision Transformer 和 Big Transfer model 的简单集成大幅提高了安全性。</p>
+<p><img src="https://s2.loli.net/2022/04/23/FVqsLCM23wApUbS.png" alt="image-20220423185104889"></p>
 <p><span id="[1]">[1] Francesco Croce and Matthias Hein. Reliable evaluation of adversarial robustness with an ensemble of diverse parameter-free attacks. In International Conference on Machine Learning, pages 2206–2216. PMLR, 2020.</span></p>
 <p><span id="[2]">[2] Anish Athalye, Nicholas Carlini, and David Wagner. Obfuscated gradients give a false sense of security: Circumventing defenses to adversarial examples. In Proceedings of the 35th International Conference on Machine Learning, pages 274– 283, 2018.</span></p>
 <p><span id="[3]">[3] Samira Abnar and Willem Zuidema. Quantifying attention flow in transformers. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics, pages 4190–4197, 2020.</span></p>
@@ -437,7 +423,7 @@ G_{b l e n d}\left(x_{a d v}^{(i)}\right)=\sum_{k \in K} \alpha_{k} \frac{\parti
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#on-the-robustness-of-vision-transformers-to-adversarial-examplesiccv2021"><span class="nav-number">1.</span> <span class="nav-text">On the Robustness of Vision Transformers to Adversarial Examples（ICCV2021）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vision-transformer%E7%99%BD%E7%9B%92%E6%94%BB%E5%87%BB"><span class="nav-number">1.1.</span> <span class="nav-text">Vision Transformer白盒攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vit%E8%BF%81%E7%A7%BB%E6%80%A7%E7%A0%94%E7%A9%B6"><span class="nav-number">1.2.</span> <span class="nav-text">ViT迁移性研究</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#saga"><span class="nav-number">1.3.</span> <span class="nav-text">SAGA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BB%91%E7%9B%92%E5%AE%89%E5%85%A8%E6%80%A7%E5%92%8C%E8%BF%81%E7%A7%BB%E6%80%A7"><span class="nav-number">1.4.</span> <span class="nav-text">黑盒安全性和迁移性</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#On-the-Robustness-of-Vision-Transformers-to-Adversarial-Examples%EF%BC%88ICCV2021%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">On the Robustness of Vision Transformers to Adversarial Examples（ICCV2021）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vision-Transformer%E7%99%BD%E7%9B%92%E6%94%BB%E5%87%BB"><span class="nav-number">1.1.</span> <span class="nav-text">Vision Transformer白盒攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ViT%E8%BF%81%E7%A7%BB%E6%80%A7%E7%A0%94%E7%A9%B6"><span class="nav-number">1.2.</span> <span class="nav-text">ViT迁移性研究</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SAGA"><span class="nav-number">1.3.</span> <span class="nav-text">SAGA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BB%91%E7%9B%92%E5%AE%89%E5%85%A8%E6%80%A7%E5%92%8C%E8%BF%81%E7%A7%BB%E6%80%A7"><span class="nav-number">1.4.</span> <span class="nav-text">黑盒安全性和迁移性</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -515,13 +501,13 @@ G_{b l e n d}\left(x_{a d v}^{(i)}\right)=\sum_{k \in K} \alpha_{k} \frac{\parti
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">67k</span>
+    <span title="站点总字数">65k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:01</span>
+    <span title="站点阅读时长">59 分钟</span>
 </div>
 <!--
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
