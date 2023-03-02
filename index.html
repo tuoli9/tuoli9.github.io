@@ -188,6 +188,168 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tuoli9.github.io/posts/0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/%E7%A8%8B%E5%BA%8F%E5%96%B5.png">
+      <meta itemprop="name" content="Li tuo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Li's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/0/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-02-21 10:06:57" itemprop="dateCreated datePublished" datetime="2023-02-21T10:06:57+08:00">2023-02-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-02 15:33:06" itemprop="dateModified" datetime="2023-03-02T15:33:06+08:00">2023-03-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB/" itemprop="url" rel="index"><span itemprop="name">对抗攻击</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/posts/0/" class="post-meta-item leancloud_visitors" data-flag-title="" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>GAMA: Generative Adversarial Multi-Object Scene Attacks（NeurIPS 2022）</p>
+<p>代码：https://github.com/abhishekaich27/GAMA-pytorch</p>
+<h3 id="简介">简介</h3>
+<p>大多数制作对抗攻击的方法都集中在具有单一主导对象的场景上(例如，来自ImageNet的图像)。另一方面，自然场景包括多个语义相关的主导对象。因此，探索设计攻击策略是至关重要的，这些策略不仅仅局限于学习单对象场景或攻击单对象受害者分类器。由于生成模型固有的扰动对未知模型的强可转移性，本文提出了第一个使用生成模型进行多目标场景对抗性攻击的方法。为了表示输入场景中不同对象之间的关系，我们利用了开源预训练的视觉-语言模型CLIP(对比语言-图像预训练)，动机是利用语言空间和视觉空间中的编码语义。我们称这种攻击方法为生成对抗多目标攻击(GAMA)。GAMA演示了CLIP模型作为攻击者的工具的效用，为多目标场景训练强大的扰动生成器。使用联合图像-文本特征来训练生成器，我们表明GAMA可以制造有效的可转移扰动，以便在各种攻击设置中欺骗受害者分类器。例如，在攻击者的分类器架构和数据分布都与受害者不同的黑盒设置中，GAMA比最先进的生成方法多触发16%的错误分类率。</p>
+<p>本文提出的GAMA攻击使用CLIP模型来利用文本特征中编码的自然语言语义以及视觉特征(由于其联合图像-文本对齐属性)。与之前的工作不同，GAMA利用CLIP模型从约4亿张图像中提取的知识，最大限度地提高了扰动图像<span class="math inline">\(x_p\)</span>与干净图像<span class="math inline">\(x_c\)</span>计算的两种不同类型特征的特征差异：(1)从代理模型计算的<span class="math inline">\(x_c\)</span>特征，(2)从CLIP的图像编码器计算的<span class="math inline">\(x_c\)</span>特征。此外，GAMA还通过一个对比损失函数，通过使用CLIP的文本编码器的特征，指导<span class="math inline">\(x_p\)</span>包含与<span class="math inline">\(x_c\)</span>不同的特征。例如，在图1中，考虑一个干净的图像<span class="math inline">\(x_c\)</span>，对象为“沙发和瓶子”。使用CLIP的图像-文本对齐特性，我们估计在一些随机选择的候选(由虚线圈表示)中，$x_c <span class="math inline">\((具有文本特征\)</span>_c<span class="math inline">\()与文本提示“汽车和自行车”(文本特征\)</span>_p<span class="math inline">\()最不相似。GAMA使用从上下文一致的类创建的\)</span><em>p<span class="math inline">\(，在特征空间中将受扰动的\)</span>x_p<span class="math inline">\(与\)</span>x_c<span class="math inline">\(进行对比和移动。因为\)</span>G</em>()$被优化以创建来自两个不同图像特征的不同特征的扰动。这使得GAMA可以对看不见的受害者模型发起高度可转移的攻击。</p>
+<figure>
+<img src="https://s2.loli.net/2023/02/21/3VYISKEtupbTzRA.png" alt="image-20230221101857994"><figcaption aria-hidden="true">image-20230221101857994</figcaption>
+</figure>
+<h3 id="方法">方法</h3>
+<p>问题定义 从具有多个对象的图像训练分布训练一个模型<span class="math inline">\(\mathcal{G}\left(\cdot\right)\)</span>，假设我们可以访问一个源数据集<span class="math inline">\(\mathcal{D}\)</span>，它由来自<span class="math inline">\(C\)</span>个类的<span class="math inline">\(N\)</span>个训练样本组成，每个样本/图像可能由多个对象标签组成，即多标签图像。<span class="math inline">\(\mathcal{D}\)</span>中的每个第<span class="math inline">\(i\)</span>个样本表示为<span class="math inline">\(x^{\left(i\right)}\in\mathbb{R}^{H\times W\times T}\)</span> (高H，宽W，通道T)，包含标签<span class="math inline">\(y^{\left(i\right)}=[y_1^{(i)}，···，y_c^{(i)}]\in\mathcal{Y}⊆\{0,1\}^C\)</span>。更具体地说，如果样本<span class="math inline">\(x^{\left(i\right)}\)</span>与类别<span class="math inline">\(c\)</span>相关，<span class="math inline">\(y_c^{\left(i\right)}\)</span>表示在<span class="math inline">\(x^{\left(i\right)}\)</span>中存在一个来自类<span class="math inline">\(c\)</span>的对象。此外，我们可以使用一个在<span class="math inline">\(\mathcal{D}\)</span>上训练的代理多标签分类器，记为<span class="math inline">\(f(·)\)</span>，用于优化扰动发生器<span class="math inline">\(\mathcal{G}_\theta\left(\cdot\right)\)</span>的权值<span class="math inline">\(\theta\)</span>。</p>
+<p>在本文中一个预训练的CLIP被用作损失网络，使用CLIP的动机是利用其联合文本和图像匹配属性，并计算两种嵌入：从图像编码器中提取的干净图像嵌入和从文本编码器中提取的不同文本嵌入。目标是通过语言衍生来编码自然场景中多个对象之间的上下文关系。我们假设每张图像包含两个用于创建文本提示的共同出现类别，这主要是由于可用于多标签数据集的维<span class="math inline">\(C\times C\)</span>的共现矩阵的计算而受到限制。正如我们稍后将看到的，共现矩阵允许我们丢弃在现实场景中不会出现的类对。</p>
+<p>GAMA。在训练<span class="math inline">\(\mathcal{G}_\theta\left(\cdot\right)\)</span>之前，我们首先使用CLIP文本编码器<span class="math inline">\(\mathcal{T}\left(\cdot\right)\)</span>计算一个文本嵌入矩阵<span class="math inline">\(A_{txt}=[ρ_1，ρ_2，···，ρ_N]∈R^{N×K}\)</span>，<span class="math inline">\(ρ_N∈R^K\)</span>(后面会详细解释)。其中，<span class="math inline">\(K\)</span>为<span class="math inline">\(\mathcal{T}\left(\cdot\right)\)</span>输出的嵌入大小。在训练<span class="math inline">\(\mathcal{G}_\theta\left(\cdot\right)\)</span>期间，我们首先将干净的图像<span class="math inline">\(x\)</span>输入CLIP图像编码器<span class="math inline">\(\mathcal{I}(\cdot)\)</span>，并计算图像嵌入<span class="math inline">\(\rho_{img}=I\left(x\right)\in R^K\)</span>。接下来，从<span class="math inline">\(A_{txt}\)</span>中提取一个与<span class="math inline">\(\rho_{img}\)</span>相似度最小的特定向量<span class="math inline">\(\rho_{txt}\in R^K\)</span>。然后，我们用扰动投影算子<span class="math inline">\(\mathcal{P}(\cdot)\)</span>将x输入到<span class="math inline">\(\mathcal{G}_\theta\left(\cdot\right)\)</span>，得到<span class="math inline">\(x_\delta\)</span>，同时确保它在给定扰动<span class="math inline">\(\ell_\infty\)</span>约束下。然后将这些干净的和扰动的图像输入代理分类器<span class="math inline">\(f(·)\)</span>，在特定的第<span class="math inline">\(k\)</span>层提取<span class="math inline">\(k\)</span>维嵌入，分别用<span class="math inline">\(f_k\left(x\right)\)</span>和<span class="math inline">\(f_k\left(x_\delta\right)\)</span>表示。最后，使用上述四组嵌入(<span class="math inline">\(\rho_{txt}\)</span>，<span class="math inline">\(ρ_{img}\)</span>，<span class="math inline">\(f_k(x)\)</span>，<span class="math inline">\(f_k(x_δ)\)</span>)来计算基于对比学习的CLIP文本嵌入引导的损失<span class="math inline">\(\mathcal{L}_{txt}(ρ_{txt},f_k(x)，f_k(x_δ))\)</span>和基于回归学习的CLIP图像嵌入引导的损失<span class="math inline">\(\mathcal{L}_{\mathcal{img}}\left(\rho_{img},f_k\left(x_\delta\right)\right)\)</span>来计算最终目标<span class="math inline">\(\mathcal{L}\)</span>。我们还包括一个损失函数，进一步从替代分类器的角度最大化<span class="math inline">\(f_k\left(x\right)\)</span>和<span class="math inline">\(f_k\left(x_\delta\right)\)</span>之间的差异。这个损失<span class="math inline">\(\mathcal{L}\)</span>被最小化，以更新生成器<span class="math inline">\(\theta\)</span>的权值。整个GAMA算法如图2所示，并在算法1中进行了总结。下面讨论损失目标<span class="math inline">\(\mathcal{L}_{\mathcal{img}}\)</span>和<span class="math inline">\(\mathcal{L}_{\mathcal{txt}}\)</span> (文本嵌入矩阵<span class="math inline">\(A_{txt}\)</span>)的细节。</p>
+<figure>
+<img src="https://s2.loli.net/2023/02/21/TgtB7aGQ2wnzvKM.png" alt="image-20230221103914078"><figcaption aria-hidden="true">image-20230221103914078</figcaption>
+</figure>
+<figure>
+<img src="https://s2.loli.net/2023/02/21/FWmMoVA6vnYLxRb.png" alt="image-20230221103925115"><figcaption aria-hidden="true">image-20230221103925115</figcaption>
+</figure>
+<p>CLIP 文本嵌入引导损失<span class="math inline">\((\mathcal{L}_{\mathcal{t}xt})\)</span>。设<span class="math inline">\(z=f_k\left(x\right)\quad\hat{z}=f_k\left(x_\delta\right)\)</span>。CLIP框架固有地通过对比学习机制学习文本和视觉嵌入关联，限制输入图像的特征嵌入与其对应的语言描述尽可能相似。与CLIP的图像嵌入<span class="math inline">\(\rho_{img}\)</span>不同，CLIP的文本嵌入<span class="math inline">\(\rho_{txt}\)</span>可以让我们超越基于像素的特征。更具体地说，CLIP的视觉和语言对齐能力允许我们利用文本特征来制作可转移的图像扰动。因此，我们可以优化<span class="math inline">\(\mathcal{G}_\theta\left(\cdot\right)\)</span>来创建扰动图像<span class="math inline">\(x_\delta\)</span>，这些图像不遵循与干净图像对应的<span class="math inline">\(x\)</span>相同的文本嵌入对齐方式。为了引起这种文本错位，我们创建了一个嵌入的三重组，其中<span class="math inline">\(x_\delta\)</span>被推离<span class="math inline">\(z\)</span>，同时将其拉近与干净图像<span class="math inline">\(x\)</span>关联最少或相似的文本嵌入<span class="math inline">\(\rho_{txt}\)</span>。为了计算这个三重组，执行以下两个步骤。</p>
+<ul>
+<li>训练之前计算<span class="math inline">\(A_{txt}\)</span>。目标是创建一个文本嵌入的字典或矩阵，可以在优化<span class="math inline">\(\mathcal{G}_\theta\left(\cdot\right)\)</span>时用于检索<span class="math inline">\(\rho_{txt}\)</span>。首先，我们使用源分布类生成语言衍生物或文本提示。这意味着我们只需要知道<span class="math inline">\(\mathcal{D}\)</span>中所有可用的类别<span class="math inline">\(C\)</span>，而不需要知道它们与<span class="math inline">\(x\)</span>的具体关联。其次，假设每个干净的图像<span class="math inline">\(x\)</span>与两个类相关联，我们可以生成<span class="math inline">\(C^2\)</span>文本提示，并创建一个大小为<span class="math inline">\(C^2 \times k\)</span>的矩阵<span class="math inline">\(A_{txt}\)</span>。例如，如果<span class="math inline">\(\mathcal{D}\)</span>中存在类' cat '， ' dog '， ' person '和' boat '，然后可以创建文本提示，例如“一张照片描绘了猫和狗”或“一张照片描绘了人和船”(参见图1，从CLIP的“ViT-B/16”模型中使用Pascal-VOC的类提取了10个随机示例)。在这里，文本提示符下划线部分是所有文本提示符通用的推荐“前缀”。但是，这样的<span class="math inline">\(A_{txt}\)</span>可以包含由现实生活中不存在的类生成的提示符的嵌入，为了避免这种情况，我们利用对象共现矩阵<span class="math inline">\(\mathcal{O}\in R^{C\times C}\)</span>(二进制矩阵)来估计类之间的共现关系。从包含<span class="math inline">\(C\)</span>类的训练数据集中计算，<span class="math inline">\(\mathcal{O}\)</span>首先用只包含零的矩阵进行初始化。然后，如果<span class="math inline">\(y_i\)</span>和<span class="math inline">\(y_j\)</span>类的对象至少在一张图像中同时出现，则元<span class="math inline">\(\mathcal{O}_{ij} (\mathcal{O}\)</span>的第<span class="math inline">\(i\)</span>行和第<span class="math inline">\(j\)</span>列)设为1。本文使用[1]提供的<span class="math inline">\(\mathcal{O}\)</span>。使用这样的共现矩阵，我们只从一对根据<span class="math inline">\(\mathcal{O}\)</span>一起出现的类中创建文本提示。这得到了一个大小为<span class="math inline">\(A_{txt}\)</span>的文本嵌入矩阵，大小为<span class="math inline">\(\| O\|_0\times K\)</span>，其中<span class="math inline">\(\| O\| _0\)</span>表示总非零元素。</li>
+<li>​ 训练中计算<span class="math inline">\(\rho_{txt}\)</span>。CLIP的训练目标允许它将相关图像-文本对的嵌入与不匹配的图像-文本对相比推得更近。我们利用这个性质来计算最小相似的文本嵌入<span class="math inline">\(\rho_{txt}\)</span> w.r.t图像嵌入<span class="math inline">\(\rho_{img}\)</span>。在每个训练阶段，我们从<span class="math inline">\(A_{txt}\)</span>中随机抽取B个候选值<span class="math inline">\([ρ_1，ρ_2，····，ρ_B]\)</span>，并对<span class="math inline">\(\rho_{txt}\)</span>进行如下估计：</li>
+</ul>
+<figure>
+<img src="https://s2.loli.net/2023/02/21/czjX3Awf7qrd8Lh.png" alt="image-20230221104455104"><figcaption aria-hidden="true">image-20230221104455104</figcaption>
+</figure>
+<p><span class="math inline">\(cs\left(\cdot\right)\)</span>代表余弦相似度，我们强制<span class="math inline">\(\hat{z}\)</span>和<span class="math inline">\(\rho_{txt}\)</span>对齐，和<span class="math inline">\(z\)</span>远离。</p>
+<figure>
+<img src="https://s2.loli.net/2023/02/21/kNOdR7TsQjWPl5w.png" alt="image-20230221104508674"><figcaption aria-hidden="true">image-20230221104508674</figcaption>
+</figure>
+<p>其中<span class="math inline">\(\alpha&gt;0，\left[v\right]_+=max\left(0,v\right)\)</span></p>
+<p>CLIP 图像嵌入引导损失<span class="math inline">\((\mathcal{L}_{img})\)</span></p>
+<p>由于CLIP对来自不同类别的约4亿张互联网检索图像的学习，以及其在不同分布上的零样本图像识别性能，我们认为其图像编码器<span class="math inline">\(\mathcal{I}(·)\)</span>输出的嵌入捕获了具有明显广义视觉特征的输入图像属性。GAMA利用这一点为我们的优势，并最大限度地提高了<span class="math inline">\(\hat{z}\)</span>和CLIP的图像编码器对干净图像<span class="math inline">\(\rho_{img}\)</span>的嵌入之间的差异。这样一个目标的目的是利用从·计算的广义特征来增加<span class="math inline">\(\mathcal{G}_\theta\left(\cdot\right)\)</span>扰动的可转移度。用基于回归的的损失函数描述如下:</p>
+<figure>
+<img src="https://s2.loli.net/2023/02/21/kJaMELitA9TOZf5.png" alt="image-20230221105056309"><figcaption aria-hidden="true">image-20230221105056309</figcaption>
+</figure>
+<p>最终学习目标<span class="math inline">\((\mathcal{L})\)</span>。</p>
+<figure>
+<img src="https://s2.loli.net/2023/02/21/38NQBqLAeoaygR4.png" alt="image-20230221105108607"><figcaption aria-hidden="true">image-20230221105108607</figcaption>
+</figure>
+<p><span class="math inline">\(\mathcal{L}_{surr}\)</span>从替代模型<span class="math inline">\(f\left(\cdot\right)\)</span>感知机最大化<span class="math inline">\(x\)</span>和<span class="math inline">\(x_\delta\)</span>，<span class="math inline">\(\mathcal{L}_{img}\)</span>和<span class="math inline">\(\mathcal{L}_{txt}\)</span>用CLIP提高迁移性。</p>
+<h3 id="实验结果">实验结果</h3>
+<figure>
+<img src="https://s2.loli.net/2023/02/21/PQt4cSUGzuOk9Xn.jpg" alt="img"><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<figure>
+<img src="https://s2.loli.net/2023/02/21/HgSxb1Zq5sILliA.jpg" alt="img"><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<figure>
+<img src="https://s2.loli.net/2023/02/21/YkOFrvwefc6ZNHq.jpg" alt="img"><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<h3 id="总结">总结</h3>
+<p>将CILP引入对抗样本生成器的过程，从文本的角度编码多物体之间的关系。</p>
+<p>[1] Zhao-Min Chen, Xiu-Shen Wei, Peng Wang, and Yanwen Guo. Multi-label image recognition with graph convolutional networks. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition, pages 5177–5186, 2019.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://tuoli9.github.io/posts/f707/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1285,129 +1447,6 @@ G_{b l e n d}\left(x_{a d v}^{(i)}\right)=\sum_{k \in K} \alpha_{k} \frac{\parti
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://tuoli9.github.io/posts/cc97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/%E7%A8%8B%E5%BA%8F%E5%96%B5.png">
-      <meta itemprop="name" content="Li tuo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Li's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/cc97/" class="post-title-link" itemprop="url">Improving the Transferability of Targeted Adversarial Examples through Object-Based Diverse Input</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-02-10 14:41:35" itemprop="dateCreated datePublished" datetime="2023-02-10T14:41:35+08:00">2023-02-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-02-16 22:30:16" itemprop="dateModified" datetime="2023-02-16T22:30:16+08:00">2023-02-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB/" itemprop="url" rel="index"><span itemprop="name">对抗攻击</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB/%E7%9B%AE%E6%A0%87%E6%94%BB%E5%87%BB/" itemprop="url" rel="index"><span itemprop="name">目标攻击</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/posts/cc97/" class="post-meta-item leancloud_visitors" data-flag-title="Improving the Transferability of Targeted Adversarial Examples through Object-Based Diverse Input" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/posts/cc97/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/cc97/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Improving the Transferability of Targeted Adversarial Examples through Object-Based Diverse Input (CVPR2022)</p>
-<p>代码：https://github.com/dreamflake/ODI</p>
-<h2 id="解决的问题">解决的问题</h2>
-<p>本文要解决目标攻击迁移效果差的文体。数据增广是缓解迁移攻击对抗样本对源模型过拟合的一种方法，之前的工作使用简单的数据变换比如 resize ，限制了输入的多样性。本文的研究动机在于人类视觉在三维物体上的图像的卓越感知能力，如果一个图像足够清晰，人类可以在多个观察条件下识别物体内容，如果一个对抗样本对于目标网络看起来像目标类别，这个网络也同样将这个渲染成3D的物体识别为目标类。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/cc97/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1479,7 +1518,7 @@ G_{b l e n d}\left(x_{a d v}^{(i)}\right)=\sum_{k \in K} \alpha_{k} \frac{\parti
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1541,13 +1580,13 @@ G_{b l e n d}\left(x_{a d v}^{(i)}\right)=\sum_{k \in K} \alpha_{k} \frac{\parti
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">67k</span>
+    <span title="站点总字数">72k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:01</span>
+    <span title="站点阅读时长">1:06</span>
 </div>
 <!--
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
