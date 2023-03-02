@@ -265,7 +265,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2k</span>
+              <span>2.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -285,27 +285,32 @@
 
       
         <p>Towards Lightweight Black-Box Attacks Against Deep （NeurIPS 2022）</p>
-<p>代码：<a target="_blank" rel="noopener" href="https://github.com/sunch-ustc/Error_TransFormer/tree/ETF">https://github.com/sunch-ustc/Error_TransFormer/tree/ETF</a></p>
+<p>代码：https://github.com/sunch-ustc/Error_TransFormer/tree/ETF</p>
 <span id="more"></span>
 <p>本文主要考虑在严格黑盒场景下的迁移攻击，黑盒模型的训练数据未知，只能获取少量测试数据。作者发现攻击一个只用少量测试数据训练的替代模型的浅层可以生成强有力的对抗样本，作者把他称为lightweight black-box attacks。促进轻量级攻击的主要挑战是减轻浅层近似误差造成的不利影响。由于可用样本很少，很难减小近似误差，作者提出了用于轻量级攻击的误差变换器(error TransFormer, ETF)。ETF将参数空间中的近似误差转化为特征空间中的扰动，并通过扰动特征来缓解误差。在实验中，即使每个类别只有1个样本，轻量级黑盒攻击实现的攻击成功率仅比使用完整训练数据的黑盒攻击低3%左右。</p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本片也属于no-box攻击，有研究表明[<a href="#[1]">1</a>]少量数据无监督训练的模型浅层特征提取效果和有监督大规模训练相似，在数据量有限的情况下，利用浅模型特征进行攻击是一种有效的方法。</p>
-<h3 id="轻量化替代模型"><a href="#轻量化替代模型" class="headerlink" title="轻量化替代模型"></a>轻量化替代模型</h3><p>假定用于生成对抗样本的干净样本的标签已知，轻量化替代模型可以以一种有监督的方式训练得到：</p>
+<h2 id="方法">方法</h2>
+<p>本片也属于no-box攻击，有研究表明[<a href="#%5B1%5D">1</a>]少量数据无监督训练的模型浅层特征提取效果和有监督大规模训练相似，在数据量有限的情况下，利用浅模型特征进行攻击是一种有效的方法。</p>
+<h3 id="轻量化替代模型">轻量化替代模型</h3>
+<p>假定用于生成对抗样本的干净样本的标签已知，轻量化替代模型可以以一种有监督的方式训练得到：</p>
 <p><img src="https://s2.loli.net/2023/02/16/MrnU9zQvmikO6hL.png" style="zoom: 67%;"></p>
-<p>$l(\cdot)$通常是交叉熵。在黑盒攻击中，攻击者只利用dnn的浅层，可以以对比的方式训练轻量级代理模型，其中监督信息非必要：</p>
+<p><span class="math inline">\(l(\cdot)\)</span>通常是交叉熵。在黑盒攻击中，攻击者只利用dnn的浅层，可以以对比的方式训练轻量级代理模型，其中监督信息非必要：</p>
 <p><img src="https://s2.loli.net/2023/02/16/pvbxEDFCQeT6KjM.png" style="zoom:67%;"></p>
-<p>其中$\sigma$是一种相似性度量，$\mathcal{T}$是数据增广，$\hat{D} \backslash x$表示$x$从$\hat{D}$中移除。</p>
-<h3 id="特征空间扰动"><a href="#特征空间扰动" class="headerlink" title="特征空间扰动"></a>特征空间扰动</h3><p>给定原始样本$x_s$，添加扰动，使其特征和引导样本$x_g$相似，原始样本和引导样本标签不同。</p>
+<p>其中<span class="math inline">\(\sigma\)</span>是一种相似性度量，<span class="math inline">\(\mathcal{T}\)</span>是数据增广，<span class="math inline">\(\hat{D} \backslash x\)</span>表示<span class="math inline">\(x\)</span>从<span class="math inline">\(\hat{D}\)</span>中移除。</p>
+<h3 id="特征空间扰动">特征空间扰动</h3>
+<p>给定原始样本<span class="math inline">\(x_s\)</span>，添加扰动，使其特征和引导样本<span class="math inline">\(x_g\)</span>相似，原始样本和引导样本标签不同。</p>
 <p><img src="https://s2.loli.net/2023/02/16/fJb3qXYF4aPySVT.png"></p>
-<h3 id="误差变换"><a href="#误差变换" class="headerlink" title="误差变换"></a>误差变换</h3><p>虽然将特征空间攻击应用于轻量替代模型可以生成可转移的对抗样本，但近似误差会对攻击造成不利影响。原因是替代模型与目标模型之间存在较大的差异，降低了攻击成功率。因此，使用轻量级攻击的主要挑战是减轻近似误差造成的不利影响。然而，在no-box威胁模型中，可用的样本通常是有限的，这使得其难以减小近似误差。</p>
+<h3 id="误差变换">误差变换</h3>
+<p>虽然将特征空间攻击应用于轻量替代模型可以生成可转移的对抗样本，但近似误差会对攻击造成不利影响。原因是替代模型与目标模型之间存在较大的差异，降低了攻击成功率。因此，使用轻量级攻击的主要挑战是减轻近似误差造成的不利影响。然而，在no-box威胁模型中，可用的样本通常是有限的，这使得其难以减小近似误差。</p>
 <p>为了解决这一难题，作者提出将参数空间的近似误差转换为特征空间的扰动。具体来说，我们很少知道哪些扰动可以(从替代模型)指向目标模型，这使得减轻权重空间中的近似误差具有挑战性。相比之下，我们有一个先验，具有不同标签的样本应该有可区分的表示。因此，我们可以利用这种先验知识来选择特征空间中的首选扰动，即，我们更喜欢可以使具有不同标签的样本表示难以区分的扰动。同样，定义“坏”扰动也很简单，这引出了最小—最大优化的设计，以确定“最坏”模型。因此，将参数空间和特征空间连接起来，可以减轻近似误差带来的不利影响。为了连接两者，引入以下等式:</p>
-<p><img src="https://s2.loli.net/2023/02/16/dJzVEalDjRFHOeh.png" alt=""></p>
-<p>$\omega^1$模型$\varphi$第一层的参数，A是一个扰动$\omega^1$的变换矩阵，$\{\omega^1+\omega^1 A\}\cup\{\omega \backslash \omega^1\}$表示第一层的参数被扰动，其它层的参数保持不变，根据上面公式，可以将参数空间的扰动转换为数据空间，$\varphi(x;\{\omega^1+\omega^1A\}\cup\{\omega \backslash \omega^1\})=\varphi(x+Ax;\omega)$。</p>
-<p>由上面分析，现在可以将替代模型和目标模型第一层参数的差异变换，以第一层为例，$\omega_t$代表目标模型的参数，$\omega_t^1$使它第一层参数，其它参数和替代模型一致。假设存在一个变换矩阵A（这条假设的讨论在附录E），用于替代模型第一层的参数$\omega_t^1=\omega^1+\omega^1 A$，有如下结果：</p>
-<p><img src="https://s2.loli.net/2023/02/16/GZ8mInMrON3Rhlg.png" alt=""></p>
+<p><img src="https://s2.loli.net/2023/02/16/dJzVEalDjRFHOeh.png"></p>
+<p><span class="math inline">\(\omega^1\)</span>模型<span class="math inline">\(\varphi\)</span>第一层的参数，A是一个扰动<span class="math inline">\(\omega^1\)</span>的变换矩阵，<span class="math inline">\(\{\omega^1+\omega^1 A\}\cup\{\omega \backslash \omega^1\}\)</span>表示第一层的参数被扰动，其它层的参数保持不变，根据上面公式，可以将参数空间的扰动转换为数据空间，<span class="math inline">\(\varphi(x;\{\omega^1+\omega^1A\}\cup\{\omega \backslash \omega^1\})=\varphi(x+Ax;\omega)\)</span>。</p>
+<p>由上面分析，现在可以将替代模型和目标模型第一层参数的差异变换，以第一层为例，<span class="math inline">\(\omega_t\)</span>代表目标模型的参数，<span class="math inline">\(\omega_t^1\)</span>使它第一层参数，其它参数和替代模型一致。假设存在一个变换矩阵A（这条假设的讨论在附录E），用于替代模型第一层的参数<span class="math inline">\(\omega_t^1=\omega^1+\omega^1 A\)</span>，有如下结果：</p>
+<p><img src="https://s2.loli.net/2023/02/16/GZ8mInMrON3Rhlg.png"></p>
 <p>公式5中的恒等式表明，我们可以在数据空间中找到一个扰动，以缓解这两个模型之间第一层参数的差异。在变换的基础上，我们可以将最坏的近似误差转换为数据空间中的最坏扰动。因此，我们可以采用最小-最大策略，通过在最坏扰动下生成对抗性样本来减轻近似误差的不利影响。因此，使用ETF的轻量级黑盒攻击生成的对抗样本如下:</p>
-<p><img src="https://s2.loli.net/2023/02/16/i7OtJQDMhqbIxAH.png" alt=""></p>
-<p>$\Delta_g$和$\Delta_s$是数据空间扰动，用于缓解参数空间近似误差，$x^{\prime}$是被扰动的原始样本。给定一个扰动对抗样本，通过在特征空间中产生扰动来解决内部最大化问题。这一步用于减轻近似误差。外部最小化问题是通过在输入空间中寻找对抗扰动来解决，与对抗样本生成相同。在迭代生成扰动后，通过攻击具有减小近似误差的模型来生成对抗示例。</p>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p><img src="https://s2.loli.net/2023/02/16/6lNxfyagQFitYVn.png" alt=""></p>
+<p><img src="https://s2.loli.net/2023/02/16/i7OtJQDMhqbIxAH.png"></p>
+<p><span class="math inline">\(\Delta_g\)</span>和<span class="math inline">\(\Delta_s\)</span>是数据空间扰动，用于缓解参数空间近似误差，<span class="math inline">\(x^{\prime}\)</span>是被扰动的原始样本。给定一个扰动对抗样本，通过在特征空间中产生扰动来解决内部最大化问题。这一步用于减轻近似误差。外部最小化问题是通过在输入空间中寻找对抗扰动来解决，与对抗样本生成相同。在迭代生成扰动后，通过攻击具有减小近似误差的模型来生成对抗示例。</p>
+<h2 id="实验">实验</h2>
+<p><img src="https://s2.loli.net/2023/02/16/6lNxfyagQFitYVn.png"></p>
 <p>轻量化模型作为替代模型可以得到与所有数据训练的模型相当的效果，用整个轻量化模型得到的对抗样本迁移性并不高，证明了所提方法的有效性。但表一中个人感觉应该加上用所有数据训练的模型使用ETF生成对抗样本的迁移性，毕竟用所有数据训练的模型和目标模型还是存在差异。</p>
 
     </div>
@@ -483,13 +488,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">65k</span>
+    <span title="站点总字数">67k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">59 分钟</span>
+    <span title="站点阅读时长">1:01</span>
 </div>
 <!--
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

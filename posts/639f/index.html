@@ -23,12 +23,12 @@
     var CONFIG = {"hostname":"tuoli9.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="A Little Robustness Goes a LongWay: Leveraging Robust Features for Targeted Transfer Attacks（NIPS2021） 代码：尚未开源 提出的问题之前的研究指出目标攻击很难迁移[1]，之前对迁移对抗样本的研究主要集中在改进生成成功的图像扰动的优化方法，本文研究了用于构建对抗样本的源神经网络对样本迁移的影响。本文提">
+  <meta name="description" content="A Little Robustness Goes a LongWay: Leveraging Robust Features for Targeted Transfer Attacks（NIPS2021） 代码：尚未开源 提出的问题 之前的研究指出目标攻击很难迁移[1]，之前对迁移对抗样本的研究主要集中在改进生成成功的图像扰动的优化方法，本文研究了用于构建对抗样本的源神经网络对样本迁移的影响。本文">
 <meta property="og:type" content="article">
 <meta property="og:title" content="A Little Robustness Goes a LongWay：Leveraging Robust Features for Targeted Transfer Attacks">
 <meta property="og:url" content="https://tuoli9.github.io/posts/639f/index.html">
 <meta property="og:site_name" content="Li&#39;s Blog">
-<meta property="og:description" content="A Little Robustness Goes a LongWay: Leveraging Robust Features for Targeted Transfer Attacks（NIPS2021） 代码：尚未开源 提出的问题之前的研究指出目标攻击很难迁移[1]，之前对迁移对抗样本的研究主要集中在改进生成成功的图像扰动的优化方法，本文研究了用于构建对抗样本的源神经网络对样本迁移的影响。本文提">
+<meta property="og:description" content="A Little Robustness Goes a LongWay: Leveraging Robust Features for Targeted Transfer Attacks（NIPS2021） 代码：尚未开源 提出的问题 之前的研究指出目标攻击很难迁移[1]，之前对迁移对抗样本的研究主要集中在改进生成成功的图像扰动的优化方法，本文研究了用于构建对抗样本的源神经网络对样本迁移的影响。本文">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2022/03/30/tWEpf2j1cvKS3aO.png">
 <meta property="og:image" content="https://s2.loli.net/2022/03/30/RGTV7ivhgqec6xY.png">
@@ -276,14 +276,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.8k</span>
+              <span>3.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -297,9 +297,10 @@
       
         <p>A Little Robustness Goes a LongWay: Leveraging Robust Features for Targeted Transfer Attacks（NIPS2021）</p>
 <p>代码：尚未开源</p>
-<h2 id="提出的问题"><a href="#提出的问题" class="headerlink" title="提出的问题"></a>提出的问题</h2><p>之前的研究指出目标攻击很难迁移[<a href="#[1]">1</a>]，之前对迁移对抗样本的研究主要集中在改进生成成功的图像扰动的优化方法，本文研究了用于构建对抗样本的源神经网络对样本迁移的影响。本文提出略微鲁棒的CNN—被训练成对小的对抗扰动具有鲁棒性的网络，可以被利用来大幅提高目标对抗样本对不同架构的可迁移性，针对一个稍微鲁棒的CNN构建的目标对抗样本可以迁移到 transformer。同时每个单独的略微鲁棒的神经网络都能有效地将特征转移到所有测试的非鲁棒网络，这表明略微鲁棒的网络依赖于与每个非鲁棒网络重叠的特征，尽管任何特定的非鲁棒网络的特征并没有与所有其他非鲁棒网络严重重叠。</p>
+<h2 id="提出的问题">提出的问题</h2>
+<p>之前的研究指出目标攻击很难迁移[<a href="#%5B1%5D">1</a>]，之前对迁移对抗样本的研究主要集中在改进生成成功的图像扰动的优化方法，本文研究了用于构建对抗样本的源神经网络对样本迁移的影响。本文提出略微鲁棒的CNN—被训练成对小的对抗扰动具有鲁棒性的网络，可以被利用来大幅提高目标对抗样本对不同架构的可迁移性，针对一个稍微鲁棒的CNN构建的目标对抗样本可以迁移到 transformer。同时每个单独的略微鲁棒的神经网络都能有效地将特征转移到所有测试的非鲁棒网络，这表明略微鲁棒的网络依赖于与每个非鲁棒网络重叠的特征，尽管任何特定的非鲁棒网络的特征并没有与所有其他非鲁棒网络严重重叠。</p>
 <span id="more"></span>
-<p>此外，本文利用对抗迁移技术来检验哪些特征是由神经网络学习的。根据先前的工作[<a href="#[2]">2</a>]，本文发现，在从非鲁棒（标准）到高鲁棒的分类器的频谱上，那些只有轻微鲁棒的分类器生成出最可能迁移的 representation-targeted 对抗样本，这表明轻微鲁棒的网络的特征与每个被测试的目标网络有很大的重叠。这可以解释为什么略微鲁棒的网络会产生更多可迁移对抗攻击，并且对于下游的迁移学习任务有更好的权重初始化。</p>
+<p>此外，本文利用对抗迁移技术来检验哪些特征是由神经网络学习的。根据先前的工作[<a href="#%5B2%5D">2</a>]，本文发现，在从非鲁棒（标准）到高鲁棒的分类器的频谱上，那些只有轻微鲁棒的分类器生成出最可能迁移的 representation-targeted 对抗样本，这表明轻微鲁棒的网络的特征与每个被测试的目标网络有很大的重叠。这可以解释为什么略微鲁棒的网络会产生更多可迁移对抗攻击，并且对于下游的迁移学习任务有更好的权重初始化。</p>
 <p>主要贡献：</p>
 <ul>
 <li>相对于标准（非鲁棒）网络产生的对抗样本，针对轻微鲁棒的CNN产生的对抗样本更容易迁移，这种迁移不仅扩展到其他CNN，也扩展到 transformer 结构。</li>
@@ -307,33 +308,39 @@
 <li>研究了对抗损失函数在产生可迁移的对抗样本中的作用。</li>
 <li>非鲁棒的神经网络没有表现出实质性的特征（表征）可迁移性，而稍微鲁棒的神经网络则表现出可迁移性。这有助于解释为什么略微鲁棒的神经网络能使目标对抗样本的可迁移性更强。</li>
 </ul>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><h3 id="Transferability-of-Adversarial-Examples"><a href="#Transferability-of-Adversarial-Examples" class="headerlink" title="Transferability of Adversarial Examples"></a>Transferability of Adversarial Examples</h3><p>从 ImageNet validation 随机挑选1000张图片，每张图片类别不同，随机为每张图片挑选目标类，保证目标类和原始类别不同。用TMDI-FGSM 方法迭代300步生成对抗样本。实验用到的 CNN 模型有：Xception，VGG，ResNet，Inception，MobileNet，DenseNet，NASNetLarge，EfficientNet，transformer 模型有：ViT，LeViT，CCT，CLIP</p>
-<h4 id="Transferability-to-Convolutional-Network-Classifiers"><a href="#Transferability-to-Convolutional-Network-Classifiers" class="headerlink" title="Transferability to Convolutional Network Classifiers"></a>Transferability to Convolutional Network Classifiers</h4><p>针对具有小的鲁棒性参数的源网络进行优化的对抗样本，与非鲁棒性（$\epsilon = 0$）网络的成功率相比（图<a href="#image-20220330163245061">1</a>）,在目标和非目标设定中都提高了迁移成功率。成功率的峰值对于每一个CNN目标网络大致相同（$\epsilon = 0.1$）</p>
-<p><img src="https://s2.loli.net/2022/03/30/tWEpf2j1cvKS3aO.png" alt=""></p>
-<p>图 1：针对 ImageNet 分类器的目标迁移攻击成功率，使用相对于 “鲁棒的 ResNet50 源模型优化的对抗样本。成功率是指被目标网络分分类为目标类的对抗样本的比例。值越高攻击越成功。Baseline 是指未受干扰的图像被分类为目标类别的比率。(最好以彩色查看）。</p>
-<p>当 $\epsilon$ 超过最佳值，攻击成功率会快速下降，我们假设，当源网络的鲁棒性增加到一定程度后，网络开始完全忽略（非鲁棒性）目标网络所依赖的许多非鲁棒性特征，因此攻击不会修改这些特征，从而降低攻击的成功率。</p>
-<h4 id="Transformer-Based-Classifiers"><a href="#Transformer-Based-Classifiers" class="headerlink" title="Transformer-Based Classifiers"></a>Transformer-Based Classifiers</h4><p>以前的研究中使用非鲁棒源网络的方法在使用卷积源模型构建目标的可迁移的对抗样本时几乎完全无效（表1）。这表明，基于 transformer 的模型和非鲁棒卷积模型所学习的特征在很大程度上是不同的。</p>
+<h2 id="实验">实验</h2>
+<h3 id="transferability-of-adversarial-examples">Transferability of Adversarial Examples</h3>
+<p>从 ImageNet validation 随机挑选1000张图片，每张图片类别不同，随机为每张图片挑选目标类，保证目标类和原始类别不同。用TMDI-FGSM 方法迭代300步生成对抗样本。实验用到的 CNN 模型有：Xception，VGG，ResNet，Inception，MobileNet，DenseNet，NASNetLarge，EfficientNet，transformer 模型有：ViT，LeViT，CCT，CLIP</p>
+<h4 id="transferability-to-convolutional-network-classifiers">Transferability to Convolutional Network Classifiers</h4>
+<p>针对具有小的鲁棒性参数的源网络进行优化的对抗样本，与非鲁棒性（<span class="math inline">\(\epsilon = 0\)</span>）网络的成功率相比（图<a href="#image-20220330163245061">1</a>）,在目标和非目标设定中都提高了迁移成功率。成功率的峰值对于每一个CNN目标网络大致相同（<span class="math inline">\(\epsilon = 0.1\)</span>）</p>
+<p><img src="https://s2.loli.net/2022/03/30/tWEpf2j1cvKS3aO.png"></p>
+<p>图 1：针对 ImageNet 分类器的目标迁移攻击成功率，使用相对于 "鲁棒的 ResNet50 源模型优化的对抗样本。成功率是指被目标网络分分类为目标类的对抗样本的比例。值越高攻击越成功。Baseline 是指未受干扰的图像被分类为目标类别的比率。(最好以彩色查看）。</p>
+<p>当 <span class="math inline">\(\epsilon\)</span> 超过最佳值，攻击成功率会快速下降，我们假设，当源网络的鲁棒性增加到一定程度后，网络开始完全忽略（非鲁棒性）目标网络所依赖的许多非鲁棒性特征，因此攻击不会修改这些特征，从而降低攻击的成功率。</p>
+<h4 id="transformer-based-classifiers">Transformer-Based Classifiers</h4>
+<p>以前的研究中使用非鲁棒源网络的方法在使用卷积源模型构建目标的可迁移的对抗样本时几乎完全无效（表1）。这表明，基于 transformer 的模型和非鲁棒卷积模型所学习的特征在很大程度上是不同的。</p>
 <p>使用略微鲁棒的 ResNet50 分类器作为源网络，可以极大地提高目标对抗样本对 transformer 分类器的迁移性。源网络的最佳鲁棒性参数对于目标 transformer 网络和目标卷积网络是不同的 ，尽管我们发现源模型中任何数量的鲁棒性（低于一个临界值）都会大大改善可迁移性。因此，在现实世界的黑箱攻击设置中—目标网络的架构是完全未知的—攻击者可以在源网络鲁棒性参数之间找到一个平衡点，使CNN分类器和基于 transformer 的分类器的迁移性能达到最佳。</p>
-<p>​                                                                                     表 1：$l_{\infty}$范数，扰动上限 16/255</p>
-<p><img src="https://s2.loli.net/2022/03/30/RGTV7ivhgqec6xY.png" alt=""></p>
+<p>​ 表 1：<span class="math inline">\(l_{\infty}\)</span>范数，扰动上限 16/255</p>
+<p><img src="https://s2.loli.net/2022/03/30/RGTV7ivhgqec6xY.png"></p>
 <p>表1也比较了三种不同损失下的目标攻击攻击成功率。</p>
 <p>对经过对抗训练的模型的攻击。用于攻击模型的对抗扰动大小设置的要比对抗训练让模型鲁棒的扰动数值要大，没有鲁棒性的模型作为源模型时对抗样本迁移失败，源模型的鲁棒性越高，攻击成功率也越高。</p>
-<p><img src="https://s2.loli.net/2022/03/30/1pouaWc7iqL2IBK.png" alt=""></p>
-<p>​                                        图 2：对对抗训练的鲁棒模型的攻击（$\epsilon = 3$），源模型是$\epsilon$ - robust ResNet50</p>
-<h3 id="Adversarial-Transferability-of-Features-特征的对抗迁移"><a href="#Adversarial-Transferability-of-Features-特征的对抗迁移" class="headerlink" title="Adversarial Transferability of Features 特征的对抗迁移"></a>Adversarial Transferability of Features 特征的对抗迁移</h3><p>这一部分展示略微鲁棒的网络比非鲁棒的网络和更鲁棒的网络表现出更高程度的表征可迁移性。这可以直接解释为什么用略微鲁棒的源网络构建的目标类对抗样本更容易转移，因为用略微鲁棒的网络生成的对抗样本将大量地转移特征，因此将较少地依赖少数可能不存在于每个模型中的高度脆弱的特征。</p>
-<p>实验设计出发点：$x$ 和 $y$ 是两个在源模型特征表达层（倒数第二层）非常相似的两个样本，如果源模型对目标模型的特征迁移程度很高，那么 $x$ 和 $y$ 在目标模型的特征表达应该也非常相似。</p>
-<p>从 ImageNet 测试集随机选择10张图像作为目标$x$，选择990张图像作为初始图像$y_0$，这1000张图像类别互不相同，对于每一个源模型，每一个目标类别，用 $y0$ 构造对抗样本，攻击算法和上一部分同为 TMDI-FGSM。对于每一个类别，990个 representation-targeted 的对抗样本 $y$ 应该和 $x$ 在源模型有相似的特征表达，通过度量（$x$,$y$）在目标模型的表达，可以度量源模型的特征迁移能力。</p>
-<p>采用两种度量相似性的方法，一种直观的方法是用 t-SNE 画出每一个 representation-targeted 对抗样本 $y$ 在目标模型的特征表达向量（图 3）。每一种颜色代表一个类别，每一张图中的<span class="github-emoji"><span>⭐</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/2b50.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>代表每一个目标 t-SNE 嵌入后的特征表达，如果与某一颜色相关的每个 $y$ 的目的网络表达都接近其对应的<span class="github-emoji"><span>⭐</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/2b50.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>，那么表达迁移性就很高。当表达转移性较低时，针对同一目标图像生成的目达表达对抗样本的是不相似的，因此在图中不会出现分组的情况。</p>
-<p><img src="https://s2.loli.net/2022/03/30/kzhH1pX6t4UeqIn.png" alt=""></p>
-<p><img src="https://s2.loli.net/2022/03/30/sbV8jXdxgnKcvrF.png" alt=""></p>
-<p>图 3：使用特定 “鲁棒性 “的白盒 ResNet50 模型生成的目标表达的对抗样本在目标模型表达的t-SNE图。底部的10张图片是来自ImageNet 的图片，我们将其作为表达目标，如文中所述。(最好以彩色和放大的方式观看)。</p>
-<p>另外一种是采用平均余弦相似度度量($x$,$y$)在目标模型表达的相似度（表 2），平均余弦相似度越高，表示从源网络到对应的目标网络的表达迁移程度越高。</p>
-<p>​                                                 表 2：平均余弦相似度，每一个值都是9900个 ($x$,$y$) 目标表达相似度的平均</p>
-<p><img src="https://s2.loli.net/2022/03/30/j9HzX3twDYvf7kN.png" alt=""></p>
-<p>非鲁棒的模型生成的目标对抗样本，即使对抗分类结果成功迁移，但对于大部分目标模型（$\epsilon = 0$），特征表达没有充分迁移。这意味着 非鲁棒网络的特征可能不会彼此严重重叠。表2和图3观察到用非鲁棒网络生成的对抗样本对 DenseNet121 有一定程度的表达迁移性，这可能解释了图1中观察到的对 DenseNet121 的高度类转迁移性。</p>
+<p><img src="https://s2.loli.net/2022/03/30/1pouaWc7iqL2IBK.png"></p>
+<p>​ 图 2：对对抗训练的鲁棒模型的攻击（<span class="math inline">\(\epsilon = 3\)</span>），源模型是<span class="math inline">\(\epsilon\)</span> - robust ResNet50</p>
+<h3 id="adversarial-transferability-of-features-特征的对抗迁移">Adversarial Transferability of Features 特征的对抗迁移</h3>
+<p>这一部分展示略微鲁棒的网络比非鲁棒的网络和更鲁棒的网络表现出更高程度的表征可迁移性。这可以直接解释为什么用略微鲁棒的源网络构建的目标类对抗样本更容易转移，因为用略微鲁棒的网络生成的对抗样本将大量地转移特征，因此将较少地依赖少数可能不存在于每个模型中的高度脆弱的特征。</p>
+<p>实验设计出发点：<span class="math inline">\(x\)</span> 和 <span class="math inline">\(y\)</span> 是两个在源模型特征表达层（倒数第二层）非常相似的两个样本，如果源模型对目标模型的特征迁移程度很高，那么 <span class="math inline">\(x\)</span> 和 <span class="math inline">\(y\)</span> 在目标模型的特征表达应该也非常相似。</p>
+<p>从 ImageNet 测试集随机选择10张图像作为目标<span class="math inline">\(x\)</span>，选择990张图像作为初始图像<span class="math inline">\(y_0\)</span>，这1000张图像类别互不相同，对于每一个源模型，每一个目标类别，用 <span class="math inline">\(y0\)</span> 构造对抗样本，攻击算法和上一部分同为 TMDI-FGSM。对于每一个类别，990个 representation-targeted 的对抗样本 <span class="math inline">\(y\)</span> 应该和 <span class="math inline">\(x\)</span> 在源模型有相似的特征表达，通过度量（<span class="math inline">\(x\)</span>,<span class="math inline">\(y\)</span>）在目标模型的表达，可以度量源模型的特征迁移能力。</p>
+<p>采用两种度量相似性的方法，一种直观的方法是用 t-SNE 画出每一个 representation-targeted 对抗样本 <span class="math inline">\(y\)</span> 在目标模型的特征表达向量（图 3）。每一种颜色代表一个类别，每一张图中的<span class="github-emoji"><span>⭐</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/2b50.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>代表每一个目标 t-SNE 嵌入后的特征表达，如果与某一颜色相关的每个 <span class="math inline">\(y\)</span> 的目的网络表达都接近其对应的<span class="github-emoji"><span>⭐</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/2b50.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>，那么表达迁移性就很高。当表达转移性较低时，针对同一目标图像生成的目达表达对抗样本的是不相似的，因此在图中不会出现分组的情况。</p>
+<p><img src="https://s2.loli.net/2022/03/30/kzhH1pX6t4UeqIn.png"></p>
+<p><img src="https://s2.loli.net/2022/03/30/sbV8jXdxgnKcvrF.png"></p>
+<p>图 3：使用特定 "鲁棒性 "的白盒 ResNet50 模型生成的目标表达的对抗样本在目标模型表达的t-SNE图。底部的10张图片是来自ImageNet 的图片，我们将其作为表达目标，如文中所述。(最好以彩色和放大的方式观看)。</p>
+<p>另外一种是采用平均余弦相似度度量(<span class="math inline">\(x\)</span>,<span class="math inline">\(y\)</span>)在目标模型表达的相似度（表 2），平均余弦相似度越高，表示从源网络到对应的目标网络的表达迁移程度越高。</p>
+<p>​ 表 2：平均余弦相似度，每一个值都是9900个 (<span class="math inline">\(x\)</span>,<span class="math inline">\(y\)</span>) 目标表达相似度的平均</p>
+<p><img src="https://s2.loli.net/2022/03/30/j9HzX3twDYvf7kN.png"></p>
+<p>非鲁棒的模型生成的目标对抗样本，即使对抗分类结果成功迁移，但对于大部分目标模型（<span class="math inline">\(\epsilon = 0\)</span>），特征表达没有充分迁移。这意味着 非鲁棒网络的特征可能不会彼此严重重叠。表2和图3观察到用非鲁棒网络生成的对抗样本对 DenseNet121 有一定程度的表达迁移性，这可能解释了图1中观察到的对 DenseNet121 的高度类转迁移性。</p>
 <p>但从稍微鲁棒的 ResNet50 分类器到 CLIP 的表示转移性是很高的，原因可能是 CLIP 不是在传统的分类问题上训练出来的，而是被训练来对图像和相应的文本描述进行类似的编码有关。高表达迁移性说明了略微鲁棒的网络的特征与每个被测试的（非鲁棒的）目标网络的特征有很大的重叠。</p>
-<p>当网络以大的 “$\epsilon$ “进行对抗性训练时，它们学到的特征与非鲁棒网络的特征重叠的程度随着 “$\epsilon $”的增加而减少。我们推测，某些非鲁棒的特征会被具有足够大的 “$\epsilon$ “的鲁棒神经网络所忽略，因此当鲁棒性增加到一定程度时，非鲁棒网络的许多特征会被忽略，表达的可迁移性会下降。</p>
-<h2 id="总结与改进"><a href="#总结与改进" class="headerlink" title="总结与改进"></a>总结与改进</h2><p>本文主要研究了略微鲁棒的模型可以促进目标表达对抗样本的迁移，可能的原因是略微鲁棒的模型表达和目标模型表达有很大的重叠，当源模型过于鲁棒时，会忽略对于目标模型分类重要的非鲁棒特征，造成攻击迁移率下降。这两条规律对 CNN 和 transformer 都适用。</p>
+<p>当网络以大的 "<span class="math inline">\(\epsilon\)</span> "进行对抗性训练时，它们学到的特征与非鲁棒网络的特征重叠的程度随着 "$<span class="math inline">\("的增加而减少。我们推测，某些非鲁棒的特征会被具有足够大的 "\)</span>$ "的鲁棒神经网络所忽略，因此当鲁棒性增加到一定程度时，非鲁棒网络的许多特征会被忽略，表达的可迁移性会下降。</p>
+<h2 id="总结与改进">总结与改进</h2>
+<p>本文主要研究了略微鲁棒的模型可以促进目标表达对抗样本的迁移，可能的原因是略微鲁棒的模型表达和目标模型表达有很大的重叠，当源模型过于鲁棒时，会忽略对于目标模型分类重要的非鲁棒特征，造成攻击迁移率下降。这两条规律对 CNN 和 transformer 都适用。</p>
 <p><strong>参考文献</strong></p>
 <p><span id="[1]">[1] Y. Liu, X. Chen, C. Liu, and D. Song. Delving into transferable adversarial examples and black-box attacks. arXiv preprint arXiv:1611.02770, 2016.</span></p>
 <p><span id="[2]">[2] J. M. Springer, M. Mitchell, and G. T. Kenyon. Adversarial perturbations are not so weird: Entanglement of robust and non-robust features in neural network classifiers. arXiv preprint arXiv:2102.05110, 2021.</span></p>
@@ -435,7 +442,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">提出的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-number">2.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Transferability-of-Adversarial-Examples"><span class="nav-number">2.1.</span> <span class="nav-text">Transferability of Adversarial Examples</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Transferability-to-Convolutional-Network-Classifiers"><span class="nav-number">2.1.1.</span> <span class="nav-text">Transferability to Convolutional Network Classifiers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Transformer-Based-Classifiers"><span class="nav-number">2.1.2.</span> <span class="nav-text">Transformer-Based Classifiers</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Adversarial-Transferability-of-Features-%E7%89%B9%E5%BE%81%E7%9A%84%E5%AF%B9%E6%8A%97%E8%BF%81%E7%A7%BB"><span class="nav-number">2.2.</span> <span class="nav-text">Adversarial Transferability of Features 特征的对抗迁移</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%E4%B8%8E%E6%94%B9%E8%BF%9B"><span class="nav-number">3.</span> <span class="nav-text">总结与改进</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">提出的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-number">2.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#transferability-of-adversarial-examples"><span class="nav-number">2.1.</span> <span class="nav-text">Transferability of Adversarial Examples</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#transferability-to-convolutional-network-classifiers"><span class="nav-number">2.1.1.</span> <span class="nav-text">Transferability to Convolutional Network Classifiers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#transformer-based-classifiers"><span class="nav-number">2.1.2.</span> <span class="nav-text">Transformer-Based Classifiers</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#adversarial-transferability-of-features-%E7%89%B9%E5%BE%81%E7%9A%84%E5%AF%B9%E6%8A%97%E8%BF%81%E7%A7%BB"><span class="nav-number">2.2.</span> <span class="nav-text">Adversarial Transferability of Features 特征的对抗迁移</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%E4%B8%8E%E6%94%B9%E8%BF%9B"><span class="nav-number">3.</span> <span class="nav-text">总结与改进</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -513,13 +520,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">65k</span>
+    <span title="站点总字数">67k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">59 分钟</span>
+    <span title="站点阅读时长">1:01</span>
 </div>
 <!--
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

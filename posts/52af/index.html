@@ -281,28 +281,34 @@
         <p>ILA-DA：Improving Transferability of Intermediate Level Attack with Data Augmentation (ICLR 2023)</p>
 <p>代码：尚未开源</p>
 <span id="more"></span>
-<h2 id="主要方法"><a href="#主要方法" class="headerlink" title="主要方法"></a>主要方法</h2><p>本文对ILA攻击进行完善，提出三个方法提高ILA</p>
+<h2 id="主要方法">主要方法</h2>
+<p>本文对ILA攻击进行完善，提出三个方法提高ILA</p>
 <ul>
 <li>一种自动有效图像增广方法</li>
 <li>一种有效的反向对抗更新技术</li>
 <li>一个生成迁移性更强的攻击插值方法</li>
 </ul>
-<h3 id="自动有效图像增广方法"><a href="#自动有效图像增广方法" class="headerlink" title="自动有效图像增广方法"></a>自动有效图像增广方法</h3><p>作者将增广选择过程$T_z$建模为从分布$p_{\alpha}(z)$中抽样，并使用公式中的可学习参数向量α：</p>
-<script type="math/tex; mode=display">
-T_z(x) = \sum_{i=1}^k z_i \varphi_i(x),\quad z \sim p_{\alpha}(z)</script><p>z是one-hot向量，代表从有k个增广的集合$\{\varphi_i(x)\}_{i=1}^k$中的选择，作者使用Gumbel-Softmax重参数化技巧将离散增广分布松弛为连续的。在此过程中，利用随机梯度下降和学习权重参数$\eta$来优化目标，$z_i$松弛为：</p>
-<script type="math/tex; mode=display">
-\mathbf{z}_i=f _{\alpha_i}\left(g_i\right)=\frac{\exp \left(\left(\log \alpha_i+g_i\right) / \tau\right)}{\sum_{j=1}^k \exp \left(\left(\log \alpha_j+g_j\right) / \tau\right)}</script><p>其中$g_i = -\log(-\log(u_i))$是第$i$个随机Gumbel变量，$u_i$是均匀随机变量，$\tau$是温度系数。本文只考虑三种数据增广方法：平移，裁剪，旋转。</p>
-<h3 id="反向对抗更新技术"><a href="#反向对抗更新技术" class="headerlink" title="反向对抗更新技术"></a>反向对抗更新技术</h3><p>为了实现ILA，需要获得参考攻击$x^{\prime}$和未扰动图像$x$之间的特征图差异。尽管x被模型正确分类，但没有关于模型有多自信以及输入能在多大程度上代表ground-truth类的信息。相比之下，如果$x$不仅被正确分类，而且具有很高的置信度，则特征图的差异预计将从本质上反映关于攻击的更多有用信息。</p>
+<h3 id="自动有效图像增广方法">自动有效图像增广方法</h3>
+<p>作者将增广选择过程<span class="math inline">\(T_z\)</span>建模为从分布<span class="math inline">\(p_{\alpha}(z)\)</span>中抽样，并使用公式中的可学习参数向量α： <span class="math display">\[
+T_z(x) = \sum_{i=1}^k z_i \varphi_i(x),\quad z \sim p_{\alpha}(z)
+\]</span> z是one-hot向量，代表从有k个增广的集合<span class="math inline">\(\{\varphi_i(x)\}_{i=1}^k\)</span>中的选择，作者使用Gumbel-Softmax重参数化技巧将离散增广分布松弛为连续的。在此过程中，利用随机梯度下降和学习权重参数<span class="math inline">\(\eta\)</span>来优化目标，<span class="math inline">\(z_i\)</span>松弛为： <span class="math display">\[
+\mathbf{z}_i=f _{\alpha_i}\left(g_i\right)=\frac{\exp \left(\left(\log \alpha_i+g_i\right) / \tau\right)}{\sum_{j=1}^k \exp \left(\left(\log \alpha_j+g_j\right) / \tau\right)}
+\]</span> 其中<span class="math inline">\(g_i = -\log(-\log(u_i))\)</span>是第<span class="math inline">\(i\)</span>个随机Gumbel变量，<span class="math inline">\(u_i\)</span>是均匀随机变量，<span class="math inline">\(\tau\)</span>是温度系数。本文只考虑三种数据增广方法：平移，裁剪，旋转。</p>
+<h3 id="反向对抗更新技术">反向对抗更新技术</h3>
+<p>为了实现ILA，需要获得参考攻击<span class="math inline">\(x^{\prime}\)</span>和未扰动图像<span class="math inline">\(x\)</span>之间的特征图差异。尽管x被模型正确分类，但没有关于模型有多自信以及输入能在多大程度上代表ground-truth类的信息。相比之下，如果<span class="math inline">\(x\)</span>不仅被正确分类，而且具有很高的置信度，则特征图的差异预计将从本质上反映关于攻击的更多有用信息。</p>
 <p>为了提高x的置信度，作者建议对其添加一个负摄动，这与应用对抗性攻击完全相反。该操作预计将减少分类器的损失，通过强调对任务更重要的特征，使分类任务更容易。因此，作者也希望输入能够高度激活中间层，为ILA中的图像更新提供更好的指导。</p>
-<p>作者从现有的参考攻击$x^{\prime}$中提取扰动，而不是制造一个新的对抗性攻击，因为新的攻击会引起额外的计算，将变换表示为：</p>
-<script type="math/tex; mode=display">
-T_{\mathrm{adv}}(\mathbf{x})=\mathbf{x}-\left(\mathbf{x}^{\prime}-\mathbf{x}\right)=2 \mathbf{x}-\mathbf{x}^{\prime}</script><h3 id="生成迁移性更强的攻击插值方法"><a href="#生成迁移性更强的攻击插值方法" class="headerlink" title="生成迁移性更强的攻击插值方法"></a>生成迁移性更强的攻击插值方法</h3><p>除了干净的图像$x$之外，参考攻击$x^{\prime}$是在所有ILA迭代中保持不变的另一个因素。但从直觉上来说，参考攻击越强，ILA性能越好。作者在ILA迭代过程中加强参考攻击的效果，方法是在参考攻击本身内插值生成更强的攻击。前一次迭代的输出$x^{\prime \prime}$是强攻击的一个很好的候选者。在迭代$t$，有</p>
-<script type="math/tex; mode=display">
-\mathbf{x}_{t+1}^{\prime}=\lambda \mathbf{x}_t^{\prime \prime}+(1-\lambda) \mathbf{x}_t^{\prime}</script><p>其中$\lambda$是范围[0,1]中的权重因子，用于控制两种攻击的比例。经过作者初步发现，将$\lambda$设置为常数，如0.5足以产生令人满意的性能。然而，设置为常数缺乏对这两种攻击行为的考虑，作者根据$x_t^{\prime \prime}$设计一种自适应方法，如果$x_t^{\prime \prime}$在一次更新后很弱，$\lambda$应该倾向于保留参考攻击，而不是与新的攻击混合。由于ILA侧重于最大化特征图差异之间的线性投影，因此特征图差异的范数可以很好地反映性能。因此，设计$\lambda$为：</p>
-<script type="math/tex; mode=display">
-\lambda=\frac{\left\|\Delta \mathbf{y}_{l}^{\prime \prime}\right\|_{2}}{\left\|\Delta \boldsymbol{y}_{l}^{\prime \prime}\right\|_{2}+\left\|\Delta y_{l}^{\prime}\right\|_{2}}</script><p>算法整个流程：</p>
-<p><img src="https://s2.loli.net/2023/02/16/lYudx1934fyBwQM.png" alt=""></p>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>实验很全面，有兴趣的可以看原文。</p>
+<p>作者从现有的参考攻击<span class="math inline">\(x^{\prime}\)</span>中提取扰动，而不是制造一个新的对抗性攻击，因为新的攻击会引起额外的计算，将变换表示为： <span class="math display">\[
+T_{\mathrm{adv}}(\mathbf{x})=\mathbf{x}-\left(\mathbf{x}^{\prime}-\mathbf{x}\right)=2 \mathbf{x}-\mathbf{x}^{\prime}
+\]</span></p>
+<h3 id="生成迁移性更强的攻击插值方法">生成迁移性更强的攻击插值方法</h3>
+<p>除了干净的图像<span class="math inline">\(x\)</span>之外，参考攻击<span class="math inline">\(x^{\prime}\)</span>是在所有ILA迭代中保持不变的另一个因素。但从直觉上来说，参考攻击越强，ILA性能越好。作者在ILA迭代过程中加强参考攻击的效果，方法是在参考攻击本身内插值生成更强的攻击。前一次迭代的输出<span class="math inline">\(x^{\prime \prime}\)</span>是强攻击的一个很好的候选者。在迭代<span class="math inline">\(t\)</span>，有 <span class="math display">\[
+\mathbf{x}_{t+1}^{\prime}=\lambda \mathbf{x}_t^{\prime \prime}+(1-\lambda) \mathbf{x}_t^{\prime}
+\]</span> 其中<span class="math inline">\(\lambda\)</span>是范围[0,1]中的权重因子，用于控制两种攻击的比例。经过作者初步发现，将<span class="math inline">\(\lambda\)</span>设置为常数，如0.5足以产生令人满意的性能。然而，设置为常数缺乏对这两种攻击行为的考虑，作者根据<span class="math inline">\(x_t^{\prime \prime}\)</span>设计一种自适应方法，如果<span class="math inline">\(x_t^{\prime \prime}\)</span>在一次更新后很弱，<span class="math inline">\(\lambda\)</span>应该倾向于保留参考攻击，而不是与新的攻击混合。由于ILA侧重于最大化特征图差异之间的线性投影，因此特征图差异的范数可以很好地反映性能。因此，设计<span class="math inline">\(\lambda\)</span>为： <span class="math display">\[
+\lambda=\frac{\left\|\Delta \mathbf{y}_{l}^{\prime \prime}\right\|_{2}}{\left\|\Delta \boldsymbol{y}_{l}^{\prime \prime}\right\|_{2}+\left\|\Delta y_{l}^{\prime}\right\|_{2}}
+\]</span> 算法整个流程：</p>
+<p><img src="https://s2.loli.net/2023/02/16/lYudx1934fyBwQM.png"></p>
+<h2 id="实验">实验</h2>
+<p>实验很全面，有兴趣的可以看原文。</p>
 
     </div>
 
@@ -482,13 +488,13 @@ T_{\mathrm{adv}}(\mathbf{x})=\mathbf{x}-\left(\mathbf{x}^{\prime}-\mathbf{x}\rig
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">65k</span>
+    <span title="站点总字数">67k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">59 分钟</span>
+    <span title="站点阅读时长">1:01</span>
 </div>
 <!--
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

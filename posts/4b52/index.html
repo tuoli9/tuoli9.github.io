@@ -23,12 +23,12 @@
     var CONFIG = {"hostname":"tuoli9.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="Towards Transferable Adversarial Attacks on Vision Transformers目前是关于transformer迁移攻击sota，发表在AAAI 2022，代码链接：https:&#x2F;&#x2F;github.com&#x2F;zhipeng-wei&#x2F;PNA-PatchOut">
+  <meta name="description" content="Towards Transferable Adversarial Attacks on Vision Transformers 目前是关于transformer迁移攻击sota，发表在AAAI 2022，代码链接：https:&#x2F;&#x2F;github.com&#x2F;zhipeng-wei&#x2F;PNA-PatchOut">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Towards Transferable Adversarial Attacks on Vision Transformers">
 <meta property="og:url" content="https://tuoli9.github.io/posts/4b52/index.html">
 <meta property="og:site_name" content="Li&#39;s Blog">
-<meta property="og:description" content="Towards Transferable Adversarial Attacks on Vision Transformers目前是关于transformer迁移攻击sota，发表在AAAI 2022，代码链接：https:&#x2F;&#x2F;github.com&#x2F;zhipeng-wei&#x2F;PNA-PatchOut">
+<meta property="og:description" content="Towards Transferable Adversarial Attacks on Vision Transformers 目前是关于transformer迁移攻击sota，发表在AAAI 2022，代码链接：https:&#x2F;&#x2F;github.com&#x2F;zhipeng-wei&#x2F;PNA-PatchOut">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2023/02/15/uFjVEcBm9kSQ3TA.png">
 <meta property="og:image" content="https://s2.loli.net/2022/04/28/PX5Tle2pUEBJoNH.png">
@@ -270,14 +270,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.2k</span>
+              <span>3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -289,7 +289,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Towards-Transferable-Adversarial-Attacks-on-Vision-Transformers"><a href="#Towards-Transferable-Adversarial-Attacks-on-Vision-Transformers" class="headerlink" title="Towards Transferable Adversarial Attacks on Vision Transformers"></a>Towards Transferable Adversarial Attacks on Vision Transformers</h2><p>目前是关于transformer迁移攻击sota，发表在AAAI 2022，代码链接：<a target="_blank" rel="noopener" href="https://github.com/zhipeng-wei/PNA-PatchOut">https://github.com/zhipeng-wei/PNA-PatchOut</a></p>
+        <h2 id="towards-transferable-adversarial-attacks-on-vision-transformers">Towards Transferable Adversarial Attacks on Vision Transformers</h2>
+<p>目前是关于transformer迁移攻击sota，发表在AAAI 2022，代码链接：https://github.com/zhipeng-wei/PNA-PatchOut</p>
 <span id="more"></span>
 <p>对于transformer的攻击要同时考虑patch和self-attention，本文提出 Pay No Attention (PNA) 攻击和 PatchOut 攻击，在反向传播时跳过注意力可以提高迁移性，同时攻击最优的一部分patch比攻击所有的patch效果好。实验证明所提方法可以提高ViTs之间的迁移和ViTs到CNNs的迁移。</p>
 <p>PNA攻击固定attention前向计算数值，在反向传播时跳过这一部分梯度的计算，这阻止了不同patch之间的交互，图像不同区域之间的交互强度和迁移性是负相关的[<a href="#1">1</a>]。</p>
@@ -300,36 +301,55 @@
 <li>研究扰动随机patch子集可以提高迁移性，提出PatchOut 方法在每轮迭代时使用不同的patch作为输入。</li>
 <li>4个不同白盒ViTs，8个黑盒ViTs，4个黑盒CNNs，3个鲁棒训练CNNs进行实验，两种攻击方法有效并且可以和其他方法结合。</li>
 </ul>
-<p>对于第一二点贡献进行了两个toy experiments，ViT-B/16白盒模型的BIM攻击（$L_{\infty}$范数下，迭代10次，$\epsilon = 16$），PNA攻击，将12个Self-attention Block分为3组，反向传播时就有八条路线，攻击成功率见下图</p>
-<p><img src="https://s2.loli.net/2023/02/15/uFjVEcBm9kSQ3TA.png" alt="image-20230215215458795"></p>
+<p>对于第一二点贡献进行了两个toy experiments，ViT-B/16白盒模型的BIM攻击（<span class="math inline">\(L_{\infty}\)</span>范数下，迭代10次，<span class="math inline">\(\epsilon = 16\)</span>），PNA攻击，将12个Self-attention Block分为3组，反向传播时就有八条路线，攻击成功率见下图</p>
+<figure>
+<img src="https://s2.loli.net/2023/02/15/uFjVEcBm9kSQ3TA.png" alt="image-20230215215458795"><figcaption aria-hidden="true">image-20230215215458795</figcaption>
+</figure>
 <p>PatchOut 攻击随机选取10个patchs作为一种输入模式，记为“ten-patch”，进行多次“ten-patch”攻击成功率高</p>
-<p><img src="https://s2.loli.net/2022/04/28/PX5Tle2pUEBJoNH.png" alt="image-20220428185342850"></p>
-<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><h4 id="Pay-No-Attention-PNA"><a href="#Pay-No-Attention-PNA" class="headerlink" title="Pay No Attention (PNA)"></a>Pay No Attention (PNA)</h4><p>给定一个patch embedding $Z\in \mathbb{R}^{N\times D}$，query，key，和value 权重$W^{Q}$，$W^{K}$，$W^{V}$$\in$ $\mathbb{R}^{D\times D_h}$，attention计算如下</p>
-<script type="math/tex; mode=display">
-A=\operatorname{softmax}\left(Z W^{Q}\left(Z W^{K}\right)^{T} / \sqrt{D_{h}}\right)</script><p>$A\in\mathbb{R}^{N\times N}$表示注意力权重，一个head的输出定义如下</p>
-<script type="math/tex; mode=display">
-Z^{\prime}=A\left(Z W^{V}\right)</script><p>输出$Z^{\prime}$对于输入$Z$的梯度如下</p>
-<script type="math/tex; mode=display">
-\frac{\partial Z^{\prime}}{\partial Z}=(\mathbb{I} \bigotimes A) \frac{\partial\left(Z W^{V}\right)}{\partial Z}+\left(\left(Z W^{V}\right)^{T} \bigotimes \mathbb{I}\right) \frac{\partial A}{\partial Z}</script><p>PNA方法忽视注意力部分的梯度，$\frac{\partial A}{\partial Z}=0$，这相当于将attention weights固定为一个常数。最终梯度计算如下</p>
-<script type="math/tex; mode=display">
-\frac{\partial Z^{\prime}}{\partial Z} \approx(\mathbb{I} \bigotimes A) \frac{\partial\left(Z W^{V}\right)}{\partial Z}=(\mathbb{I} \bigotimes A)\left(\left(W^{V}\right)^{T} \bigotimes \mathbb{I}\right)</script><p>$\bigotimes$表示克罗内克积，PNA迫使扰动只通过使用特征表征来利用网络，而不是通过利用注意力的高度模型特定属性。这导致了具有高迁移性的对抗样本。跳过注意力也允许梯度关注每个patch，而不是依赖patch之间的复杂相互作用。</p>
-<h4 id="PatchOut-Attack"><a href="#PatchOut-Attack" class="headerlink" title="PatchOut Attack"></a>PatchOut Attack</h4><p>DIM攻击表明输入多样性有利于对抗向本迁移，PatchOut Attack每次迭代随机选择patch子集攻击。</p>
-<p>用$T$控制每一轮使用的patch数量，$x_s=\{x_s^{1},…,x_s^{t},…,x_s^{T}\}$表示被选择的patch，攻击的mask $M\in {0,1}^{H\times W\times C}$ 定义如下</p>
-<script type="math/tex; mode=display">
-M_{p}^{i}= \begin{cases}1, & \text { if } x_{p}^{i} \text { in } x_{s} \\ 0, & \text { otherwise }\end{cases}</script><p>$M_{p}^{i} \in\{0,1\}^{P \times P \times C}$是$x_p ^{i}$在图像中区域，整个攻击的优化目标</p>
-<script type="math/tex; mode=display">
-\underset{\delta}{\arg \max } J(f(x+M \odot \delta), y)+\lambda\|\delta\|_{2}$, s.t. $\|\delta\|_{\infty}<\epsilon</script><p>$\odot$是element-wise乘法，第二项鼓励扰动有一个较大的$l_2$范数，两种攻击的伪代码如下</p>
-<p><img src="https://s2.loli.net/2022/04/28/ufKO3mzARTbcg1U.png" alt="image-20220428204122682"></p>
-<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>在CNNS上的效果</p>
+<figure>
+<img src="https://s2.loli.net/2022/04/28/PX5Tle2pUEBJoNH.png" alt="image-20220428185342850"><figcaption aria-hidden="true">image-20220428185342850</figcaption>
+</figure>
+<h3 id="方法">方法</h3>
+<h4 id="pay-no-attention-pna">Pay No Attention (PNA)</h4>
+<p>给定一个patch embedding <span class="math inline">\(Z\in \mathbb{R}^{N\times D}\)</span>，query，key，和value 权重<span class="math inline">\(W^{Q}\)</span>，<span class="math inline">\(W^{K}\)</span>，<span class="math inline">\(W^{V}\)</span><span class="math inline">\(\in\)</span> <span class="math inline">\(\mathbb{R}^{D\times D_h}\)</span>，attention计算如下 <span class="math display">\[
+A=\operatorname{softmax}\left(Z W^{Q}\left(Z W^{K}\right)^{T} / \sqrt{D_{h}}\right)
+\]</span> <span class="math inline">\(A\in\mathbb{R}^{N\times N}\)</span>表示注意力权重，一个head的输出定义如下 <span class="math display">\[
+Z^{\prime}=A\left(Z W^{V}\right)
+\]</span> 输出<span class="math inline">\(Z^{\prime}\)</span>对于输入<span class="math inline">\(Z\)</span>的梯度如下 <span class="math display">\[
+\frac{\partial Z^{\prime}}{\partial Z}=(\mathbb{I} \bigotimes A) \frac{\partial\left(Z W^{V}\right)}{\partial Z}+\left(\left(Z W^{V}\right)^{T} \bigotimes \mathbb{I}\right) \frac{\partial A}{\partial Z}
+\]</span> PNA方法忽视注意力部分的梯度，<span class="math inline">\(\frac{\partial A}{\partial Z}=0\)</span>，这相当于将attention weights固定为一个常数。最终梯度计算如下 <span class="math display">\[
+\frac{\partial Z^{\prime}}{\partial Z} \approx(\mathbb{I} \bigotimes A) \frac{\partial\left(Z W^{V}\right)}{\partial Z}=(\mathbb{I} \bigotimes A)\left(\left(W^{V}\right)^{T} \bigotimes \mathbb{I}\right)
+\]</span> <span class="math inline">\(\bigotimes\)</span>表示克罗内克积，PNA迫使扰动只通过使用特征表征来利用网络，而不是通过利用注意力的高度模型特定属性。这导致了具有高迁移性的对抗样本。跳过注意力也允许梯度关注每个patch，而不是依赖patch之间的复杂相互作用。</p>
+<h4 id="patchout-attack">PatchOut Attack</h4>
+<p>DIM攻击表明输入多样性有利于对抗向本迁移，PatchOut Attack每次迭代随机选择patch子集攻击。</p>
+<p>用<span class="math inline">\(T\)</span>控制每一轮使用的patch数量，<span class="math inline">\(x_s=\{x_s^{1},...,x_s^{t},...,x_s^{T}\}\)</span>表示被选择的patch，攻击的mask <span class="math inline">\(M\in {0,1}^{H\times W\times C}\)</span> 定义如下 <span class="math display">\[
+M_{p}^{i}= \begin{cases}1, &amp; \text { if } x_{p}^{i} \text { in } x_{s} \\ 0, &amp; \text { otherwise }\end{cases}
+\]</span> <span class="math inline">\(M_{p}^{i} \in\{0,1\}^{P \times P \times C}\)</span>是<span class="math inline">\(x_p ^{i}\)</span>在图像中区域，整个攻击的优化目标 <span class="math display">\[
+\underset{\delta}{\arg \max } J(f(x+M \odot \delta), y)+\lambda\|\delta\|_{2}$, s.t. $\|\delta\|_{\infty}&lt;\epsilon
+\]</span> <span class="math inline">\(\odot\)</span>是element-wise乘法，第二项鼓励扰动有一个较大的<span class="math inline">\(l_2\)</span>范数，两种攻击的伪代码如下</p>
+<figure>
+<img src="https://s2.loli.net/2022/04/28/ufKO3mzARTbcg1U.png" alt="image-20220428204122682"><figcaption aria-hidden="true">image-20220428204122682</figcaption>
+</figure>
+<h3 id="实验结果">实验结果</h3>
+<p>在CNNS上的效果</p>
 <p>数据集：ImageNet val中1000张不同类所有模型正确分类图像，白盒模型 ViT-B/16，PiT-B，CaiT-S-24，Visformer-S，图中每个数据都是四种替代模型迁移攻击成功率的平均。</p>
-<p><img src="https://s2.loli.net/2022/04/28/YAbBRV5lyvcsGFQ.png" alt="image-20220428204253145"></p>
-<p>本文方法和之前方法的结合，白盒模型ViT-B/16，表中是平均迁移攻击成功率，8个ViTs：ViT-B/16，DeiT-B，TNT-S，LeViT-256，PiT-B ，CaiT-S-24，ConViT-B 和 Visformer-S，4个CNNs：Inception v3 (Inc-v3)，Inception v4 (Incv4)，Inception ResNet v2 (IncRes-v2)，<br>和 ResNet v2-152 (Res-v2)。</p>
-<p><img src="https://s2.loli.net/2022/04/28/T8h9uQrvJz6SO2y.png" alt="image-20220428204936007"></p>
-<h4 id="消融实验"><a href="#消融实验" class="headerlink" title="消融实验"></a>消融实验</h4><p>白盒模型 ViT-B/16，数据 2000张随机采样图像，平均迁移攻击成功率</p>
-<p><img src="https://s2.loli.net/2022/04/28/IHqF9fCJXsyNVGn.png" alt="image-20220428210344909"></p>
+<figure>
+<img src="https://s2.loli.net/2022/04/28/YAbBRV5lyvcsGFQ.png" alt="image-20220428204253145"><figcaption aria-hidden="true">image-20220428204253145</figcaption>
+</figure>
+<p>本文方法和之前方法的结合，白盒模型ViT-B/16，表中是平均迁移攻击成功率，8个ViTs：ViT-B/16，DeiT-B，TNT-S，LeViT-256，PiT-B ，CaiT-S-24，ConViT-B 和 Visformer-S，4个CNNs：Inception v3 (Inc-v3)，Inception v4 (Incv4)，Inception ResNet v2 (IncRes-v2)， 和 ResNet v2-152 (Res-v2)。</p>
+<figure>
+<img src="https://s2.loli.net/2022/04/28/T8h9uQrvJz6SO2y.png" alt="image-20220428204936007"><figcaption aria-hidden="true">image-20220428204936007</figcaption>
+</figure>
+<h4 id="消融实验">消融实验</h4>
+<p>白盒模型 ViT-B/16，数据 2000张随机采样图像，平均迁移攻击成功率</p>
+<figure>
+<img src="https://s2.loli.net/2022/04/28/IHqF9fCJXsyNVGn.png" alt="image-20220428210344909"><figcaption aria-hidden="true">image-20220428210344909</figcaption>
+</figure>
 <p>三部分都有效，一起使用效果最佳</p>
-<p>超参数影响，ViTs 平均攻击成功率 $T=N$ PatchOut 退化成 BIM，</p>
-<p><img src="https://s2.loli.net/2022/04/28/s8qo4Hv6x9F7TBl.png" alt="image-20220428210530488"></p>
+<p>超参数影响，ViTs 平均攻击成功率 <span class="math inline">\(T=N\)</span> PatchOut 退化成 BIM，</p>
+<figure>
+<img src="https://s2.loli.net/2022/04/28/s8qo4Hv6x9F7TBl.png" alt="image-20220428210530488"><figcaption aria-hidden="true">image-20220428210530488</figcaption>
+</figure>
 <p><span id="1">[1] Wang, X.; Ren, J.; Lin, S.; Zhu, X.;Wang, Y.; and Zhang, Q.2020. A unified approach to interpreting and boosting adversarial transferability. arXiv preprint arXiv:2010.04055.</span></p>
 
     </div>
@@ -429,7 +449,7 @@ M_{p}^{i}= \begin{cases}1, & \text { if } x_{p}^{i} \text { in } x_{s} \\ 0, & \
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Towards-Transferable-Adversarial-Attacks-on-Vision-Transformers"><span class="nav-number">1.</span> <span class="nav-text">Towards Transferable Adversarial Attacks on Vision Transformers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Pay-No-Attention-PNA"><span class="nav-number">1.1.1.</span> <span class="nav-text">Pay No Attention (PNA)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PatchOut-Attack"><span class="nav-number">1.1.2.</span> <span class="nav-text">PatchOut Attack</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">1.2.</span> <span class="nav-text">实验结果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C"><span class="nav-number">1.2.1.</span> <span class="nav-text">消融实验</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#towards-transferable-adversarial-attacks-on-vision-transformers"><span class="nav-number">1.</span> <span class="nav-text">Towards Transferable Adversarial Attacks on Vision Transformers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#pay-no-attention-pna"><span class="nav-number">1.1.1.</span> <span class="nav-text">Pay No Attention (PNA)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#patchout-attack"><span class="nav-number">1.1.2.</span> <span class="nav-text">PatchOut Attack</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">1.2.</span> <span class="nav-text">实验结果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C"><span class="nav-number">1.2.1.</span> <span class="nav-text">消融实验</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -507,13 +527,13 @@ M_{p}^{i}= \begin{cases}1, & \text { if } x_{p}^{i} \text { in } x_{s} \\ 0, & \
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">65k</span>
+    <span title="站点总字数">67k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">59 分钟</span>
+    <span title="站点阅读时长">1:01</span>
 </div>
 <!--
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

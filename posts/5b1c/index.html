@@ -23,12 +23,12 @@
     var CONFIG = {"hostname":"tuoli9.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="Practical No-box Adversarial Attacks against DNNs发表在 NeurIPS 2020，代码：https:&#x2F;&#x2F;github.com&#x2F;qizhangli&#x2F;nobox-attacks">
+  <meta name="description" content="Practical No-box Adversarial Attacks against DNNs 发表在 NeurIPS 2020，代码：https:&#x2F;&#x2F;github.com&#x2F;qizhangli&#x2F;nobox-attacks">
 <meta property="og:type" content="article">
 <meta property="og:title" content="No-box Attack">
 <meta property="og:url" content="https://tuoli9.github.io/posts/5b1c/index.html">
 <meta property="og:site_name" content="Li&#39;s Blog">
-<meta property="og:description" content="Practical No-box Adversarial Attacks against DNNs发表在 NeurIPS 2020，代码：https:&#x2F;&#x2F;github.com&#x2F;qizhangli&#x2F;nobox-attacks">
+<meta property="og:description" content="Practical No-box Adversarial Attacks against DNNs 发表在 NeurIPS 2020，代码：https:&#x2F;&#x2F;github.com&#x2F;qizhangli&#x2F;nobox-attacks">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2022/11/12/lWj9aoREbqxUiCc.png">
 <meta property="og:image" content="https://s2.loli.net/2022/11/13/Eby2HjlkUP4WItT.png">
@@ -275,7 +275,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>6.9k</span>
+              <span>7.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -294,73 +294,87 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Practical-No-box-Adversarial-Attacks-against-DNNs"><a href="#Practical-No-box-Adversarial-Attacks-against-DNNs" class="headerlink" title="Practical No-box Adversarial Attacks against DNNs"></a>Practical No-box Adversarial Attacks against DNNs</h1><p>发表在 NeurIPS 2020，代码：<a target="_blank" rel="noopener" href="https://github.com/qizhangli/nobox-attacks">https://github.com/qizhangli/nobox-attacks</a></p>
-<span id="more"></span> 
+        <h1 id="practical-no-box-adversarial-attacks-against-dnns">Practical No-box Adversarial Attacks against DNNs</h1>
+<p>发表在 NeurIPS 2020，代码：https://github.com/qizhangli/nobox-attacks</p>
+<span id="more"></span>
 <p>提出 no box 设定：禁止查询目标模型，模型结构参数和训练数据也未知，攻击者只能收集来自相似任务的少量数据（几十张或者更少）。依靠这些少量的数据进行有监督的训练得到一个替代模型十分困难。</p>
 <p>本文使用 auto-encoders 从少量数据（来自两个类别的20张图片）学习判别性的特征，并研究了三种训练机制：a) 估计每个旋转图像的正面视图，b) 估计每个可能的拼图的最佳拟合，c) 构建原型图像。auto-encoding 模型生成的对抗样本可以很好的迁移到不同的目标模型上，它的有效性有时与使用在与目标模型相同的大规模数据集上训练的预训练模型构建的样本不相上下。</p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><h3 id="训练方法"><a href="#训练方法" class="headerlink" title="训练方法"></a>训练方法</h3><p>本文针对非目标攻击，训练集 $\mathcal{X}:=\{(x_i,y_i)\}_{i=0}^{n-1}$ ，本文考虑这个辅助数据集一共有两类，i.e.，$y_i\in \{0,1\}$。</p>
-<p>Baseline 借助于图像到图像的映射，它们在建模数据的内部分布方面是成功的，最小化$\sum_i \Vert\text{Dec}(\text{Enc}(x_i))-x_i \Vert^2$， 这样的模型一方面能够捕获低层次的图像表示，不会遭受严重的过拟合，另一方面，模型没有判别能力，因此针对模型生成的对样本例很难迁移到其他模型上。</p>
-<p><strong>Reconstruction from chaos</strong> 已有研究表明，预测图像旋转角度和拼图构型赋予DNNs相当大的判别能力，使用image-to-image auto-encoding 模型，结合上述辅助信息，引入评估任务：(a) 每个旋转图像的前视图和 (b) 每一个可能的拼图的完美配合，学习目标函数：</p>
-<script type="math/tex; mode=display">
-L_{\text{rotaion/jigsaw}}=\frac{1}{n}\sum_{i=0}^{n-1}\Vert \text{Dec}(\text{Enc}(T(x_i)))-x_i\Vert^2</script><p>上式图像转换函数$T(\cdot)$ 对于这两个任务分别是旋转图像和随机打乱图像patches，虽然学习任务仍然像经典的自动编码器一样是无监督，但辅助信息是与内容相关的，应该有利于分类。</p>
-<p><strong>Prototypical image reconstruction</strong> 利用标签信息，鼓励模型重建特定类别原型，</p>
-<script type="math/tex; mode=display">
+<h2 id="方法">方法</h2>
+<h3 id="训练方法">训练方法</h3>
+<p>本文针对非目标攻击，训练集 <span class="math inline">\(\mathcal{X}:=\{(x_i,y_i)\}_{i=0}^{n-1}\)</span> ，本文考虑这个辅助数据集一共有两类，i.e.，<span class="math inline">\(y_i\in \{0,1\}\)</span>。</p>
+<p>Baseline 借助于图像到图像的映射，它们在建模数据的内部分布方面是成功的，最小化<span class="math inline">\(\sum_i \Vert\text{Dec}(\text{Enc}(x_i))-x_i \Vert^2\)</span>， 这样的模型一方面能够捕获低层次的图像表示，不会遭受严重的过拟合，另一方面，模型没有判别能力，因此针对模型生成的对样本例很难迁移到其他模型上。</p>
+<p><strong>Reconstruction from chaos</strong> 已有研究表明，预测图像旋转角度和拼图构型赋予DNNs相当大的判别能力，使用image-to-image auto-encoding 模型，结合上述辅助信息，引入评估任务：(a) 每个旋转图像的前视图和 (b) 每一个可能的拼图的完美配合，学习目标函数： <span class="math display">\[
+L_{\text{rotaion/jigsaw}}=\frac{1}{n}\sum_{i=0}^{n-1}\Vert \text{Dec}(\text{Enc}(T(x_i)))-x_i\Vert^2
+\]</span></p>
+<p>上式图像转换函数<span class="math inline">\(T(\cdot)\)</span> 对于这两个任务分别是旋转图像和随机打乱图像patches，虽然学习任务仍然像经典的自动编码器一样是无监督，但辅助信息是与内容相关的，应该有利于分类。</p>
+<p><strong>Prototypical image reconstruction</strong> 利用标签信息，鼓励模型重建特定类别原型， <span class="math display">\[
 L_{\text {prototypical}}=\frac{1}{n} \sum_{i=0}^{n-1}\left(\left(1-y_i\right)\left\|\text{Dec}\left(\text{Enc}\left(x_i\right)\right)-
-x^{(0)}\right\|^2+y_i\left\|\text{Dec}\left(\text{Enc}\left(x_i\right)\right)-x^{(1)}\right\|^2\right)</script><p>上式$x^0 \in \{x_i|y_i=0\}$，$x^1 \in \{x_i|y_i=1\}$是随机选择的类别原型，这种机制背后的直觉是，一个模型将必须区分具有不同标签的样本，以获得完美的训练</p>
-<p><img src="https://s2.loli.net/2022/11/12/lWj9aoREbqxUiCc.png" alt=""></p>
-<h3 id="提高攻击迁移性"><a href="#提高攻击迁移性" class="headerlink" title="提高攻击迁移性"></a>提高攻击迁移性</h3><p>定义 auto-encoding 模型的对抗损失，这个损失用来训练模型，对每个$x_i$ 重建 $\tilde{x}_i$。</p>
-<script type="math/tex; mode=display">
-L_{\text {adversarial }}=-\log p\left(y_i \mid x_i\right) \quad \text { where } \quad p\left(y_i \mid x_i\right)=\frac{\exp \left(-\lambda\left\|\text{Dec}\left(\text{Enc}\left(x_i\right)\right)-\tilde{x}_i\right\|^2\right)}{\sum_j \exp \left(-\lambda\left\|\text{Dec}\left(\text{Enc}\left(x_i\right)\right)-\tilde{x}_j\right\|^2\right)}</script><p>$\lambda&gt;0$，对于旋转和拼图，$\tilde{x}_i:=x$，对于原型重建，当 $x_i$ 的标签 $y_i=0$，$\tilde{x}_i:=x^{(0)}$。这样的$\tilde{x}_i$被称为 $x_i$ 的 positive prototype，通过攻击，他们的距离增大，对抗损失$L_{\text{adversarial}}$最大化。在本文中使用ILA攻击方法，首先使用一个基于梯度的攻击方法获得一个攻击扰动，然后用编码器的输出进行ILA攻击。</p>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p><strong>设定</strong> 分类任务：从 ImageNet 随机选择5000张（500类，一类10张），$\epsilon = 0.1$或者$0.8$。人脸验证任务：LFW数据集，随机选取来自400个个体2110张图，$\epsilon = 0.1$，攻击一个商用系统 clarifai.com。图片resize为$112\times112$。</p>
-<p><strong>方法</strong> 对于rotation，考虑四个选择角度：0°，90°，180°，270°，对于jigsaw，原始图形平均分为四部分随机打乱，优化器adam，学习率0.001，最大训练次数15000，一个替代模型训练完毕后，I-FGSM攻击200步，然后ILA 100步，$\lambda = 1$，对于ImageNet和LFW，攻击步长1/255.</p>
-<p><strong>Competitors</strong> 本文提出两个baseline，$naïve^{\dagger}$：监督训练的ResNets，正则化和数据增广训练得到，$naïve^{\ddagger}$：无监督训练的 auto-encoders，$naïve^{\dagger}$和$naïve^{\ddagger}$训练数据不超过20张图像，$Beyonder$：在大规模数据集预训练的模型，训练数据和目标模型一致，在本文中选取ResNet-50</p>
+x^{(0)}\right\|^2+y_i\left\|\text{Dec}\left(\text{Enc}\left(x_i\right)\right)-x^{(1)}\right\|^2\right)
+\]</span> 上式<span class="math inline">\(x^0 \in \{x_i|y_i=0\}\)</span>，<span class="math inline">\(x^1 \in \{x_i|y_i=1\}\)</span>是随机选择的类别原型，这种机制背后的直觉是，一个模型将必须区分具有不同标签的样本，以获得完美的训练</p>
+<p><img src="https://s2.loli.net/2022/11/12/lWj9aoREbqxUiCc.png"></p>
+<h3 id="提高攻击迁移性">提高攻击迁移性</h3>
+<p>定义 auto-encoding 模型的对抗损失，这个损失用来训练模型，对每个<span class="math inline">\(x_i\)</span> 重建 <span class="math inline">\(\tilde{x}_i\)</span>。 <span class="math display">\[
+L_{\text {adversarial }}=-\log p\left(y_i \mid x_i\right) \quad \text { where } \quad p\left(y_i \mid x_i\right)=\frac{\exp \left(-\lambda\left\|\text{Dec}\left(\text{Enc}\left(x_i\right)\right)-\tilde{x}_i\right\|^2\right)}{\sum_j \exp \left(-\lambda\left\|\text{Dec}\left(\text{Enc}\left(x_i\right)\right)-\tilde{x}_j\right\|^2\right)}
+\]</span> <span class="math inline">\(\lambda&gt;0\)</span>，对于旋转和拼图，<span class="math inline">\(\tilde{x}_i:=x\)</span>，对于原型重建，当 <span class="math inline">\(x_i\)</span> 的标签 <span class="math inline">\(y_i=0\)</span>，<span class="math inline">\(\tilde{x}_i:=x^{(0)}\)</span>。这样的<span class="math inline">\(\tilde{x}_i\)</span>被称为 <span class="math inline">\(x_i\)</span> 的 positive prototype，通过攻击，他们的距离增大，对抗损失<span class="math inline">\(L_{\text{adversarial}}\)</span>最大化。在本文中使用ILA攻击方法，首先使用一个基于梯度的攻击方法获得一个攻击扰动，然后用编码器的输出进行ILA攻击。</p>
+<h2 id="实验">实验</h2>
+<p><strong>设定</strong> 分类任务：从 ImageNet 随机选择5000张（500类，一类10张），<span class="math inline">\(\epsilon = 0.1\)</span>或者<span class="math inline">\(0.8\)</span>。人脸验证任务：LFW数据集，随机选取来自400个个体2110张图，<span class="math inline">\(\epsilon = 0.1\)</span>，攻击一个商用系统 clarifai.com。图片resize为<span class="math inline">\(112\times112\)</span>。</p>
+<p><strong>方法</strong> 对于rotation，考虑四个选择角度：0°，90°，180°，270°，对于jigsaw，原始图形平均分为四部分随机打乱，优化器adam，学习率0.001，最大训练次数15000，一个替代模型训练完毕后，I-FGSM攻击200步，然后ILA 100步，<span class="math inline">\(\lambda = 1\)</span>，对于ImageNet和LFW，攻击步长1/255.</p>
+<p><strong>Competitors</strong> 本文提出两个baseline，<span class="math inline">\(naïve^{\dagger}\)</span>：监督训练的ResNets，正则化和数据增广训练得到，<span class="math inline">\(naïve^{\ddagger}\)</span>：无监督训练的 auto-encoders，<span class="math inline">\(naïve^{\dagger}\)</span>和<span class="math inline">\(naïve^{\ddagger}\)</span>训练数据不超过20张图像，<span class="math inline">\(Beyonder\)</span>：在大规模数据集预训练的模型，训练数据和目标模型一致，在本文中选取ResNet-50</p>
 <p><strong>实验结果</strong> 对于prototypical机制测试单个解码器和多个解码器的模型，无监督训练的模型rotation最优，</p>
-<p><img src="https://s2.loli.net/2022/11/13/Eby2HjlkUP4WItT.png" alt=""></p>
-<h1 id="Adversarial-Pixel-Restoration-as-a-Pretext-Task-for-Transferable-Perturbations"><a href="#Adversarial-Pixel-Restoration-as-a-Pretext-Task-for-Transferable-Perturbations" class="headerlink" title="Adversarial Pixel Restoration as a Pretext Task for Transferable Perturbations"></a>Adversarial Pixel Restoration as a Pretext Task for Transferable Perturbations</h1><p>发表在 BMVC 2022，代码：<a target="_blank" rel="noopener" href="https://github.com/HashmatShadab/APR">https://github.com/HashmatShadab/APR</a></p>
+<p><img src="https://s2.loli.net/2022/11/13/Eby2HjlkUP4WItT.png"></p>
+<h1 id="adversarial-pixel-restoration-as-a-pretext-task-for-transferable-perturbations">Adversarial Pixel Restoration as a Pretext Task for Transferable Perturbations</h1>
+<p>发表在 BMVC 2022，代码：https://github.com/HashmatShadab/APR</p>
 <p>设定和上一篇相同，在上一篇工作中prototypical方法需要有监督训练，为了减小对少量样本数据的过拟合，并且找到鲁棒的特征，提出对抗像素复原（Adversarial Pixel Restoration）自监督任务，用少量无标签样本训练替代模型。本文提出的min-max目标函数可以找到一个更鲁棒更平坦的最小值，提高对抗迁移性。</p>
 <p>本文3点贡献：1. 提出了一种自监督对抗像素恢复方法，通过在平坦损失表面上学习来找到高度可转移的模式。我们的训练方法允许在不访问大规模标记数据或预训练模型的情况下实现cross-domain 攻击。2. 对抗攻击方法是自监督的，和任务无关。所提方法生成的扰动可以迁移到不同任务中。3. 本文方法使损失更平滑，有助于生成更通用的对抗样本。当训练集仅包含两个样本时方法依然有效。</p>
-<h2 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h2><p>给定一个无标签的数据分布$p_s$，样本数量$\leq 20$，由于数据都是无标签的，可以定义一个自监督学习任务$\mathcal{T}_s$训练替代模型，一个主要的挑战是，深度神经网络可以很容易地记忆数据，即使使用较强的数据增广方法，模型还是会快速过拟合少数可用的样本。这导致替代模型的可泛化性较差，因此，从该模型生成的对抗攻击具有较弱的可转移性。</p>
-<p><strong>Adversarial Training via Denoising</strong> 本文提出一个min-max训练过程，max过程通过单步攻击的对抗像素变换欺骗模型$\mathcal{F}$，min过程去噪并恢复特征和像素空间，实现可泛化的损失面。</p>
-<p><strong>对抗像素变换</strong> 对于输入$x \sim P_s$，通过下面目标寻找满足$\Vert x-x^{\prime}\Vert_{\infty} \leq \varepsilon$对抗样本$x^{\prime}$，</p>
-<script type="math/tex; mode=display">
-\underset{\boldsymbol{x}^{\prime}}{\operatorname{maximize}} \quad \mathcal{L}_{\max }=\left\|\mathcal{F}\left(\mathcal{T}_s\left(\boldsymbol{x}^{\prime}\right)\right)-\boldsymbol{x}\right\|^p \tag{1}</script><p>$\mathcal{T}_s$代表像素变换，例如rotation或者jigsaw shuffle，因此，我们的攻击通过最大化式5中所示的损失来欺骗模型恢复转换像素空间的能力，并最终帮助鲁棒自监督特征。上述攻击方法扩展到有监督的情况：</p>
-<script type="math/tex; mode=display">
-\underset{\boldsymbol{x}^{\prime}}{\operatorname{maximize}} \sum_{c=1}^C\left(y_c\left\|\mathcal{F}\left(\mathcal{T}_s\left(\boldsymbol{x}^{\prime}\right)\right)-\boldsymbol{x}^{(c)}\right\|^p\right) \tag{2}</script><p>其中$C$是类别数，$y_c$是one-hot标签，$x^{(c)}$是选取的特定类别原型。</p>
-<p><strong>像素重建</strong> 对于公式1生成的对抗样本$x^{\prime}$，最小化原始图像$x$和模型对抗变换输出以及原始样本变换输出之间的重建错误：</p>
-<script type="math/tex; mode=display">
-\mathcal{L}_{\text {out }}=\left\|\mathcal{F}\left(\mathcal{T}_s\left(\boldsymbol{x}^{\prime}\right)\right)-\boldsymbol{x}\right\|^p+\left\|\mathcal{F}\left(\mathcal{T}_s(\boldsymbol{x})\right)-\boldsymbol{x}\right\|^p \tag{3}</script><p>在对抗训练中，我们进一步调节模型的特征空间，通过强制原始和对抗特征分布之间的对齐，如下所示：</p>
-<script type="math/tex; mode=display">
-\mathcal{L}_{\text {feature }}=\left\|\mathcal{F}^n\left(\mathcal{T}_s\left(\boldsymbol{x}^{\prime}\right)\right)-\mathcal{F}^n\left(\mathcal{T}_s(\boldsymbol{x})\right)\right\|^p \tag{4}</script><p>其中$\mathcal{F}^n$代表encoder中间层输出，整个训练目标：</p>
-<script type="math/tex; mode=display">
-\mathcal{L}_{\text {min }}=\mathcal{L}_{\text {out }}+\lambda \mathcal{L}_{\text {feature }} \tag{5}</script><p>训练过程伪代码：</p>
-<p><img src="https://s2.loli.net/2022/11/14/S816zNAhk4ECIPv.png" alt=""></p>
-<h2 id="实验-1"><a href="#实验-1" class="headerlink" title="实验"></a>实验</h2><p>本文考虑$x_{\infty}$对抗攻击，扰动边界$\varepsilon \leq 0.1$，考虑in-domian和cross-domain数据，adam优化器学习率0.001，$\delta=\frac{2}{255},\lambda=1,p=2$。</p>
-<p><strong>Surrogate Training with Few Samples:</strong>  使用公式1作为无监督对抗像素变换（$\mathcal{T}$）,公式2针对有标签，使用多个decoder的模型。</p>
-<p><strong>Surrogate Training with Large Dataset:</strong>  在paintings（79K 样本），CoCo（40K 样本），和Comics（50K 样本）训练替代模型，测试本文所提方法的cross-domain对抗迁移性。</p>
+<h2 id="方法-1">方法</h2>
+<p>给定一个无标签的数据分布<span class="math inline">\(p_s\)</span>，样本数量<span class="math inline">\(\leq 20\)</span>，由于数据都是无标签的，可以定义一个自监督学习任务<span class="math inline">\(\mathcal{T}_s\)</span>训练替代模型，一个主要的挑战是，深度神经网络可以很容易地记忆数据，即使使用较强的数据增广方法，模型还是会快速过拟合少数可用的样本。这导致替代模型的可泛化性较差，因此，从该模型生成的对抗攻击具有较弱的可转移性。</p>
+<p><strong>Adversarial Training via Denoising</strong> 本文提出一个min-max训练过程，max过程通过单步攻击的对抗像素变换欺骗模型<span class="math inline">\(\mathcal{F}\)</span>，min过程去噪并恢复特征和像素空间，实现可泛化的损失面。</p>
+<p><strong>对抗像素变换</strong> 对于输入<span class="math inline">\(x \sim P_s\)</span>，通过下面目标寻找满足<span class="math inline">\(\Vert x-x^{\prime}\Vert_{\infty} \leq \varepsilon\)</span>对抗样本<span class="math inline">\(x^{\prime}\)</span>， <span class="math display">\[
+\underset{\boldsymbol{x}^{\prime}}{\operatorname{maximize}} \quad \mathcal{L}_{\max }=\left\|\mathcal{F}\left(\mathcal{T}_s\left(\boldsymbol{x}^{\prime}\right)\right)-\boldsymbol{x}\right\|^p \tag{1}
+\]</span> <span class="math inline">\(\mathcal{T}_s\)</span>代表像素变换，例如rotation或者jigsaw shuffle，因此，我们的攻击通过最大化式5中所示的损失来欺骗模型恢复转换像素空间的能力，并最终帮助鲁棒自监督特征。上述攻击方法扩展到有监督的情况： <span class="math display">\[
+\underset{\boldsymbol{x}^{\prime}}{\operatorname{maximize}} \sum_{c=1}^C\left(y_c\left\|\mathcal{F}\left(\mathcal{T}_s\left(\boldsymbol{x}^{\prime}\right)\right)-\boldsymbol{x}^{(c)}\right\|^p\right) \tag{2}
+\]</span> 其中<span class="math inline">\(C\)</span>是类别数，<span class="math inline">\(y_c\)</span>是one-hot标签，<span class="math inline">\(x^{(c)}\)</span>是选取的特定类别原型。</p>
+<p><strong>像素重建</strong> 对于公式1生成的对抗样本<span class="math inline">\(x^{\prime}\)</span>，最小化原始图像<span class="math inline">\(x\)</span>和模型对抗变换输出以及原始样本变换输出之间的重建错误： <span class="math display">\[
+\mathcal{L}_{\text {out }}=\left\|\mathcal{F}\left(\mathcal{T}_s\left(\boldsymbol{x}^{\prime}\right)\right)-\boldsymbol{x}\right\|^p+\left\|\mathcal{F}\left(\mathcal{T}_s(\boldsymbol{x})\right)-\boldsymbol{x}\right\|^p \tag{3}
+\]</span> 在对抗训练中，我们进一步调节模型的特征空间，通过强制原始和对抗特征分布之间的对齐，如下所示： <span class="math display">\[
+\mathcal{L}_{\text {feature }}=\left\|\mathcal{F}^n\left(\mathcal{T}_s\left(\boldsymbol{x}^{\prime}\right)\right)-\mathcal{F}^n\left(\mathcal{T}_s(\boldsymbol{x})\right)\right\|^p \tag{4}
+\]</span> 其中<span class="math inline">\(\mathcal{F}^n\)</span>代表encoder中间层输出，整个训练目标： <span class="math display">\[
+\mathcal{L}_{\text {min }}=\mathcal{L}_{\text {out }}+\lambda \mathcal{L}_{\text {feature }} \tag{5}
+\]</span> 训练过程伪代码：</p>
+<p><img src="https://s2.loli.net/2022/11/14/S816zNAhk4ECIPv.png"></p>
+<h2 id="实验-1">实验</h2>
+<p>本文考虑<span class="math inline">\(x_{\infty}\)</span>对抗攻击，扰动边界<span class="math inline">\(\varepsilon \leq 0.1\)</span>，考虑in-domian和cross-domain数据，adam优化器学习率0.001，<span class="math inline">\(\delta=\frac{2}{255},\lambda=1,p=2\)</span>。</p>
+<p><strong>Surrogate Training with Few Samples:</strong> 使用公式1作为无监督对抗像素变换（<span class="math inline">\(\mathcal{T}\)</span>）,公式2针对有标签，使用多个decoder的模型。</p>
+<p><strong>Surrogate Training with Large Dataset:</strong> 在paintings（79K 样本），CoCo（40K 样本），和Comics（50K 样本）训练替代模型，测试本文所提方法的cross-domain对抗迁移性。</p>
 <p><strong>目标模型：</strong> VGG-19，Inc-V3，Res152，Dense161，SeNet，WRN，MNet-V2，ViT-S，DeiT-T 和DeiT-S，鲁棒ResNet-50，DETR 和DINO评估跨任务迁移性。</p>
 <p><strong>数据集：</strong>在5K 来自ImageNet Val样本测试分类模型，目标检测CoCo（5K）视频分割DAVIS （2K）</p>
 <p><strong>Baseline 对抗攻击：</strong>200 iterations I-FGSM，100 iterations of ILA，攻击目标：公式1</p>
 <p>in-domain</p>
-<p><img src="https://s2.loli.net/2022/11/14/k29vzrt1N3BYCHX.png" alt=""></p>
+<p><img src="https://s2.loli.net/2022/11/14/k29vzrt1N3BYCHX.png"></p>
 <p>cross-domain：在所有CNNs上求平均的结果</p>
-<p><img src="https://s2.loli.net/2022/11/14/kBcXtZC9fJjF52s.png" alt=""></p>
-<p>消融实验结果省略……</p>
-<h1 id="Practical-No-box-Adversarial-Attacks-with-Training-free-Hybrid-Image-Transformation"><a href="#Practical-No-box-Adversarial-Attacks-with-Training-free-Hybrid-Image-Transformation" class="headerlink" title="Practical No-box Adversarial Attacks with Training-free Hybrid Image Transformation"></a>Practical No-box Adversarial Attacks with Training-free Hybrid Image Transformation</h1><p>还未正式发表</p>
-<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>针对no-box提出一种不需要训练的方法，在分类任务中低层网络提取到的特征的高频部分（HFC）至关重要，如果一个扰动可以有效地控制图像的HFC，模型将会提取完全不同的底层特征，导致模型错分。[<a href="#id2">2</a>]表明对抗扰动的有效性在于它包含不相关的特征，这些扰动的特征在原始图像特征中占主导地位，文本设计包含不相关特征的的对抗HFC，本文发现有效噪声HFC是区域均匀，重复密集的。</p>
-<h2 id="方法-2"><a href="#方法-2" class="headerlink" title="方法"></a>方法</h2><p>本文猜测有效的扰动应该是均匀重复密集的，采用混合图像（hybrid image [<a href="#id1">1</a>]）的思想，提出一种 Hybrid Image Transformation (HIT) 攻击方法。hybrid image：将一张图像的HFC替换为另一张精心挑选的图像的HFC，并用两种不同的解释制作混合图像:一种是在近距离观看图像时出现的，另一种是从远处出现的。HIT 减少了原始的HFC，同时增加了精心设计的噪声HFC来攻击dnn。</p>
-<p>具体实现就是生成由下面三种图案均匀排列的patch $x^p$，这个patch的大小和要攻击的图像相同，一个图案包括几个形状定义为密集度</p>
-<p><img src="https://s2.loli.net/2022/11/17/FezKWilNa87L4G1.png" alt=""></p>
-<p>然后定义一个高斯低通滤波器$G$，大小是（$4k+1 \times 4k+1$ ）,定义为：</p>
-<script type="math/tex; mode=display">
-G_{i,j}=\frac{1}{2\pi \sigma^2}e^{-(\frac{i^2+j^2}{2\sigma^2})} \tag{1}</script><p>$\sigma$越大，更多的HFC将被过滤掉，用原始图像的低频部分和patch的高频部分融合生成对抗样本：</p>
-<script type="math/tex; mode=display">
-x^{a d v}=\operatorname{clip}_{x, \varepsilon}\left(x * G+\lambda \cdot\left(x^p-x^p * G\right)\right) \tag{2}</script><p>从下图可以直观的看到，黄框框出来的box，HIT减小相关的HFC并且添加了不相关的噪声，目标模型无法提取正确的特征来做出合理的预测，从而导致分类错误</p>
-<p><img src="https://s2.loli.net/2022/11/17/m24vPhSbnFq7lIL.png" alt=""></p>
-<h2 id="实验-2"><a href="#实验-2" class="headerlink" title="实验"></a>实验</h2><p>实验部分考虑了ImageNet和三个DCL 框架[<a href="#id3">3</a>]下细粒度分类CUB-200-2011，Stanford Cars 和 FGVC Aircraft，由圆组成的patch攻击效果更好，实验结果和消融实验具体看原本，这里就不放了</p>
+<p><img src="https://s2.loli.net/2022/11/14/kBcXtZC9fJjF52s.png"></p>
+<p>消融实验结果省略......</p>
+<h1 id="practical-no-box-adversarial-attacks-with-training-free-hybrid-image-transformation">Practical No-box Adversarial Attacks with Training-free Hybrid Image Transformation</h1>
+<p>还未正式发表</p>
+<h2 id="动机">动机</h2>
+<p>针对no-box提出一种不需要训练的方法，在分类任务中低层网络提取到的特征的高频部分（HFC）至关重要，如果一个扰动可以有效地控制图像的HFC，模型将会提取完全不同的底层特征，导致模型错分。[<a href="#id2">2</a>]表明对抗扰动的有效性在于它包含不相关的特征，这些扰动的特征在原始图像特征中占主导地位，文本设计包含不相关特征的的对抗HFC，本文发现有效噪声HFC是区域均匀，重复密集的。</p>
+<h2 id="方法-2">方法</h2>
+<p>本文猜测有效的扰动应该是均匀重复密集的，采用混合图像（hybrid image [<a href="#id1">1</a>]）的思想，提出一种 Hybrid Image Transformation (HIT) 攻击方法。hybrid image：将一张图像的HFC替换为另一张精心挑选的图像的HFC，并用两种不同的解释制作混合图像:一种是在近距离观看图像时出现的，另一种是从远处出现的。HIT 减少了原始的HFC，同时增加了精心设计的噪声HFC来攻击dnn。</p>
+<p>具体实现就是生成由下面三种图案均匀排列的patch <span class="math inline">\(x^p\)</span>，这个patch的大小和要攻击的图像相同，一个图案包括几个形状定义为密集度</p>
+<p><img src="https://s2.loli.net/2022/11/17/FezKWilNa87L4G1.png"></p>
+<p>然后定义一个高斯低通滤波器<span class="math inline">\(G\)</span>，大小是（<span class="math inline">\(4k+1 \times 4k+1\)</span> ）,定义为： <span class="math display">\[
+G_{i,j}=\frac{1}{2\pi \sigma^2}e^{-(\frac{i^2+j^2}{2\sigma^2})} \tag{1}
+\]</span> <span class="math inline">\(\sigma\)</span>越大，更多的HFC将被过滤掉，用原始图像的低频部分和patch的高频部分融合生成对抗样本： <span class="math display">\[
+x^{a d v}=\operatorname{clip}_{x, \varepsilon}\left(x * G+\lambda \cdot\left(x^p-x^p * G\right)\right) \tag{2}
+\]</span> 从下图可以直观的看到，黄框框出来的box，HIT减小相关的HFC并且添加了不相关的噪声，目标模型无法提取正确的特征来做出合理的预测，从而导致分类错误</p>
+<p><img src="https://s2.loli.net/2022/11/17/m24vPhSbnFq7lIL.png"></p>
+<h2 id="实验-2">实验</h2>
+<p>实验部分考虑了ImageNet和三个DCL 框架[<a href="#id3">3</a>]下细粒度分类CUB-200-2011，Stanford Cars 和 FGVC Aircraft，由圆组成的patch攻击效果更好，实验结果和消融实验具体看原本，这里就不放了</p>
 <p><a id="id1">[1] Aude Oliva. The art of hybrid images: Two for the view of one. Art &amp; Perception, 1(1-2):65–74, 2013.</a></p>
 <p><a id="id2">[2] Chaoning Zhang, Philipp Benz, Tooba Imtiaz, and In-So Kweon. Understanding adversarial examples from the mutual influence of images and perturbations. In CVPR, 2020.</a>&gt;</p>
 <p><a id="id3">[3] Yue Chen, Yalong Bai,Wei Zhang, and Tao Mei. Destruction and construction learning for fine-grained image recognition. In CVPR, 2019.</a></p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这两篇工作考虑了实际中训练替代模型和目标模型的数据分布不一致，且仅有少量训练数据（有标签/无标签）可用是如何训练替代模型。但是在实验设定上用20个样本训练一个替代模型，攻击5000个样本需要训练250个替代模型，在实验设置上并没有对比用5000个样本训练一个模型的迁移效果。在第一篇中Beyonder作为替代模型测试IFGSM对5000样本攻击迁移效果，其他方法都是IFGSM+ILA，对于不太公平。IFGSM和ILA攻击收敛慢，在文章中分别要迭代200和100步，减少迭代次数达不到最佳效果。</p>
+<h1 id="总结">总结</h1>
+<p>这两篇工作考虑了实际中训练替代模型和目标模型的数据分布不一致，且仅有少量训练数据（有标签/无标签）可用是如何训练替代模型。但是在实验设定上用20个样本训练一个替代模型，攻击5000个样本需要训练250个替代模型，在实验设置上并没有对比用5000个样本训练一个模型的迁移效果。在第一篇中Beyonder作为替代模型测试IFGSM对5000样本攻击迁移效果，其他方法都是IFGSM+ILA，对于不太公平。IFGSM和ILA攻击收敛慢，在文章中分别要迭代200和100步，减少迭代次数达不到最佳效果。</p>
 <p>在第三个方法中，HIT用在某些中间层feature上效果如何还可进一步研究。图案的选取没有什么依据，在文章中对比了三种最常见的形状，对抗样本的生成不需要训练，也不需要迭代，从这一点来看是一种非深度学习的方法。</p>
 
     </div>
@@ -463,7 +477,7 @@ x^{a d v}=\operatorname{clip}_{x, \varepsilon}\left(x * G+\lambda \cdot\left(x^p
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Practical-No-box-Adversarial-Attacks-against-DNNs"><span class="nav-number">1.</span> <span class="nav-text">Practical No-box Adversarial Attacks against DNNs</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.1.</span> <span class="nav-text">训练方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E9%AB%98%E6%94%BB%E5%87%BB%E8%BF%81%E7%A7%BB%E6%80%A7"><span class="nav-number">1.1.2.</span> <span class="nav-text">提高攻击迁移性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-number">1.2.</span> <span class="nav-text">实验</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Adversarial-Pixel-Restoration-as-a-Pretext-Task-for-Transferable-Perturbations"><span class="nav-number">2.</span> <span class="nav-text">Adversarial Pixel Restoration as a Pretext Task for Transferable Perturbations</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95-1"><span class="nav-number">2.1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C-1"><span class="nav-number">2.2.</span> <span class="nav-text">实验</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Practical-No-box-Adversarial-Attacks-with-Training-free-Hybrid-Image-Transformation"><span class="nav-number">3.</span> <span class="nav-text">Practical No-box Adversarial Attacks with Training-free Hybrid Image Transformation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%9C%BA"><span class="nav-number">3.1.</span> <span class="nav-text">动机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95-2"><span class="nav-number">3.2.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C-2"><span class="nav-number">3.3.</span> <span class="nav-text">实验</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#practical-no-box-adversarial-attacks-against-dnns"><span class="nav-number">1.</span> <span class="nav-text">Practical No-box Adversarial Attacks against DNNs</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.1.</span> <span class="nav-text">训练方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E9%AB%98%E6%94%BB%E5%87%BB%E8%BF%81%E7%A7%BB%E6%80%A7"><span class="nav-number">1.1.2.</span> <span class="nav-text">提高攻击迁移性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-number">1.2.</span> <span class="nav-text">实验</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#adversarial-pixel-restoration-as-a-pretext-task-for-transferable-perturbations"><span class="nav-number">2.</span> <span class="nav-text">Adversarial Pixel Restoration as a Pretext Task for Transferable Perturbations</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95-1"><span class="nav-number">2.1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C-1"><span class="nav-number">2.2.</span> <span class="nav-text">实验</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#practical-no-box-adversarial-attacks-with-training-free-hybrid-image-transformation"><span class="nav-number">3.</span> <span class="nav-text">Practical No-box Adversarial Attacks with Training-free Hybrid Image Transformation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%9C%BA"><span class="nav-number">3.1.</span> <span class="nav-text">动机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95-2"><span class="nav-number">3.2.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C-2"><span class="nav-number">3.3.</span> <span class="nav-text">实验</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -541,13 +555,13 @@ x^{a d v}=\operatorname{clip}_{x, \varepsilon}\left(x * G+\lambda \cdot\left(x^p
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">65k</span>
+    <span title="站点总字数">67k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">59 分钟</span>
+    <span title="站点阅读时长">1:01</span>
 </div>
 <!--
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
