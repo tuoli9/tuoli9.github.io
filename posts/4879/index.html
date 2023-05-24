@@ -23,27 +23,19 @@
     var CONFIG = {"hostname":"tuoli9.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="Towards Transferable Adversarial Attacks on Vision Transformers 目前是关于transformer迁移攻击sota，发表在AAAI 2022，代码链接：https:&#x2F;&#x2F;github.com&#x2F;zhipeng-wei&#x2F;PNA-PatchOut">
+  <meta name="description" content="CVPR2023对抗攻击&amp;防御论文汇总 下面论文部分来自这个链接，粗略分类，可能有遗漏">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Towards Transferable Adversarial Attacks on Vision Transformers">
-<meta property="og:url" content="https://tuoli9.github.io/posts/4b52/index.html">
+<meta property="og:title" content="CVPR2023对抗攻击&amp;防御论文汇总">
+<meta property="og:url" content="https://tuoli9.github.io/posts/4879/index.html">
 <meta property="og:site_name" content="Li&#39;s Blog">
-<meta property="og:description" content="Towards Transferable Adversarial Attacks on Vision Transformers 目前是关于transformer迁移攻击sota，发表在AAAI 2022，代码链接：https:&#x2F;&#x2F;github.com&#x2F;zhipeng-wei&#x2F;PNA-PatchOut">
+<meta property="og:description" content="CVPR2023对抗攻击&amp;防御论文汇总 下面论文部分来自这个链接，粗略分类，可能有遗漏">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s2.loli.net/2023/02/15/uFjVEcBm9kSQ3TA.png">
-<meta property="og:image" content="https://s2.loli.net/2022/04/28/PX5Tle2pUEBJoNH.png">
-<meta property="og:image" content="https://s2.loli.net/2022/04/28/ufKO3mzARTbcg1U.png">
-<meta property="og:image" content="https://s2.loli.net/2022/04/28/YAbBRV5lyvcsGFQ.png">
-<meta property="og:image" content="https://s2.loli.net/2022/04/28/T8h9uQrvJz6SO2y.png">
-<meta property="og:image" content="https://s2.loli.net/2022/04/28/IHqF9fCJXsyNVGn.png">
-<meta property="og:image" content="https://s2.loli.net/2022/04/28/s8qo4Hv6x9F7TBl.png">
-<meta property="article:published_time" content="2023-02-10T06:41:35.933Z">
-<meta property="article:modified_time" content="2023-02-15T13:59:56.296Z">
+<meta property="article:published_time" content="2023-05-23T07:00:51.889Z">
+<meta property="article:modified_time" content="2023-05-23T13:34:08.450Z">
 <meta property="article:author" content="Li tuo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s2.loli.net/2023/02/15/uFjVEcBm9kSQ3TA.png">
 
-<link rel="canonical" href="https://tuoli9.github.io/posts/4b52/">
+<link rel="canonical" href="https://tuoli9.github.io/posts/4879/">
 
 
 <script id="page-configurations">
@@ -56,7 +48,7 @@
   };
 </script>
 
-  <title>Towards Transferable Adversarial Attacks on Vision Transformers | Li's Blog</title>
+  <title>CVPR2023对抗攻击&防御论文汇总 | Li's Blog</title>
   
 
 
@@ -201,7 +193,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://tuoli9.github.io/posts/4b52/">
+    <link itemprop="mainEntityOfPage" href="https://tuoli9.github.io/posts/4879/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/%E7%A8%8B%E5%BA%8F%E5%96%B5.png">
@@ -214,7 +206,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Towards Transferable Adversarial Attacks on Vision Transformers
+          CVPR2023对抗攻击&防御论文汇总
         </h1>
 
         <div class="post-meta">
@@ -223,28 +215,22 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2023-02-10 14:41:35" itemprop="dateCreated datePublished" datetime="2023-02-10T14:41:35+08:00">2023-02-10</time>
+              <time title="创建时间：2023-05-23 15:00:51 / 修改时间：21:34:08" itemprop="dateCreated datePublished" datetime="2023-05-23T15:00:51+08:00">2023-05-23</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-02-15 21:59:56" itemprop="dateModified" datetime="2023-02-15T21:59:56+08:00">2023-02-15</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB/" itemprop="url" rel="index"><span itemprop="name">对抗攻击</span></a>
+                  <a href="/categories/%E8%AE%BA%E6%96%87%E6%B1%87%E6%80%BB/" itemprop="url" rel="index"><span itemprop="name">论文汇总</span></a>
                 </span>
             </span>
 
           
-            <span id="/posts/4b52/" class="post-meta-item leancloud_visitors" data-flag-title="Towards Transferable Adversarial Attacks on Vision Transformers" title="阅读次数">
+            <span id="/posts/4879/" class="post-meta-item leancloud_visitors" data-flag-title="CVPR2023对抗攻击&防御论文汇总" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -259,8 +245,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/posts/4b52/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/4b52/" itemprop="commentCount"></span>
+    <a title="valine" href="/posts/4879/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/4879/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -270,14 +256,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3k</span>
+              <span>4.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -289,68 +275,78 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="towards-transferable-adversarial-attacks-on-vision-transformers">Towards Transferable Adversarial Attacks on Vision Transformers</h2>
-<p>目前是关于transformer迁移攻击sota，发表在AAAI 2022，代码链接：https://github.com/zhipeng-wei/PNA-PatchOut</p>
+        <h2 id="cvpr2023对抗攻击防御论文汇总">CVPR2023对抗攻击&amp;防御论文汇总</h2>
+<p>下面论文部分来自<a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/CVPR2023?day=all">这个链接</a>，粗略分类，可能有遗漏</p>
 <span id="more"></span>
-<p>对于transformer的攻击要同时考虑patch和self-attention，本文提出 Pay No Attention (PNA) 攻击和 PatchOut 攻击，在反向传播时跳过注意力可以提高迁移性，同时攻击最优的一部分patch比攻击所有的patch效果好。实验证明所提方法可以提高ViTs之间的迁移和ViTs到CNNs的迁移。</p>
-<p>PNA攻击固定attention前向计算数值，在反向传播时跳过这一部分梯度的计算，这阻止了不同patch之间的交互，图像不同区域之间的交互强度和迁移性是负相关的[<a href="#1">1</a>]。</p>
-<p>PatchOut 攻击在每一次迭代随机选择一部分patch攻击，有点像drop-out缓解过拟合，这和随机森林随机选择特征和DIM攻击相似。</p>
-<p>本文主要贡献点</p>
-<ul>
-<li>PAN攻击不经过对attention的反向传播构造对抗样本。</li>
-<li>研究扰动随机patch子集可以提高迁移性，提出PatchOut 方法在每轮迭代时使用不同的patch作为输入。</li>
-<li>4个不同白盒ViTs，8个黑盒ViTs，4个黑盒CNNs，3个鲁棒训练CNNs进行实验，两种攻击方法有效并且可以和其他方法结合。</li>
-</ul>
-<p>对于第一二点贡献进行了两个toy experiments，ViT-B/16白盒模型的BIM攻击（<span class="math inline">\(L_{\infty}\)</span>范数下，迭代10次，<span class="math inline">\(\epsilon = 16\)</span>），PNA攻击，将12个Self-attention Block分为3组，反向传播时就有八条路线，攻击成功率见下图</p>
-<figure>
-<img src="https://s2.loli.net/2023/02/15/uFjVEcBm9kSQ3TA.png" alt="image-20230215215458795"><figcaption aria-hidden="true">image-20230215215458795</figcaption>
-</figure>
-<p>PatchOut 攻击随机选取10个patchs作为一种输入模式，记为“ten-patch”，进行多次“ten-patch”攻击成功率高</p>
-<figure>
-<img src="https://s2.loli.net/2022/04/28/PX5Tle2pUEBJoNH.png" alt="image-20220428185342850"><figcaption aria-hidden="true">image-20220428185342850</figcaption>
-</figure>
-<h3 id="方法">方法</h3>
-<h4 id="pay-no-attention-pna">Pay No Attention (PNA)</h4>
-<p>给定一个patch embedding <span class="math inline">\(Z\in \mathbb{R}^{N\times D}\)</span>，query，key，和value 权重<span class="math inline">\(W^{Q}\)</span>，<span class="math inline">\(W^{K}\)</span>，<span class="math inline">\(W^{V}\)</span><span class="math inline">\(\in\)</span> <span class="math inline">\(\mathbb{R}^{D\times D_h}\)</span>，attention计算如下 <span class="math display">\[
-A=\operatorname{softmax}\left(Z W^{Q}\left(Z W^{K}\right)^{T} / \sqrt{D_{h}}\right)
-\]</span> <span class="math inline">\(A\in\mathbb{R}^{N\times N}\)</span>表示注意力权重，一个head的输出定义如下 <span class="math display">\[
-Z^{\prime}=A\left(Z W^{V}\right)
-\]</span> 输出<span class="math inline">\(Z^{\prime}\)</span>对于输入<span class="math inline">\(Z\)</span>的梯度如下 <span class="math display">\[
-\frac{\partial Z^{\prime}}{\partial Z}=(\mathbb{I} \bigotimes A) \frac{\partial\left(Z W^{V}\right)}{\partial Z}+\left(\left(Z W^{V}\right)^{T} \bigotimes \mathbb{I}\right) \frac{\partial A}{\partial Z}
-\]</span> PNA方法忽视注意力部分的梯度，<span class="math inline">\(\frac{\partial A}{\partial Z}=0\)</span>，这相当于将attention weights固定为一个常数。最终梯度计算如下 <span class="math display">\[
-\frac{\partial Z^{\prime}}{\partial Z} \approx(\mathbb{I} \bigotimes A) \frac{\partial\left(Z W^{V}\right)}{\partial Z}=(\mathbb{I} \bigotimes A)\left(\left(W^{V}\right)^{T} \bigotimes \mathbb{I}\right)
-\]</span> <span class="math inline">\(\bigotimes\)</span>表示克罗内克积，PNA迫使扰动只通过使用特征表征来利用网络，而不是通过利用注意力的高度模型特定属性。这导致了具有高迁移性的对抗样本。跳过注意力也允许梯度关注每个patch，而不是依赖patch之间的复杂相互作用。</p>
-<h4 id="patchout-attack">PatchOut Attack</h4>
-<p>DIM攻击表明输入多样性有利于对抗向本迁移，PatchOut Attack每次迭代随机选择patch子集攻击。</p>
-<p>用<span class="math inline">\(T\)</span>控制每一轮使用的patch数量，<span class="math inline">\(x_s=\{x_s^{1},...,x_s^{t},...,x_s^{T}\}\)</span>表示被选择的patch，攻击的mask <span class="math inline">\(M\in {0,1}^{H\times W\times C}\)</span> 定义如下 <span class="math display">\[
-M_{p}^{i}= \begin{cases}1, &amp; \text { if } x_{p}^{i} \text { in } x_{s} \\ 0, &amp; \text { otherwise }\end{cases}
-\]</span> <span class="math inline">\(M_{p}^{i} \in\{0,1\}^{P \times P \times C}\)</span>是<span class="math inline">\(x_p ^{i}\)</span>在图像中区域，整个攻击的优化目标 <span class="math display">\[
-\underset{\delta}{\arg \max } J(f(x+M \odot \delta), y)+\lambda\|\delta\|_{2}$, s.t. $\|\delta\|_{\infty}&lt;\epsilon
-\]</span> <span class="math inline">\(\odot\)</span>是element-wise乘法，第二项鼓励扰动有一个较大的<span class="math inline">\(l_2\)</span>范数，两种攻击的伪代码如下</p>
-<figure>
-<img src="https://s2.loli.net/2022/04/28/ufKO3mzARTbcg1U.png" alt="image-20220428204122682"><figcaption aria-hidden="true">image-20220428204122682</figcaption>
-</figure>
-<h3 id="实验结果">实验结果</h3>
-<p>在CNNS上的效果</p>
-<p>数据集：ImageNet val中1000张不同类所有模型正确分类图像，白盒模型 ViT-B/16，PiT-B，CaiT-S-24，Visformer-S，图中每个数据都是四种替代模型迁移攻击成功率的平均。</p>
-<figure>
-<img src="https://s2.loli.net/2022/04/28/YAbBRV5lyvcsGFQ.png" alt="image-20220428204253145"><figcaption aria-hidden="true">image-20220428204253145</figcaption>
-</figure>
-<p>本文方法和之前方法的结合，白盒模型ViT-B/16，表中是平均迁移攻击成功率，8个ViTs：ViT-B/16，DeiT-B，TNT-S，LeViT-256，PiT-B ，CaiT-S-24，ConViT-B 和 Visformer-S，4个CNNs：Inception v3 (Inc-v3)，Inception v4 (Incv4)，Inception ResNet v2 (IncRes-v2)， 和 ResNet v2-152 (Res-v2)。</p>
-<figure>
-<img src="https://s2.loli.net/2022/04/28/T8h9uQrvJz6SO2y.png" alt="image-20220428204936007"><figcaption aria-hidden="true">image-20220428204936007</figcaption>
-</figure>
-<h4 id="消融实验">消融实验</h4>
-<p>白盒模型 ViT-B/16，数据 2000张随机采样图像，平均迁移攻击成功率</p>
-<figure>
-<img src="https://s2.loli.net/2022/04/28/IHqF9fCJXsyNVGn.png" alt="image-20220428210344909"><figcaption aria-hidden="true">image-20220428210344909</figcaption>
-</figure>
-<p>三部分都有效，一起使用效果最佳</p>
-<p>超参数影响，ViTs 平均攻击成功率 <span class="math inline">\(T=N\)</span> PatchOut 退化成 BIM，</p>
-<figure>
-<img src="https://s2.loli.net/2022/04/28/s8qo4Hv6x9F7TBl.png" alt="image-20220428210530488"><figcaption aria-hidden="true">image-20220428210530488</figcaption>
-</figure>
-<p><span id="1">[1] Wang, X.; Ren, J.; Lin, S.; Zhu, X.;Wang, Y.; and Zhang, Q.2020. A unified approach to interpreting and boosting adversarial transferability. arXiv preprint arXiv:2010.04055.</span></p>
+<h3 id="攻击">攻击</h3>
+<p>Re-Thinking Model Inversion Attacks Against Deep Neural Networks</p>
+<p>Minimizing Maximum Model Discrepancy for Transferable Black-Box Targeted Attacks</p>
+<p>Color Backdoor: A Robust Poisoning Attack in Color Space</p>
+<p>Effective Ambiguity Attack Against Passport-Based DNN Intellectual Property Protection Schemes Through Fully Connected Layer Substitution</p>
+<p>Sibling-Attack: Rethinking Transferable Adversarial Attacks Against Face Recognition</p>
+<p>Physical-World Optical Adversarial Attacks on 3D Face Recognition</p>
+<p>Proximal Splitting Adversarial Attack for Semantic Segmentation</p>
+<p>Turning Strengths Into Weaknesses: A Certified Robustness Inspired Attack Framework Against Graph Neural Networks</p>
+<p>Discrete Point-Wise Attack Is Not Enough: Generalized Manifold Adversarial Attack for Face Recognition</p>
+<p>Transferable Adversarial Attacks on Vision Transformers With Token Gradient Regularization</p>
+<p>TrojDiff: Trojan Attacks on Diffusion Models With Diverse Targets</p>
+<p>T-SEA: Transfer-Based Self-Ensemble Attack on Object Detection</p>
+<p>Rate Gradient Approximation Attack Threats Deep Spiking Neural Networks</p>
+<p>Enhancing the Self-Universality for Transferable Targeted Attacks</p>
+<p>Backdoor Attacks Against Deep Image Compression via Adaptive Frequency Trigger</p>
+<p>Ensemble-Based Blackbox Attacks on Dense Prediction</p>
+<p>Black-Box Sparse Adversarial Attack via Multi-Objective Optimisation</p>
+<p>Progressive Backdoor Erasing via Connecting Backdoor and Adversarial Attacks</p>
+<p>Can't Steal? Cont-Steal! Contrastive Stealing Attacks Against Image Encoders</p>
+<p>Towards Benchmarking and Assessing Visual Naturalness of Physical World Adversarial Attacks</p>
+<p>Dynamic Generative Targeted Attacks With Pattern Injection</p>
+<p>Reinforcement Learning-Based Black-Box Model Inversion Attacks</p>
+<p>StyLess: Boosting the Transferability of Adversarial Examples</p>
+<p>Introducing Competition To Boost the Transferability of Targeted Adversarial Examples Through Clean Feature Mixup</p>
+<p>Towards Transferable Targeted Adversarial Examples</p>
+<p>Improving the Transferability of Adversarial Samples by Path-Augmented Method</p>
+<p>Physically Adversarial Infrared Patches with Learnable Shapes and Locations</p>
+<p>Towards Effective Adversarial Textured 3D Meshes on Physical Face Recognition</p>
+<p>Physical-World Optical Adversarial Attacks on 3D Face Recognition</p>
+<p>Single Image Backdoor Inversion via Robust Smoothed Classifiers</p>
+<h3 id="防御">防御</h3>
+<p>Teacher-Generated Spatial-Attention Labels Boost Robustness and Accuracy of Contrastive Models</p>
+<p>Boosting Accuracy and Robustness of Student Models via Adaptive Adversarial Distillation</p>
+<p>Defending Against Patch-Based Backdoor Attacks on Self-Supervised Learning</p>
+<p>Backdoor Defense via Deconfounded Representation Learning</p>
+<p>Backdoor Defense via Adaptively Splitting Poisoned Dataset</p>
+<p>TWINS: A Fine-Tuning Framework for Improved Transferability of Adversarial Robustness and Generalization</p>
+<p>Towards Compositional Adversarial Robustness: Generalizing Adversarial Training to Composite Semantic Perturbations</p>
+<p>Revisiting Residual Networks for Adversarial Robustness</p>
+<p>CFA: Class-Wise Calibrated Fair Adversarial Training</p>
+<p>Jedi: Entropy-Based Localization and Removal of Adversarial Patches</p>
+<p>The Enemy of My Enemy Is My Friend: Exploring Inverse Adversaries for Improving Adversarial Training</p>
+<p>Exploring the Relationship Between Architectural Design and Adversarially Robust Generalization</p>
+<p>Adversarially Robust Neural Architecture Search for Graph Neural Networks</p>
+<p>Randomized Adversarial Training via Taylor Expansion</p>
+<p>Feature Separation and Recalibration for Adversarial Robustness</p>
+<p>Adversarial Robustness via Random Projection Filters</p>
+<p>AGAIN: Adversarial Training With Attribution Span Enlargement and Hybrid Feature Fusion</p>
+<p>Improving Robustness of Vision Transformers by Reducing Sensitivity To Patch Corruptions</p>
+<p>Demystifying Causal Features on Adversarial Examples and Causal Inoculation for Robust Network by Adversarial Instrumental Variable Regression</p>
+<p>Cooperation or Competition: Avoiding Player Domination for Multi-Target Robustness via Adaptive Budgets</p>
+<p>Benchmarking Robustness of 3D Object Detection to Common Corruptions</p>
+<p>Adversarial Robustness via Random Projection Filters</p>
+<p>Generalist: Decoupling Natural and Robust Generalization</p>
+<h3 id="其他">其他</h3>
+<p>Efficient Loss Function by Minimizing the Detrimental Effect of Floating-Point Errors on Gradient-Based Attacks</p>
+<p>The Resource Problem of Using Linear Layer Leakage Attack in Federated Learning</p>
+<p>Breaching FedMD: Image Recovery via Paired-Logits Inversion Attack</p>
+<p>Robust Single Image Reflection Removal Against Adversarial Attacks</p>
+<p>You Are Catching My Attention: Are Vision Transformers Bad Learners Under Backdoor Attacks?</p>
+<p>The Best Defense Is a Good Offense: Adversarial Augmentation Against Adversarial Attacks</p>
+<p>SlowLiDAR: Increasing the Latency of LiDAR-Based Detection Using Adversarial Examples</p>
+<p>Demystifying Causal Features on Adversarial Examples and Causal Inoculation for Robust Network by Adversarial Instrumental Variable Regression</p>
+<p>Progressive Backdoor Erasing via Connecting Backdoor and Adversarial Attacks</p>
+<p>CLIP2Protect: Protecting Facial Privacy Using Text-Guided Makeup via Adversarial Latent Search</p>
+<p>Evading DeepFake Detectors via Adversarial Statistical Consistency</p>
+<p>Detecting Backdoors During the Inference Stage Based on Corruption Robustness Consistency</p>
+<p>Don't Lie to Me! Robust and Efficient Explainability With Verified Perturbation Analysis</p>
 
     </div>
 
@@ -366,7 +362,7 @@ M_{p}^{i}= \begin{cases}1, &amp; \text { if } x_{p}^{i} \text { in } x_{s} \\ 0,
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://tuoli9.github.io/posts/4b52/" title="Towards Transferable Adversarial Attacks on Vision Transformers">https://tuoli9.github.io/posts/4b52/</a>
+    <a href="https://tuoli9.github.io/posts/4879/" title="CVPR2023对抗攻击&amp;防御论文汇总">https://tuoli9.github.io/posts/4879/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -383,13 +379,10 @@ M_{p}^{i}= \begin{cases}1, &amp; \text { if } x_{p}^{i} \text { in } x_{s} \\ 0,
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/e759/" rel="prev" title="On the Robustness of Vision Transformers to Adversarial Examples">
-      <i class="fa fa-chevron-left"></i> On the Robustness of Vision Transformers to Adversarial Examples
+    <a href="/posts/0/" rel="prev" title="">
+      <i class="fa fa-chevron-left"></i> 
     </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/6731/" rel="next" title="一些packages">
-      一些packages <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -449,7 +442,7 @@ M_{p}^{i}= \begin{cases}1, &amp; \text { if } x_{p}^{i} \text { in } x_{s} \\ 0,
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#towards-transferable-adversarial-attacks-on-vision-transformers"><span class="nav-number">1.</span> <span class="nav-text">Towards Transferable Adversarial Attacks on Vision Transformers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#pay-no-attention-pna"><span class="nav-number">1.1.1.</span> <span class="nav-text">Pay No Attention (PNA)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#patchout-attack"><span class="nav-number">1.1.2.</span> <span class="nav-text">PatchOut Attack</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">1.2.</span> <span class="nav-text">实验结果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C"><span class="nav-number">1.2.1.</span> <span class="nav-text">消融实验</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#cvpr2023%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB%E9%98%B2%E5%BE%A1%E8%AE%BA%E6%96%87%E6%B1%87%E6%80%BB"><span class="nav-number">1.</span> <span class="nav-text">CVPR2023对抗攻击&amp;防御论文汇总</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%BB%E5%87%BB"><span class="nav-number">1.1.</span> <span class="nav-text">攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B2%E5%BE%A1"><span class="nav-number">1.2.</span> <span class="nav-text">防御</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">1.3.</span> <span class="nav-text">其他</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

@@ -188,6 +188,117 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tuoli9.github.io/posts/4879/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/%E7%A8%8B%E5%BA%8F%E5%96%B5.png">
+      <meta itemprop="name" content="Li tuo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Li's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/4879/" class="post-title-link" itemprop="url">CVPR2023对抗攻击&防御论文汇总</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-05-23 15:00:51 / 修改时间：21:34:08" itemprop="dateCreated datePublished" datetime="2023-05-23T15:00:51+08:00">2023-05-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BA%E6%96%87%E6%B1%87%E6%80%BB/" itemprop="url" rel="index"><span itemprop="name">论文汇总</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/posts/4879/" class="post-meta-item leancloud_visitors" data-flag-title="CVPR2023对抗攻击&防御论文汇总" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/4879/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/4879/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="cvpr2023对抗攻击防御论文汇总">CVPR2023对抗攻击&amp;防御论文汇总</h2>
+<p>下面论文部分来自<a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/CVPR2023?day=all">这个链接</a>，粗略分类，可能有遗漏</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/4879/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://tuoli9.github.io/posts/0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -219,7 +330,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-02 15:33:06" itemprop="dateModified" datetime="2023-03-02T15:33:06+08:00">2023-03-02</time>
+                <time title="修改时间：2023-03-03 10:50:28" itemprop="dateModified" datetime="2023-03-03T10:50:28+08:00">2023-03-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -309,7 +420,7 @@
 </figure>
 <p>其中<span class="math inline">\(\alpha&gt;0，\left[v\right]_+=max\left(0,v\right)\)</span></p>
 <p>CLIP 图像嵌入引导损失<span class="math inline">\((\mathcal{L}_{img})\)</span></p>
-<p>由于CLIP对来自不同类别的约4亿张互联网检索图像的学习，以及其在不同分布上的零样本图像识别性能，我们认为其图像编码器<span class="math inline">\(\mathcal{I}(·)\)</span>输出的嵌入捕获了具有明显广义视觉特征的输入图像属性。GAMA利用这一点为我们的优势，并最大限度地提高了<span class="math inline">\(\hat{z}\)</span>和CLIP的图像编码器对干净图像<span class="math inline">\(\rho_{img}\)</span>的嵌入之间的差异。这样一个目标的目的是利用从·计算的广义特征来增加<span class="math inline">\(\mathcal{G}_\theta\left(\cdot\right)\)</span>扰动的可转移度。用基于回归的的损失函数描述如下:</p>
+<p>由于CLIP对来自不同类别的约4亿张互联网检索图像的学习，以及其在不同分布上的零样本图像识别性能，我们认为其图像编码器<span class="math inline">\(\mathcal{I}(·)\)</span>输出的嵌入捕获了具有明显广义视觉特征的输入图像属性。GAMA利用这一点为我们的优势，并最大限度地提高了<span class="math inline">\(\hat{z}\)</span>和CLIP的图像编码器对干净图像<span class="math inline">\(\rho_{img}\)</span>的嵌入之间的差异。这样一个目标的目的是利用从<span class="math inline">\(\mathcal{I}(·)\)</span>计算的广义特征来增加<span class="math inline">\(\mathcal{G}_\theta\left(\cdot\right)\)</span>扰动的可转移度。用基于回归的的损失函数描述如下:</p>
 <figure>
 <img src="https://s2.loli.net/2023/02/21/kJaMELitA9TOZf5.png" alt="image-20230221105056309"><figcaption aria-hidden="true">image-20230221105056309</figcaption>
 </figure>
@@ -484,10 +595,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-02-16 10:11:37 / 修改时间：22:27:15" itemprop="dateCreated datePublished" datetime="2023-02-16T10:11:37+08:00">2023-02-16</time>
+              <time title="创建时间：2023-02-16 10:11:37" itemprop="dateCreated datePublished" datetime="2023-02-16T10:11:37+08:00">2023-02-16</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-03 16:12:37" itemprop="dateModified" datetime="2023-03-03T16:12:37+08:00">2023-03-03</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -545,7 +662,7 @@
 
       
           <p>ILA-DA：Improving Transferability of Intermediate Level Attack with Data Augmentation (ICLR 2023)</p>
-<p>代码：尚未开源</p>
+<p>代码：https://github.com/argenycw/ILA-DA</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/52af/#more" rel="contents">
@@ -1322,131 +1439,6 @@ G_{b l e n d}\left(x_{a d v}^{(i)}\right)=\sum_{k \in K} \alpha_{k} \frac{\parti
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://tuoli9.github.io/posts/ecaa/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/%E7%A8%8B%E5%BA%8F%E5%96%B5.png">
-      <meta itemprop="name" content="Li tuo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Li's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/ecaa/" class="post-title-link" itemprop="url">NIPS2022对抗攻击&防御论文汇总</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-02-10 14:41:35" itemprop="dateCreated datePublished" datetime="2023-02-10T14:41:35+08:00">2023-02-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-05 11:30:52" itemprop="dateModified" datetime="2022-10-05T11:30:52+08:00">2022-10-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%BA%E6%96%87%E6%B1%87%E6%80%BB/" itemprop="url" rel="index"><span itemprop="name">论文汇总</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/posts/ecaa/" class="post-meta-item leancloud_visitors" data-flag-title="NIPS2022对抗攻击&防御论文汇总" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/posts/ecaa/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/ecaa/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.9k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>来自：<a target="_blank" rel="noopener" href="https://neurips.cc/Conferences/2022/Schedule?type=Poster">NeurIPS 2022</a></p>
-<h2 id="攻击">攻击</h2>
-<p>On the Robustness of Deep Clustering Models: Adversarial Attacks and Defenses</p>
-<p>Adversarial Attack on Attackers: Post-Process to Mitigate Black-Box Score-Based Query Attacks</p>
-<p>GAMA: Generative Adversarial Multi-Object Scene Attacks</p>
-<p>BadPrompt: Backdoor Attacks on Continuous Prompts</p>
-<p>VoiceBox: Privacy through Real-Time Adversarial Attacks with Audio-to-Audio Models</p>
-<p>Towards Reasonable Budget Allocation in Untargeted Graph Structure Attacks via Gradient Debias</p>
-<p>Decision-based Black-box Attack Against Vision Transformers via Patch-wise Adversarial Removal</p>
-<p>Revisiting Injective Attacks on Recommender Systems</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/ecaa/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1518,7 +1510,7 @@ G_{b l e n d}\left(x_{a d v}^{(i)}\right)=\sum_{k \in K} \alpha_{k} \frac{\parti
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">19</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1580,13 +1572,13 @@ G_{b l e n d}\left(x_{a d v}^{(i)}\right)=\sum_{k \in K} \alpha_{k} \frac{\parti
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">72k</span>
+    <span title="站点总字数">77k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:06</span>
+    <span title="站点阅读时长">1:10</span>
 </div>
 <!--
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
